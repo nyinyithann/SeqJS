@@ -1,0 +1,7 @@
+node_modules/
+
+#idea folder
+.idea/
+/.idea/JS_Playground.iml
+/.idea/modules.xml
+/.idea/vcs.xml
