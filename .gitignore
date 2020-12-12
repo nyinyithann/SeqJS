@@ -5,3 +5,4 @@ node_modules/
 /.idea/JS_Playground.iml
 /.idea/modules.xml
 /.idea/vcs.xml
+/tests/examples.js

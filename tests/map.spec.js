@@ -26,13 +26,19 @@ describe('map()', () => {
             toBe([[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]].join());
     });
 
-    test('Should throw error if seq is null or undefined.', () => {
+    test('should throw error if seq is null or undefined.', () => {
         const seqMap = Seq.prototype.map;
-        expect(() => seqMap(null, x => x + 1)).
+        expect(() => seqMap.call(null, x => x + 1)).
             toThrow('This is null or not defined.');
     });
 
-    test('Should throw error if callable is not a function.', () => {
+    test('calling upon prototype method.', () => {
+        const seqMap = Seq.prototype.map;
+        expect([...seqMap.call(Seq.from(nums),obj.add10, obj)].join()).
+            toBe(nums.map(obj.add10, obj).join());
+    });
+
+    test('should throw error if callable is not a function.', () => {
         expect(() => Seq.of(1, 2).map(undefined)).toThrow(Error);
         expect(() => Seq.of(1, 2).map(null)).toThrow(Error);
         expect(() => Seq.of(1, 2).map({})).toThrow(Error);

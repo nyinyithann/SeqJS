@@ -1,6 +1,6 @@
 {
   "name": "Seq.js",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "main": "src/seq.js",
   "license": "MIT",
   "repository": {
@@ -31,7 +31,8 @@
     "eslint": "^7.15.0",
     "jest": "^26.6.3",
     "jest-cli": "^26.6.3",
-    "nodemon": "^2.0.6"
+    "jsdoc": "^3.6.6",
+    "jsdoc-to-markdown": "^6.0.1"
   },
   "scripts": {
     "test": "jest --config jest.config.js"

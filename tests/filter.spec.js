@@ -21,13 +21,19 @@ describe('filter()', () => {
             toBe(nums.filter(obj.greaterThan4, obj).join());
     });
 
-    test('Should throw error if seq is null or undefined.', () => {
+    test('should throw error if seq is null or undefined.', () => {
         const seqFilter = Seq.prototype.filter;
-        expect(() => seqFilter(null, x => x > 2)).
+        expect(() => seqFilter.call(null, x => x > 2)).
             toThrow('This is null or not defined.');
     });
 
-    test('Should throw error if predicate is not a function.', () => {
+    test('calling up prototype method.', () => {
+        const seqFilter = Seq.prototype.filter;
+        expect([...seqFilter.call(Seq.from(nums), obj.greaterThan4, obj)].join()).
+            toBe(nums.filter(obj.greaterThan4, obj).join());
+    });
+
+    test('should throw error if predicate is not a function.', () => {
         expect(() => Seq.of(1, 2).filter(undefined)).toThrow(Error);
         expect(() => Seq.of(1, 2).filter(null)).toThrow(Error);
         expect(() => Seq.of(1, 2).filter({})).toThrow(Error);
