@@ -5,8 +5,8 @@ describe("reduce()", () => {
         expect(Seq.of().reduce((x,y) => x + y, 10)).toBe(10);
    });
 
-    test("first element should be returned if initial value is not provided and sequence contains only one element.", () => {
-        expect(Seq.of(1).reduce((x,y) => x + y, 10)).toBe(1);
+    test("initial value is not provided and sequence contains only one element. The element will be returned.", () => {
+        expect(Seq.of(1).reduce((x,y) => x + y)).toBe(1);
     });
 
     test('sum of 1 to 10.', () => {
@@ -15,7 +15,7 @@ describe("reduce()", () => {
 
     test('flatten array.', () => {
         const flatArray = Seq.of([0, 1], [2, 3], [4, 5]).reduce((accumulator, currentValue) => accumulator.concat(currentValue) , []);
-        expect(flatArray.join()).toBe([0,1,2,3,4,5].join());
+        expect(flatArray).toEqual([0,1,2,3,4,5]);
     });
 
     test('function composition.', () => {
@@ -37,4 +37,37 @@ describe("reduce()", () => {
        expect(result)
        .toBe(6);
     });
+
+    test('initial value is provided. seq has only one element.', () => {
+       const expected = Seq.of(1).reduce((x, y) => x + y, 10);
+       expect(expected).toBe( [1].reduce((x,y) => x + y, 10) );
+    });
+
+    test('map using reduce.', () => {
+        const map = function (iterable, func) {
+            const seq = new Seq(iterable);
+            return seq.reduce((acc, cv) => acc.concat(func(cv)), new Seq());
+        };
+        const nums = [1,2,3,4];
+        const callback = x => x + x;
+        const mappedSeq = map(nums, callback);
+        expect([...mappedSeq]).toEqual(nums.map(callback));
+    });
+
+    test('filter using reduce.', () => {
+        const filter = function(iterable, predicate) {
+            const seq = new Seq(iterable);
+            return seq.reduce((acc, cv) => {
+                if (predicate(cv)) {
+                    acc = acc.concat(cv);
+                }
+                return acc;
+            }, new Seq());
+        };
+        const nums = [1,2,3,4];
+        const predicate = x => x % 2 == 0;
+        const filteredSeq = filter(new Seq(nums), predicate);
+        expect([...filteredSeq]).toEqual(nums.filter(predicate));
+    });
+
 });

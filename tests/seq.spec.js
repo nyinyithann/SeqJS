@@ -24,15 +24,15 @@ describe('Spec of Seq.', () => {
     };
 
     test('Seq is instantiated with default empty generator function.', () => {
-        expect([...new Seq()].join()).toBe([].join());
+        expect([...new Seq()]).toEqual([]);
     });
 
     test('Seq can be constructed with a generator function.', () => {
-        expect([...new Seq(generator)].join()).toBe(array.join());
+        expect([...new Seq(generator)]).toEqual(array);
     });
 
     test('Seq can be constructed with an iterable (array).', () => {
-        expect([...new Seq(array)].join()).toBe(array.join());
+        expect([...new Seq(array)]).toEqual(array);
     });
 
     test('Seq can be constructed with an iterable (string).', () => {
@@ -50,7 +50,7 @@ describe('Spec of Seq.', () => {
         for (const item of seq) {}
         const s1 = [...seq];
         const s2 = [...seq];
-        expect(s1.join()).toBe(s2.join());
+        expect(s1).toEqual(s2);
     });
 
     test('Seq is closable.', () => {
@@ -63,7 +63,7 @@ describe('Spec of Seq.', () => {
             if (item == 4) break;
         }
         const s2 = [...seq];
-        expect(s1.join()).toBe(s2.join());
+        expect(s1).toEqual(s2);
     });
 
     test('instanceof', () => {
@@ -74,12 +74,12 @@ describe('Spec of Seq.', () => {
 
 describe(`Seq's static methods.`, () => {
     test('Seq.from()', () => {
-        expect([...Seq.from([1, 2, 3])].join()).toBe([1, 2, 3].join());
+        expect([...Seq.from([1, 2, 3])]).toEqual([1, 2, 3]);
     });
 
     test('Seq.of()', () => {
-        expect([...Seq.of([1, 2, 3], 'a', 'b', 'c')].join()).
-            toBe([[1, 2, 3], 'a', 'b', 'c'].join());
+        expect([...Seq.of([1, 2, 3], 'a', 'b', 'c')]).
+            toEqual([[1, 2, 3], 'a', 'b', 'c']);
     });
 
     test('Seq.isSeq()', () => {

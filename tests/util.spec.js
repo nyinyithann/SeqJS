@@ -14,8 +14,8 @@ describe('Test utility functions', () => {
     });
 
     test('createGeneratorFunction()', () => {
-        expect([...utils.createGeneratorFunction([1, 2, 3])()].join()).
-            toBe([1, 2, 3].join());
+        expect([...utils.createGeneratorFunction([1, 2, 3])()]).
+            toEqual([1, 2, 3]);
     });
 
     test('createGeneratorFunction()', () => {
@@ -25,15 +25,15 @@ describe('Test utility functions', () => {
                 return { done: true };
             },
         };
-        expect([...utils.createGeneratorFunction(iter)()].join()).
-            toBe([].join());
+        expect([...utils.createGeneratorFunction(iter)()]).
+            toEqual([]);
     });
 
     test(
         'createGeneratorFunction(): Empty generator if source is not iterable.',
         () => {
-            expect([...utils.createGeneratorFunction({})()].join()).
-                toBe([].join());
+            expect([...utils.createGeneratorFunction({})()]).
+                toEqual([]);
         });
 
     test('notNull()', () => {

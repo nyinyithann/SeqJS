@@ -14,6 +14,7 @@
     "enumerable",
     "enumerator",
     "sequence",
+    "generator",
     "ES6"
   ],
   "author": "Nyi Nyi Than <nyinyithann@gmail.com>",

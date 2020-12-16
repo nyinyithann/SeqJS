@@ -59,7 +59,8 @@ export default class Seq {
      * @exception {TypeError} If callable is not a function.
      * @example
      *
-     * Seq.of(1,2,3,4,5).map(x => x * x)
+     * const seq = Seq.of(1,2,3,4,5).map(x => x * x);
+     * console.log([...seq]);
      * // => [1, 4, 9, 16, 25]
      */
     map (callable) {
@@ -94,7 +95,8 @@ export default class Seq {
      * @exception {TypeError} If predicate is not a function.
      * @example
      *
-     * Seq.of(1,2,3,4,5).filter(x => x % 2 === 0)
+     * const seq = Seq.of(1,2,3,4,5).filter(x => x % 2 === 0);
+     * console.log([...seq]);
      * // => [2, 4]
      */
     filter (predicate) {
@@ -125,16 +127,18 @@ export default class Seq {
 
     /**
      * The method executes the provided reducer function on each element of the sequence, resulting in single output value.
-     * If the seq only has one element and no initialValue is provided, or if initialValue is provided but the seq is empty, the solo value will be returned without calling reducer.
-     * @param reducer {Function} It takes two arguments - (accumulator, currentValue)
+     * @param reducer {Function} It takes two arguments - (accumulator, currentValue). if initialValue is provided, the value will be used as the first argument in the reducer.
+     * Otherwise; the first element of the sequence will be used as the first argument.
      * @returns {T|TReturn|*} The single value that results from reduction.
      * @exception {TypeError} If reducer is not a function.
      *
      * @example
-     * Seq.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10).reduce((accumulator, currentValue) => accumulator + currentValue);
+     * const result = Seq.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10).reduce((accumulator, currentValue) => accumulator + currentValue);
+     * console.log(result);
      * // => 55
      *
-     * Seq.of([0, 1], [2, 3], [4, 5]).reduce((accumulator, currentValue) => accumulator.concat(currentValue) , []);
+     * const result = Seq.of([0, 1], [2, 3], [4, 5]).reduce((accumulator, currentValue) => accumulator.concat(currentValue) , []);
+     * console.log(result);
      * // => [0, 1, 2, 3, 4, 5]
      */
     reduce (reducer) {
@@ -163,12 +167,51 @@ export default class Seq {
                     'Reduce of empty sequence with no initial value.');
             }
         }
-        let state = current.value;
+        let state;
+        if (initialValue) {
+            state = reducer(initialValue, current.value);
+        } else {
+            state = current.value;
+        }
         while (!(current = iter.next()).done) {
             state = reducer(state, current.value);
         }
         return state;
+    }
 
+    /**
+     * The concat() method creates a new seq that appends the passed value to the existing seq. This method does not change the existing sequence.
+     * @param other Iterable, iterator, generator function or single value to concatenate into new sequence.
+     * @returns {Seq} The result sequence.
+     * @example
+     * const seq = Seq.of(1,2,3);
+     * const carr = seq.concat([4,5,6]);
+     * console.log([...carr]);
+     * // => [1, 2, 3, 4, 5, 6]
+     */
+    concat (other) {
+        if (this == null) {
+            throw new TypeError('This is null or not defined.');
+        }
+
+        let otherIter;
+        if (utils.isGeneratorFunction(other)) {
+            otherIter = other();
+        } else if (utils.isIterable(other)) {
+            otherIter = other[Symbol.iterator]();
+        } else {
+            otherIter = {
+                *[Symbol.iterator]() {
+                    yield other;
+                }
+            }
+        }
+
+        const thisIter = this._generator();
+        return new Seq(function * () {
+            yield * thisIter;
+            yield * otherIter;
+        });
     }
 }
 

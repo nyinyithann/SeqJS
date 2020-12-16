@@ -12,13 +12,13 @@ describe('filter()', () => {
     };
 
     test('filtering with arrow function.', () => {
-        expect(([...Seq.from(nums).filter(x => x % 2 == 0)].join())).
-            toBe(nums.filter(x => x % 2 == 0).join());
+        expect([...Seq.from(nums).filter(x => x % 2 == 0)]).
+            toEqual(nums.filter(x => x % 2 == 0));
     });
 
     test('filtering with an object method.', () => {
-        expect(([...Seq.from(nums).filter(obj.greaterThan4, obj)].join())).
-            toBe(nums.filter(obj.greaterThan4, obj).join());
+        expect([...Seq.from(nums).filter(obj.greaterThan4, obj)]).
+            toEqual(nums.filter(obj.greaterThan4, obj));
     });
 
     test('should throw error if seq is null or undefined.', () => {
@@ -29,14 +29,14 @@ describe('filter()', () => {
 
     test('calling up prototype method.', () => {
         const seqFilter = Seq.prototype.filter;
-        expect([...seqFilter.call(Seq.from(nums), obj.greaterThan4, obj)].join()).
-            toBe(nums.filter(obj.greaterThan4, obj).join());
+        expect([...seqFilter.call(Seq.from(nums), obj.greaterThan4, obj)]).
+            toEqual(nums.filter(obj.greaterThan4, obj));
     });
 
     test('should throw error if predicate is not a function.', () => {
         expect(() => Seq.of(1, 2).filter(undefined)).toThrow(Error);
         expect(() => Seq.of(1, 2).filter(null)).toThrow(Error);
-        expect(() => Seq.of(1, 2).filter({})).toThrow(Error);
+        expect(() => Seq.of(1, 2).filter({ })).toThrow(Error);
     });
 
 });

@@ -1,6 +1,6 @@
 # SeqJS
 
-`SeqJS` contains operations for working with values of type `Seq` which is a container of sequence of elements.
+`SeqJS` contains operations for working with values of type `Seq` which is a container of a series of elements. Types of a seq's elements are not fixed. Individual seq elements are computed only as required.
 `Seq` conforms [`iterable`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#The_iterable_protocol) and [`iterator`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#The_iterator_protocol) protocols of JavaScript.
 
 ## Roadmap
@@ -12,7 +12,7 @@ The project is under active development. Below is the roadmap.
 
 ## API
 ### Seq Type
-Seq instance can be constructed as follows:
+A seq instance can be constructed as follows:
 ```javascript
 // An empty sequence
 let seq = new Seq(); 
@@ -82,8 +82,10 @@ The provided function is invoked with two arguments: (item, index).</p>
 <dd><p>Returns a new sequence containing only the elements of the collection for which the given predicate returns &quot;true&quot;.</p>
 </dd>
 <dt><a href="#reduce">reduce(reducer)</a> ⇒ <code>T</code> | <code>TReturn</code> | <code>*</code></dt>
-<dd><p>The method executes the provided reducer function on each element of the sequence, resulting in single output value.
-If the seq only has one element and no initialValue is provided, or if initialValue is provided but the seq is empty, the solo value will be returned without calling reducer.</p>
+<dd><p>The method executes the provided reducer function on each element of the sequence, resulting in single output value.</p>
+</dd>
+<dt><a href="#concat">concat(other)</a> ⇒ <code>Seq</code></dt>
+<dd><p>The concat() method creates a new seq that appends the passed value to the existing seq. This method does not change the existing sequence.</p>
 </dd>
 </dl>
 
@@ -106,7 +108,8 @@ The provided function is invoked with two arguments: (item, index).
 
 **Example**
 ```js
-Seq.of(1,2,3,4,5).map(x => x * x)
+const seq = Seq.of(1,2,3,4,5).map(x => x * x);
+console.log([...seq]);
 // => [1, 4, 9, 16, 25]
 ```
 <a name="filter"></a>
@@ -127,14 +130,14 @@ Returns a new sequence containing only the elements of the collection for which 
 
 **Example**
 ```js
-Seq.of(1,2,3,4,5).filter(x => x % 2 === 0)
+const seq = Seq.of(1,2,3,4,5).filter(x => x % 2 === 0);
+console.log([...seq]);
 // => [2, 4]
 ```
 <a name="reduce"></a>
 
 ## reduce(reducer) ⇒ <code>T</code> \| <code>TReturn</code> \| <code>\*</code>
 The method executes the provided reducer function on each element of the sequence, resulting in single output value.
-If the seq only has one element and no initialValue is provided, or if initialValue is provided but the seq is empty, the solo value will be returned without calling reducer.
 
 **Kind**: global function  
 **Returns**: <code>T</code> \| <code>TReturn</code> \| <code>\*</code> - The single value that results from reduction.  
@@ -145,19 +148,37 @@ If the seq only has one element and no initialValue is provided, or if initialVa
 
 | Param | Type | Description |
 | --- | --- | --- |
-| reducer | <code>function</code> | It takes two arguments - (accumulator, currentValue) |
+| reducer | <code>function</code> | It takes two arguments - (accumulator, currentValue). if initialValue is provided, the value will be used as the first argument in the reducer. Otherwise; the first element of the sequence will be used as the first argument. |
 
 **Example**
 ```js
-Seq.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10).reduce((accumulator, currentValue) => accumulator + currentValue);
+const result = Seq.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10).reduce((accumulator, currentValue) => accumulator + currentValue);
+console.log(result);
 // => 55
 
-Seq.of([0, 1], [2, 3], [4, 5]).reduce((accumulator, currentValue) => accumulator.concat(currentValue) , []);
+const result = Seq.of([0, 1], [2, 3], [4, 5]).reduce((accumulator, currentValue) => accumulator.concat(currentValue) , []);
+console.log(result);
 // => [0, 1, 2, 3, 4, 5]
 ```
+<a name="concat"></a>
 
+## concat(other) ⇒ <code>Seq</code>
+The concat() method creates a new seq that appends the passed value to the existing seq. This method does not change the existing sequence.
 
+**Kind**: global function  
+**Returns**: <code>Seq</code> - The result sequence.
 
+| Param | Description |
+| --- | --- |
+| other | Iterable, iterator, generator function or single value to concatenate into new sequence. |
+
+**Example**
+```js
+const seq = Seq.of(1,2,3);
+const carr = seq.concat([4,5,6]);
+console.log([...carr]);
+// => [1, 2, 3, 4, 5, 6]
+```
 
 ### Author
 Nyi Nyi Than - [@nyinyithann](https://www.linkedin.com/in/nyinyithan/)
