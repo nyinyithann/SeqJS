@@ -7,7 +7,7 @@ describe('filter()', () => {
     let obj = {
         num: 4,
         greaterThan4: function (x) {
-            return x > 4;
+            return x > this.num;
         },
     };
 

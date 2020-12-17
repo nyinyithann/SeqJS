@@ -73,6 +73,16 @@ console.log([...seq]);
 ```
 ## Functions
 
+## Members
+
+<dl>
+<dt><a href="#length">length</a> ⇒ <code>number</code></dt>
+<dd><p>Returns the length of the sequence.</p>
+</dd>
+</dl>
+
+## Functions
+
 <dl>
 <dt><a href="#map">map(callable)</a> ⇒ <code>Seq</code></dt>
 <dd><p>The map() method creates a new Seq populated with the results of calling a provided function on every element.
@@ -87,8 +97,27 @@ The provided function is invoked with two arguments: (item, index).</p>
 <dt><a href="#concat">concat(other)</a> ⇒ <code>Seq</code></dt>
 <dd><p>The concat() method creates a new seq that appends the passed value to the existing seq. This method does not change the existing sequence.</p>
 </dd>
+<dt><a href="#some">some(predicate)</a> ⇒ <code>boolean</code></dt>
+<dd><p>The some() method tests if at least one element in the seq passes the test implemented by the provided function.</p>
+</dd>
+<dt><a href="#every">every(predicate)</a> ⇒ <code>boolean</code></dt>
+<dd><p>The every() method tests if all elements of the sequence satisfy the given predicate.</p>
+</dd>
 </dl>
 
+<a name="length"></a>
+
+## length ⇒ <code>number</code>
+Returns the length of the sequence.
+
+**Kind**: global variable  
+**Returns**: <code>number</code> - The length of the sequence.  
+**Example**
+```js
+const seq = Seq.of(1,2,3);
+console.log(seq.length);
+// => 3;
+```
 <a name="map"></a>
 
 ## map(callable) ⇒ <code>Seq</code>
@@ -111,6 +140,10 @@ The provided function is invoked with two arguments: (item, index).
 const seq = Seq.of(1,2,3,4,5).map(x => x * x);
 console.log([...seq]);
 // => [1, 4, 9, 16, 25]
+
+const seq = Seq.of(1,2,3,4,5).map((item, index) => [index, item]);
+console.log([...seq]);
+// => [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]]
 ```
 <a name="filter"></a>
 
@@ -179,6 +212,43 @@ const carr = seq.concat([4,5,6]);
 console.log([...carr]);
 // => [1, 2, 3, 4, 5, 6]
 ```
+<a name="some"></a>
+
+## some(predicate) ⇒ <code>boolean</code>
+The some() method tests if at least one element in the seq passes the test implemented by the provided function.
+
+**Kind**: global function
+
+| Param | Type | Description |
+| --- | --- | --- |
+| predicate | <code>function</code> | A function to test on the elements of the seq. It takes two argument - (element, thisArg) |
+
+**Example**
+```js
+const seq = Seq.of(1,2,3,4,5);
+const result = seq.some(x => x % 2 == 0);
+console.log(result);
+// => true
+```
+<a name="every"></a>
+
+## every(predicate) ⇒ <code>boolean</code>
+The every() method tests if all elements of the sequence satisfy the given predicate.
+
+**Kind**: global function
+
+| Param | Type | Description |
+| --- | --- | --- |
+| predicate | <code>function</code> | A function to test on the elements of the seq. It takes two argument - (element, thisArg) |
+
+**Example**
+```js
+const seq = Seq.of(2, 4, 5, 8);
+const result = seq.some(x => x % 2 == 0);
+console.log(result);
+// => true
+```
+
 
 ### Author
 Nyi Nyi Than - [@nyinyithann](https://www.linkedin.com/in/nyinyithan/)

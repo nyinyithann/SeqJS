@@ -4,10 +4,11 @@ export default class Seq {
 
     constructor (source = function * () {
     }) {
-        if (utils.isGeneratorFunction(source)) {
-            this._generator = source;
-        } else if (utils.isIterable(source)) {
-            this._generator = utils.createGeneratorFunction(source);
+        this._source = source;
+        if (utils.isGeneratorFunction(this._source)) {
+            this._generator = this._source;
+        } else if (utils.isIterable(this._source)) {
+            this._generator = utils.createGeneratorFunction(this._source);
         } else {
             throw new TypeError('source must be iterable.');
         }
@@ -46,8 +47,33 @@ export default class Seq {
         return new Seq(args);
     }
 
+    static empty () {
+        return new Seq();
+    }
+
     static isSeq (source) {
         return Object.prototype.toString.call(source) === '[object Seq]';
+    }
+
+    /**
+     * Returns the length of the sequence.
+     * @returns {number} The length of the sequence.
+     * @example
+     * const seq = Seq.of(1,2,3);
+     * console.log(seq.length);
+     * // => 3;
+     */
+    get length () {
+        if (Array.isArray(this._source)) {
+            return this._source.length;
+        } else {
+            let count = 0;
+            const iter = this._generator();
+            while (!iter.next().done) {
+                count++;
+            }
+            return count;
+        }
     }
 
     /**
@@ -62,6 +88,10 @@ export default class Seq {
      * const seq = Seq.of(1,2,3,4,5).map(x => x * x);
      * console.log([...seq]);
      * // => [1, 4, 9, 16, 25]
+     *
+     * const seq = Seq.of(1,2,3,4,5).map((item, index) => [index, item]);
+     * console.log([...seq]);
+     * // => [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]]
      */
     map (callable) {
 
@@ -201,10 +231,10 @@ export default class Seq {
             otherIter = other[Symbol.iterator]();
         } else {
             otherIter = {
-                *[Symbol.iterator]() {
+                * [Symbol.iterator] () {
                     yield other;
-                }
-            }
+                },
+            };
         }
 
         const thisIter = this._generator();
@@ -212,6 +242,76 @@ export default class Seq {
             yield * thisIter;
             yield * otherIter;
         });
+    }
+
+    /**
+     * The some() method tests if at least one element in the seq passes the test implemented by the provided function.
+     * @param {Function} predicate A function to test on the elements of the seq. It takes two argument - (element, thisArg)
+     * @returns {boolean}
+     * @example
+     * const seq = Seq.of(1,2,3,4,5);
+     * const result = seq.some(x => x % 2 == 0);
+     * console.log(result);
+     * // => true
+     */
+    some (predicate) {
+        if (this == null) {
+            throw new TypeError('This is null or not defined.');
+        }
+
+        if (!utils.isFunction(predicate)) {
+            throw new TypeError(predicate + ' is not a function.');
+        }
+
+        let thisArg;
+
+        if (arguments.length > 1) {
+            thisArg = arguments[1];
+        }
+
+        let current;
+        const iter = this._generator();
+        while (!(current = iter.next()).done) {
+            if (predicate.call(thisArg, current.value)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * The every() method tests if all elements of the sequence satisfy the given predicate.
+     * @param {Function} predicate A function to test on the elements of the seq. It takes two argument - (element, thisArg)
+     * @returns {boolean}
+     * @example
+     * const seq = Seq.of(2, 4, 5, 8);
+     * const result = seq.some(x => x % 2 == 0);
+     * console.log(result);
+     * // => true
+     */
+    every(predicate) {
+        if (this == null) {
+            throw new TypeError('This is null or not defined.');
+        }
+
+        if (!utils.isFunction(predicate)) {
+            throw new TypeError(predicate + ' is not a function.');
+        }
+
+        let thisArg;
+
+        if (arguments.length > 1) {
+            thisArg = arguments[1];
+        }
+
+        let current;
+        const iter = this._generator();
+        while (!(current = iter.next()).done) {
+            if (!predicate.call(thisArg, current.value)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
 
