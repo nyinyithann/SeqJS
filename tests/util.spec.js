@@ -1,4 +1,4 @@
-import * as utils from '../src/utils';
+import * as utils from '../src/util';
 
 describe('Test utility functions', () => {
 

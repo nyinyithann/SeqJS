@@ -29,7 +29,7 @@ describe('map()', () => {
     test('should throw error if seq is null or undefined.', () => {
         const seqMap = Seq.prototype.map;
         expect(() => seqMap.call(null, x => x + 1)).
-            toThrow('This is null or not defined.');
+            toThrow(TypeError);
     });
 
     test('calling upon prototype method.', () => {

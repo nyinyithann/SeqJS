@@ -1,14 +1,14 @@
-import * as utils from '../src/utils';
+import * as util from './util';
 
 export default class Seq {
 
     constructor (source = function * () {
     }) {
         this._source = source;
-        if (utils.isGeneratorFunction(this._source)) {
+        if (util.isGeneratorFunction(this._source)) {
             this._generator = this._source;
-        } else if (utils.isIterable(this._source)) {
-            this._generator = utils.createGeneratorFunction(this._source);
+        } else if (util.isIterable(this._source)) {
+            this._generator = util.createGeneratorFunction(this._source);
         } else {
             throw new TypeError('source must be iterable.');
         }
@@ -77,6 +77,18 @@ export default class Seq {
     }
 
     /**
+     * Returns true if the sequence contains no elements, false otherwise.
+     * @returns {boolean} True if the sequence is empty; false otherwise.
+     * @example
+     * console.log(Seq.empty().isEmpty());
+     * // => true
+     */
+    isEmpty() {
+        util.checkNonNull(this, 'this');
+        return this._generator().next().done;
+    }
+
+    /**
      * The map() method creates a new Seq populated with the results of calling a provided function on every element.
      * The provided function is invoked with two arguments: (item, index).
      *
@@ -95,13 +107,8 @@ export default class Seq {
      */
     map (callable) {
 
-        if (this == null) {
-            throw new TypeError('This is null or not defined.');
-        }
-
-        if (!utils.isFunction(callable)) {
-            throw new TypeError(callable + ' is not a function.');
-        }
+        util.checkNonNull(this, 'this');
+        util.checkFunction(callable, 'callable');
 
         let index = 0;
         let thisArg;
@@ -131,13 +138,8 @@ export default class Seq {
      */
     filter (predicate) {
 
-        if (this == null) {
-            throw new TypeError('This is null or not defined.');
-        }
-
-        if (!utils.isFunction(predicate)) {
-            throw new TypeError(predicate + ' is not a function.');
-        }
+        util.checkNonNull(this, 'this');
+        util.checkFunction(predicate, 'predicate');
 
         let thisArg;
 
@@ -159,7 +161,7 @@ export default class Seq {
      * The method executes the provided reducer function on each element of the sequence, resulting in single output value.
      * @param reducer {Function} It takes two arguments - (accumulator, currentValue). if initialValue is provided, the value will be used as the first argument in the reducer.
      * Otherwise; the first element of the sequence will be used as the first argument.
-     * @returns {T|TReturn|*} The single value that results from reduction.
+     * @returns A single value that results from reduction.
      * @exception {TypeError} If reducer is not a function.
      *
      * @example
@@ -173,13 +175,8 @@ export default class Seq {
      */
     reduce (reducer) {
 
-        if (this == null) {
-            throw new TypeError('This is null or not defined.');
-        }
-
-        if (!utils.isFunction(reducer)) {
-            throw new TypeError(reducer + ' is not a function.');
-        }
+        util.checkNonNull(this, 'this');
+        util.checkFunction(reducer, 'reducer');
 
         let initialValue;
 
@@ -220,14 +217,13 @@ export default class Seq {
      * // => [1, 2, 3, 4, 5, 6]
      */
     concat (other) {
-        if (this == null) {
-            throw new TypeError('This is null or not defined.');
-        }
+
+        util.checkNonNull(this, 'this');
 
         let otherIter;
-        if (utils.isGeneratorFunction(other)) {
+        if (util.isGeneratorFunction(other)) {
             otherIter = other();
-        } else if (utils.isIterable(other)) {
+        } else if (util.isIterable(other)) {
             otherIter = other[Symbol.iterator]();
         } else {
             otherIter = {
@@ -255,13 +251,9 @@ export default class Seq {
      * // => true
      */
     some (predicate) {
-        if (this == null) {
-            throw new TypeError('This is null or not defined.');
-        }
 
-        if (!utils.isFunction(predicate)) {
-            throw new TypeError(predicate + ' is not a function.');
-        }
+        util.checkNonNull(this, 'this');
+        util.checkFunction(predicate, 'predicate');
 
         let thisArg;
 
@@ -289,14 +281,10 @@ export default class Seq {
      * console.log(result);
      * // => true
      */
-    every(predicate) {
-        if (this == null) {
-            throw new TypeError('This is null or not defined.');
-        }
+    every (predicate) {
 
-        if (!utils.isFunction(predicate)) {
-            throw new TypeError(predicate + ' is not a function.');
-        }
+        util.checkNonNull(this, 'this');
+        util.checkFunction(predicate, 'predicate');
 
         let thisArg;
 
@@ -312,6 +300,36 @@ export default class Seq {
             }
         }
         return true;
+    }
+
+    /**
+     * Returns the first N elements of the sequence.
+     * @param count The number of items to take.
+     * @returns {Seq} The result sequence.
+     * @example
+     * const seq = Seq.of(1,2,3,4,5);
+     * const taken = seq.take(2);
+     * console.log([...taken]);
+     * // => [1, 2]
+     */
+    take (count) {
+        util.checkNonNull(this, 'this');
+        util.checkNonNegative(count, 'count');
+
+        if (count === 0) {
+            return Seq.empty();
+        } else {
+            let current;
+            const iter = this._generator();
+            return new Seq(function * () {
+                for (let i = 0; i < count; i++) {
+                    current = iter.next();
+                    if (!current.done) {
+                        yield current.value;
+                    }
+                }
+            });
+        }
     }
 }
 

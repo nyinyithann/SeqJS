@@ -30,3 +30,21 @@ export function notUndefined (value) {
 export function isFunction (value) {
     return typeof value === 'function';
 }
+
+export function checkNonNull(value, name = "value") {
+    if (value == null) {
+        throw new TypeError(name + " is null or not defined.");
+    }
+}
+
+export function checkFunction(value, name = "value") {
+    if (!this.isFunction(value)) {
+        throw new TypeError(name + ' is not a function.');
+    }
+}
+
+export function checkNonNegative(value, name = "value") {
+    if (!Number.isFinite(value) || value < 0 ) {
+        throw new TypeError(name + " must be a non-negative number.");
+    }
+}

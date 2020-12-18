@@ -71,8 +71,6 @@ for (const item of seq) {
 console.log([...seq]);
 // => [1, 2, 3, 4, 5]
 ```
-## Functions
-
 ## Members
 
 <dl>
@@ -84,6 +82,9 @@ console.log([...seq]);
 ## Functions
 
 <dl>
+<dt><a href="#isEmpty">isEmpty()</a> ⇒ <code>boolean</code></dt>
+<dd><p>Returns true if the sequence contains no elements, false otherwise.</p>
+</dd>
 <dt><a href="#map">map(callable)</a> ⇒ <code>Seq</code></dt>
 <dd><p>The map() method creates a new Seq populated with the results of calling a provided function on every element.
 The provided function is invoked with two arguments: (item, index).</p>
@@ -103,6 +104,9 @@ The provided function is invoked with two arguments: (item, index).</p>
 <dt><a href="#every">every(predicate)</a> ⇒ <code>boolean</code></dt>
 <dd><p>The every() method tests if all elements of the sequence satisfy the given predicate.</p>
 </dd>
+<dt><a href="#take">take(count)</a> ⇒ <code>Seq</code></dt>
+<dd><p>Returns the first N elements of the sequence.</p>
+</dd>
 </dl>
 
 <a name="length"></a>
@@ -117,6 +121,18 @@ Returns the length of the sequence.
 const seq = Seq.of(1,2,3);
 console.log(seq.length);
 // => 3;
+```
+<a name="isEmpty"></a>
+
+## isEmpty() ⇒ <code>boolean</code>
+Returns true if the sequence contains no elements, false otherwise.
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - True if the sequence is empty; false otherwise.  
+**Example**
+```js
+console.log(Seq.empty().isEmpty());
+// => true
 ```
 <a name="map"></a>
 
@@ -173,7 +189,7 @@ console.log([...seq]);
 The method executes the provided reducer function on each element of the sequence, resulting in single output value.
 
 **Kind**: global function  
-**Returns**: <code>T</code> \| <code>TReturn</code> \| <code>\*</code> - The single value that results from reduction.  
+**Returns**: <code>T</code> | <code>TReturn</code> | <code>*</code> - The single value that results from reduction.  
 **Throws**:
 
 - <code>TypeError</code> If reducer is not a function.
@@ -248,6 +264,26 @@ const result = seq.some(x => x % 2 == 0);
 console.log(result);
 // => true
 ```
+<a name="take"></a>
+
+## take(count) ⇒ <code>Seq</code>
+Returns the first N elements of the sequence.
+
+**Kind**: global function  
+**Returns**: <code>Seq</code> - The result sequence.
+
+| Param | Description |
+| --- | --- |
+| count | The number of items to take. |
+
+**Example**
+```js
+const seq = Seq.of(1,2,3,4,5);
+const taken = seq.take(2);
+console.log([...taken]);
+// => [1, 2]
+```
+
 
 
 ### Author
@@ -256,6 +292,7 @@ Nyi Nyi Than - [@nyinyithann](https://www.linkedin.com/in/nyinyithan/)
 ### Credit
 - [Exploring ES6](https://exploringjs.com/es6.html) By [Dr. Axel Rauschmayer](https://2ality.com/p/about.html)
 - [Understanding ECMAScript 6](https://leanpub.com/understandinges6) By [Nicholas C. Zakas](https://humanwhocodes.com/)
+- [Collection Pipeline](https://martinfowler.com/articles/collection-pipeline/) by [Martin Fowler](https://martinfowler.com/)
 - [javascript.info](https://javascript.info/)
 - [Iteration protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)
 

@@ -27,8 +27,9 @@ describe('Spec of Seq.', () => {
         expect([...new Seq()]).toEqual([]);
     });
 
-    test('Seq can be constructed with a generator function.', () => {
+    test('Seq can be constructed with a generator function or an iterator.', () => {
         expect([...new Seq(generator)]).toEqual(array);
+        expect([...new Seq(iterator)]).toEqual([1,2,3,4,5]);
     });
 
     test('Seq can be constructed with an iterable (array).', () => {
@@ -70,6 +71,12 @@ describe('Spec of Seq.', () => {
         expect(new Seq() instanceof Seq).toBe(true);
     });
 
+    test('original seq is not mutated after operators are applied.', () => {
+       const seq = Seq.of(1,2,3,4,5);
+       const mappedSeq = seq.map(x => x * x);
+       expect([...mappedSeq]).toEqual([...seq.map(x => x * x)]);
+       expect([...seq]).toEqual([1,2,3,4,5]);
+    });
 });
 
 describe(`Seq's static methods.`, () => {

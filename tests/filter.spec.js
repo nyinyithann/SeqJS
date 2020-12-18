@@ -24,7 +24,7 @@ describe('filter()', () => {
     test('should throw error if seq is null or undefined.', () => {
         const seqFilter = Seq.prototype.filter;
         expect(() => seqFilter.call(null, x => x > 2)).
-            toThrow('This is null or not defined.');
+            toThrow(TypeError);
     });
 
     test('calling up prototype method.', () => {
