@@ -34,7 +34,7 @@ describe('map()', () => {
 
     test('calling upon prototype method.', () => {
         const seqMap = Seq.prototype.map;
-        expect([...seqMap.call(Seq.from(nums),obj.add10, obj)]).
+        expect([...seqMap.call(Seq.from(nums), obj.add10, obj)]).
             toEqual(nums.map(obj.add10, obj));
     });
 

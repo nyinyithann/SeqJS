@@ -36,7 +36,7 @@ describe('filter()', () => {
     test('should throw error if predicate is not a function.', () => {
         expect(() => Seq.of(1, 2).filter(undefined)).toThrow(Error);
         expect(() => Seq.of(1, 2).filter(null)).toThrow(Error);
-        expect(() => Seq.of(1, 2).filter({ })).toThrow(Error);
+        expect(() => Seq.of(1, 2).filter({})).toThrow(Error);
     });
 
 });

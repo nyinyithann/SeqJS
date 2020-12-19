@@ -7,7 +7,7 @@ describe('length property', () => {
     });
 
     test('length of array source', () => {
-       const seq = new Seq([1,2,3,4,5]);
-       expect(seq.length).toBe(5);
+        const seq = new Seq([1, 2, 3, 4, 5]);
+        expect(seq.length).toBe(5);
     });
 });
