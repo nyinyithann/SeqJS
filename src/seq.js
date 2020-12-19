@@ -83,7 +83,7 @@ export default class Seq {
      * console.log(Seq.empty().isEmpty());
      * // => true
      */
-    isEmpty() {
+    isEmpty () {
         util.checkNonNull(this, 'this');
         return this._generator().next().done;
     }
@@ -329,6 +329,51 @@ export default class Seq {
                     }
                 }
             });
+        }
+    }
+
+    /**
+     * Create an array out of the sequence.
+     * @returns {*[]} The result array.
+     * @example
+     *
+     * const seq = Seq.of(1,2,3,4);
+     * const arr = seq.toArray();
+     * console.log(arr);
+     * // => [1,2,3,4]
+     */
+    toArray () {
+        util.checkNonNull(this, 'this');
+        return [...this._generator()];
+    }
+
+    /**
+     * Applies the given function to each element of the collection.
+     * @param  {Function} callback A function to apply to each element of the sequence.
+     * @example
+     *
+     * const seq = Seq.of(g1, 2, 3, 4, 5);
+     * seq.forEach(x => console.log(x));
+     * // => 1
+     *       2
+     *       3
+     *       4
+     *       5
+     */
+    forEach (callback) {
+        util.checkNonNull(this, 'this');
+        util.checkFunction(callback, 'callback');
+
+        let index = 0;
+        let thisArg;
+
+        if (arguments.length > 1) {
+            thisArg = arguments[1];
+        }
+
+        const iter = this._generator();
+        for (const item of iter) {
+            callback.call(thisArg, item, index++);
         }
     }
 }
