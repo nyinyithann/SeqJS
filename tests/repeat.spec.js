@@ -20,4 +20,5 @@ describe('repeat()', () => {
     test('should throw TypeError if count is a negative number', () => {
         expect(() => Seq.repeat(-1, 1)).toThrow(TypeError);
     });
+
 });

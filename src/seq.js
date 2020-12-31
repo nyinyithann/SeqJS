@@ -111,7 +111,7 @@ export default class Seq {
     static repeat (count, initial) {
         util.checkNonNegative(count, 'count');
 
-        if(count === 0) {
+        if (count === 0) {
             return Seq.empty();
         }
 
@@ -194,6 +194,7 @@ export default class Seq {
     forEach (callback) {
         util.checkNonNull(this, 'this');
         util.checkNonFunction(callback, 'callback');
+        util.checkGeneratorFunction(callback, 'callback');
 
         let index = 0;
         let thisArg;
@@ -212,7 +213,7 @@ export default class Seq {
      * The map() method creates a new Seq populated with the results of calling a provided function on every element.
      * The provided function is invoked with two arguments: (item, index).
      *
-     * @param {Function} callable The function invoked on each item.
+     * @param {Function} callback The function invoked on each item.
      * @returns {Seq} Return the new mapped sequence.
      * @exception {TypeError} If callable is not a function.
      * @example
@@ -225,10 +226,12 @@ export default class Seq {
      * console.log([...seq]);
      * // => [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]]
      */
-    map (callable) {
+    map (callback) {
 
         util.checkNonNull(this, 'this');
-        util.checkNonFunction(callable, 'callable');
+        util.checkNonFunction(callback, 'callback');
+        util.checkGeneratorFunction(callback, 'callback');
+
 
         let index = 0;
         let thisArg;
@@ -240,7 +243,7 @@ export default class Seq {
         const iter = this._generator();
         return new Seq(function * () {
             for (const item of iter) {
-                yield callable.call(thisArg, item, index++);
+                yield callback.call(thisArg, item, index++);
             }
         });
     }
@@ -260,6 +263,8 @@ export default class Seq {
 
         util.checkNonNull(this, 'this');
         util.checkNonFunction(predicate, 'predicate');
+        util.checkGeneratorFunction(predicate, 'predicate');
+
 
         let thisArg;
 
@@ -297,6 +302,7 @@ export default class Seq {
 
         util.checkNonNull(this, 'this');
         util.checkNonFunction(reducer, 'reducer');
+        util.checkGeneratorFunction(reducer, 'reducer');
 
         let initialValue;
 
@@ -374,6 +380,7 @@ export default class Seq {
 
         util.checkNonNull(this, 'this');
         util.checkNonFunction(predicate, 'predicate');
+        util.checkGeneratorFunction(predicate, 'predicate');
 
         let thisArg;
 
@@ -405,6 +412,7 @@ export default class Seq {
 
         util.checkNonNull(this, 'this');
         util.checkNonFunction(predicate, 'predicate');
+        util.checkGeneratorFunction(predicate, 'predicate');
 
         let thisArg;
 
@@ -450,6 +458,36 @@ export default class Seq {
                 }
             });
         }
+    }
+
+    /**
+     * Returns a sequence that, when iterated, yields elements of the underlying sequence while the given predicate returns True, and then returns no further elements.
+     * @param {Function} predicate A function that evaluates to false when no more items should be returned.
+     * @returns {Seq} The result sequence.
+     * @example
+     * const seq = Seq.from([1,2,3,4,5]);
+     * const result = seq.takeWhile(x => x < 3).toArray();
+     * console.log(result);
+     * => [1, 2]
+     */
+    takeWhile (predicate) {
+        util.checkNonFunction(predicate, 'predicate');
+        util.checkGeneratorFunction(predicate, 'predicate');
+
+        let thisArg;
+
+        if (arguments.length > 1) {
+            thisArg = arguments[1];
+        }
+
+        let current;
+        const iter = this._generator();
+        return new Seq(function * () {
+            while (!(current = iter.next()).done &&
+            predicate.call(thisArg, current.value)) {
+                yield current.value;
+            }
+        });
     }
 
 }
