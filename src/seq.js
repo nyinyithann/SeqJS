@@ -7,7 +7,7 @@ export default class Seq {
         this._source = source;
         if (util.isGeneratorFunction(this._source)) {
             this._generator = this._source;
-        } else if (util.isIterable(this._source)) {
+        } else if (util.isIterable(this._source) || util.isArrayLike(source)) {
             this._generator = util.createGeneratorFunction(this._source);
         } else {
             throw new TypeError('source must be iterable.');
@@ -45,6 +45,81 @@ export default class Seq {
 
     static of (...args) {
         return new Seq(args);
+    }
+
+    /**
+     * Generate a new sequence by invoking initializer function passed as the argument up to the given count.
+     * @param {Number} count The maximum number of items to generate for the sequence.
+     * @param {Function } initializer A function that generates an item in the sequence from a given index.
+     * @returns {Seq} The result sequence.
+     * @example
+     * const fiveNums = Seq.initInfinite(5, x => x * 2);
+     * console.log(fiveNums.toArray());
+     * => [0, 2, 4, 6, 8]
+     */
+    static init (count, initializer) {
+        util.checkNonNegative(count, 'count');
+        util.checkNonFunction(initializer, 'initializer');
+        util.checkGeneratorFunction(initializer, 'initializer');
+
+        if (count === 0) {
+            return Seq.empty();
+        }
+
+        return new Seq(function * () {
+            for (let i = 0; i < count; i++) {
+                yield initializer(i);
+            }
+        });
+    }
+
+    /**
+     * Generate a new sequence by invoking initializer function passed as the argument.
+     * The index of the item generated is passed to the initializer function.
+     * The iteration can continue up to Number.MAX_SAFE_INTEGER.
+     * @param {Function } initializer A function that generates an item in the sequence from a given index.
+     * @returns {Seq} The result sequence.
+     * @example
+     * const seq = Seq.initInfinite(x => x * 2);
+     * const first5Nums = seq.take(5);
+     * console.log(first5Nums.toArray());
+     * => [0, 2, 4, 6, 8]
+     */
+    static initInfinite (initializer) {
+        util.checkNonFunction(initializer, 'initializer');
+        util.checkGeneratorFunction(initializer, 'initializer');
+
+        let index = 0;
+
+        return new Seq(function * () {
+            while (index < Number.MAX_SAFE_INTEGER) {
+                yield initializer(index++);
+            }
+        });
+    }
+
+    /**
+     * Creates a sequence by replicating the given initial value.
+     * @param {Number} count The number of elements to replicate.
+     * @param initial The value to replicate.
+     * @returns {Seq} The generated sequence.
+     * @example
+     * const seq = Seq.repeat(5, 1);
+     * console.log(seq.toArray());
+     * => [1, 1, 1, 1, 1]
+     */
+    static repeat (count, initial) {
+        util.checkNonNegative(count, 'count');
+
+        if(count === 0) {
+            return Seq.empty();
+        }
+
+        return new Seq(function * () {
+            for (let i = 0; i < count; i++) {
+                yield initial;
+            }
+        });
     }
 
     static empty () {
@@ -89,6 +164,51 @@ export default class Seq {
     }
 
     /**
+     * Create an array out of the sequence.
+     * @returns {Array} The result array.
+     * @example
+     *
+     * const seq = Seq.of(1,2,3,4);
+     * const arr = seq.toArray();
+     * console.log(arr);
+     * // => [1,2,3,4]
+     */
+    toArray () {
+        util.checkNonNull(this, 'this');
+        return [...this._generator()];
+    }
+
+    /**
+     * Applies the given function to each element of the collection.
+     * @param  {Function} callback A function to apply to each element of the sequence.
+     * @example
+     *
+     * const seq = Seq.of(g1, 2, 3, 4, 5);
+     * seq.forEach(x => console.log(x));
+     * // => 1
+     *       2
+     *       3
+     *       4
+     *       5
+     */
+    forEach (callback) {
+        util.checkNonNull(this, 'this');
+        util.checkNonFunction(callback, 'callback');
+
+        let index = 0;
+        let thisArg;
+
+        if (arguments.length > 1) {
+            thisArg = arguments[1];
+        }
+
+        const iter = this._generator();
+        for (const item of iter) {
+            callback.call(thisArg, item, index++);
+        }
+    }
+
+    /**
      * The map() method creates a new Seq populated with the results of calling a provided function on every element.
      * The provided function is invoked with two arguments: (item, index).
      *
@@ -108,7 +228,7 @@ export default class Seq {
     map (callable) {
 
         util.checkNonNull(this, 'this');
-        util.checkFunction(callable, 'callable');
+        util.checkNonFunction(callable, 'callable');
 
         let index = 0;
         let thisArg;
@@ -139,7 +259,7 @@ export default class Seq {
     filter (predicate) {
 
         util.checkNonNull(this, 'this');
-        util.checkFunction(predicate, 'predicate');
+        util.checkNonFunction(predicate, 'predicate');
 
         let thisArg;
 
@@ -176,7 +296,7 @@ export default class Seq {
     reduce (reducer) {
 
         util.checkNonNull(this, 'this');
-        util.checkFunction(reducer, 'reducer');
+        util.checkNonFunction(reducer, 'reducer');
 
         let initialValue;
 
@@ -253,7 +373,7 @@ export default class Seq {
     some (predicate) {
 
         util.checkNonNull(this, 'this');
-        util.checkFunction(predicate, 'predicate');
+        util.checkNonFunction(predicate, 'predicate');
 
         let thisArg;
 
@@ -284,7 +404,7 @@ export default class Seq {
     every (predicate) {
 
         util.checkNonNull(this, 'this');
-        util.checkFunction(predicate, 'predicate');
+        util.checkNonFunction(predicate, 'predicate');
 
         let thisArg;
 
@@ -332,49 +452,5 @@ export default class Seq {
         }
     }
 
-    /**
-     * Create an array out of the sequence.
-     * @returns {*[]} The result array.
-     * @example
-     *
-     * const seq = Seq.of(1,2,3,4);
-     * const arr = seq.toArray();
-     * console.log(arr);
-     * // => [1,2,3,4]
-     */
-    toArray () {
-        util.checkNonNull(this, 'this');
-        return [...this._generator()];
-    }
-
-    /**
-     * Applies the given function to each element of the collection.
-     * @param  {Function} callback A function to apply to each element of the sequence.
-     * @example
-     *
-     * const seq = Seq.of(g1, 2, 3, 4, 5);
-     * seq.forEach(x => console.log(x));
-     * // => 1
-     *       2
-     *       3
-     *       4
-     *       5
-     */
-    forEach (callback) {
-        util.checkNonNull(this, 'this');
-        util.checkFunction(callback, 'callback');
-
-        let index = 0;
-        let thisArg;
-
-        if (arguments.length > 1) {
-            thisArg = arguments[1];
-        }
-
-        const iter = this._generator();
-        for (const item of iter) {
-            callback.call(thisArg, item, index++);
-        }
-    }
 }
 
