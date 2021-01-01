@@ -1,4 +1,4 @@
-# SeqJS
+# SeqJS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Node.js CI](https://github.com/nyinyithann/SeqJS/workflows/Node.js%20CI/badge.svg?branch=master&event=push)
 
 `SeqJS` contains operations for working with values of type `Seq` which is a container of a series of elements. Types of
 a seq's elements are not fixed. Individual seq elements are computed only as required.
