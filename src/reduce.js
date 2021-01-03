@@ -3,7 +3,8 @@ import * as util from './util';
 /** @module */
 
 /**
- * ### reduce(reducer) ⇒ Any </br>
+ * <hr style="border:2px solid gray"> </hr>
+ * <h3> reduce(reducer) ⇒ Any </h3>
  * The method executes the provided reducer function on each element of the sequence, resulting in single output value.
  * @param reducer {Function} It takes two arguments - (accumulator, currentValue). if initialValue is provided, the value will be used as the first argument in the reducer.
  * Otherwise; the first element of the sequence will be used as the first argument.

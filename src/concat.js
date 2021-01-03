@@ -4,7 +4,7 @@ import from from './from';
 /** @module */
 
 /**
- * ### concat([val1[,val2[,...[,valN]]]]) ⇒ Seq </br>
+ * <h3>concat([val1[,val2[,...[,valN]]]]) ⇒ Seq </h3>
  * Creates a new seq that appends the passed value to the existing seq. This method does not change the existing sequence.
  * @param others Iterable, iterator, generator function or single value to concatenate into new sequence. If omitted, the method
  * returns the existing sequence.
@@ -15,6 +15,7 @@ import from from './from';
  * const result = seq.concat([4, 5, 6], { seven: 7 }, [[8], [9]], [[[10], [11]]]);
  * console.log(result.toArray());
  * // => [ 1, 2, 3, 4, 5, 6, { seven: 7 }, [ 8 ], [ 9 ], [ [ 10 ], [ 11 ] ] ]
+ *
  */
 const concat = function (...others) {
   util.throwIfNull(this, 'this');

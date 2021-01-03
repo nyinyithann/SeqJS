@@ -2,7 +2,8 @@ import Seq from './seq';
 
 /** @module */
 /**
- * Seq.empty() ⇒ Seq </br>
+ * <hr style="border:2px solid gray"> </hr>
+ * <h3> Seq.empty() ⇒ Seq </h3>
  * Creates an empty sequence.
  * @returns {Seq} An empty sequence.
  * @example

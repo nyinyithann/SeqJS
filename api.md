@@ -40,7 +40,7 @@
 </dl>
 
 -->
-  ### concat([val1[,val2[,...[,valN]]]]) ⇒ Seq </br>
+  <h3>concat([val1[,val2[,...[,valN]]]]) ⇒ Seq </h3>
 Creates a new seq that appends the passed value to the existing seq. This method does not change the existing sequence.
 
 **Returns**: <code>Seq</code> - A new sequence.  
@@ -60,7 +60,8 @@ const result = seq.concat([4, 5, 6], { seven: 7 }, [[8], [9]], [[[10], [11]]]);
 console.log(result.toArray());
 // => [ 1, 2, 3, 4, 5, 6, { seven: 7 }, [ 8 ], [ 9 ], [ [ 10 ], [ 11 ] ] ]
 ```
-Seq.empty() ⇒ Seq </br>
+<hr style="border:2px solid gray"> </hr>
+<h3> Seq.empty() ⇒ Seq </h3>
 Creates an empty sequence.
 
 **Returns**: <code>Seq</code> - An empty sequence.  
@@ -70,7 +71,8 @@ const emptySeq = Seq.empty();
 console.log(emptySeq.toArray());
 // => []
 ```
-### every(predicate) ⇒ Seq </br>
+<hr style="border:2px solid gray"> </hr>
+<h3>every(predicate) ⇒ Seq</h3>
 Tests if all elements of the sequence satisfy the given predicate.
 
 **Returns**: <code>boolean</code> - true if the callback function returns a truthy value for at least one element in the sequence. Otherwise, false.  
@@ -90,7 +92,8 @@ const result = seq.some(x => x % 2 === 0);
 console.log(result);
 // => true
 ```
-### filter(predicate) ⇒ Seq </br>
+<hr style="border:2px solid gray"> </hr>
+<h3>filter(predicate) ⇒ Seq</h3>
 Returns a new sequence containing only the elements of the collection for which the given predicate returns "true".
 
 **Returns**: <code>Seq</code> - The result sequence.  
@@ -109,7 +112,8 @@ const seq = Seq.of(1,2,3,4,5).filter(x => x % 2 === 0);
 console.log([...seq]);
 // => [2, 4]
 ```
-### forEach(callback) ⇒ undefined </br>
+<hr style="border:2px solid gray"> </hr>
+<h3> forEach(callback) ⇒ undefined </h3>
 Applies the given function to each element of the collection.
 
 **Throws**:
@@ -131,7 +135,8 @@ seq.forEach(x => console.log(x));
 // =>   4
 // =>   5
 ```
-### Seq.from(source) ⇒ Seq </br>
+<hr style="border:2px solid gray"> </hr>
+<h3> Seq.from(source) ⇒ Seq </h3>
 Create a new sequence wrapped a given source. The given source can be anything that implemented iterable protocol.
 
 **Returns**: <code>Seq</code> - The return sequence.  
@@ -144,7 +149,8 @@ Create a new sequence wrapped a given source. The given source can be anything t
 | --- | --- |
 | source | Anything that implemented iterable protocol. |
 
-### init(count, initializer) ⇒ Seq </br>
+<hr style="border:2px solid gray"> </hr>
+<h3> init(count, initializer) ⇒ Seq </h3>
 Generate a new sequence by invoking initializer function passed as the argument up to the given count.
 
 **Returns**: <code>Seq</code> - The result sequence.  
@@ -164,7 +170,8 @@ const fiveNums = Seq.init(5, x => x * 2);
 console.log(fiveNums.toArray());
 // => [0, 2, 4, 6, 8]
 ```
-### initInfinite(initializer) ⇒ Seq </br>
+<hr style="border:2px solid gray"> </hr>
+<h3> initInfinite(initializer) ⇒ Seq </h3>
 Generate a new sequence by invoking initializer function passed as the argument.
 The index of the item generated is passed to the initializer function.
 The iteration can continue up to Number.MAX_SAFE_INTEGER.
@@ -186,7 +193,8 @@ const first5Nums = seq.take(5);
 console.log(first5Nums.toArray());
 // => [0, 2, 4, 6, 8]
 ```
-### isEmpty() ⇒ Boolean </br>
+<hr style="border:2px solid gray"> </hr>
+<h3> isEmpty() ⇒ Boolean </h3>
 Returns true if the sequence contains no elements, false otherwise.
 
 **Returns**: <code>boolean</code> - True if the sequence is empty; false otherwise.  
@@ -199,7 +207,8 @@ Returns true if the sequence contains no elements, false otherwise.
 console.log(Seq.empty().isEmpty());
 // => true
 ```
-### length ⇒ Number </br>
+<hr style="border:2px solid gray"> </hr>
+<h3> length ⇒ Number </h3>
 Returns the length of the sequence.
 
 **Returns**: <code>number</code> - The length of the sequence.  
@@ -213,7 +222,8 @@ const seq = Seq.of(1,2,3);
 console.log(seq.length);
 // => 3;
 ```
-### map(callback) ⇒ Seq </br>
+<hr style="border:2px solid gray"> </hr>
+<h3> map(callback) ⇒ Seq </h3>
 The map method creates a new Seq populated with the results of calling a provided function on every element.
 The provided function is invoked with two arguments: (item, index).
 
@@ -237,7 +247,8 @@ const seq = Seq.of(1,2,3,4,5).map((item, index) => [index, item]);
 console.log([...seq]);
 // => [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]]
 ```
-### Seq.of(elem0[elem1[,...[,elemN]]]) ⇒ Seq </br>
+<hr style="border:2px solid gray"> </hr>
+<h3> Seq.of(elem0[elem1[,...[,elemN]]]) ⇒ Seq </h3>
 Creates a new sequence from a variable number of arguments, regardless of number or type of the arguments.
 
 **Returns**: <code>Seq</code> - A new sequence.  
@@ -252,7 +263,8 @@ const nums = Seq.of(1,2, { 'three' : 3}, [4], '5', 0b110);
 console.log(nums);
 // => [ 1, 2, { three: 3 }, [ 4 ], '5', 6 ]
 ```
-### reduce(reducer) ⇒ Any </br>
+<hr style="border:2px solid gray"> </hr>
+<h3> reduce(reducer) ⇒ Any </h3>
 The method executes the provided reducer function on each element of the sequence, resulting in single output value.
 
 **Returns**: A single value that results from reduction.  
@@ -275,7 +287,8 @@ const result = Seq.of([0, 1], [2, 3], [4, 5]).reduce((accumulator, currentValue)
 console.log(result);
 // => [0, 1, 2, 3, 4, 5]
 ```
-### repeat(count, initial) ⇒ Seq </br>
+<hr style="border:2px solid gray"> </hr>
+<h3> repeat(count, initial) ⇒ Seq </h3>
 Creates a sequence by replicating the given initial value.
 
 **Returns**: <code>Seq</code> - The generated sequence.  
@@ -295,7 +308,8 @@ const seq = Seq.repeat(5, 1);
 console.log(seq.toArray());
 // => [1, 1, 1, 1, 1]
 ```
-### some(predicate) ⇒ Seq </br>
+<hr style="border:2px solid gray"> </hr>
+<h3> some(predicate) ⇒ Seq </h3>
 Tests if at least one element in the sequence passes the test implemented by the provided function.
 
 **Returns**: <code>boolean</code> - true if the callback function returns a truthy value for at least one element in the sequence. Otherwise, false.  
@@ -315,7 +329,8 @@ const result = seq.some(x => x % 2 === 0);
 console.log(result);
 // => true
 ```
-### take(count) ⇒ Seq </br>
+<hr style="border:2px solid gray"> </hr>
+<h3> take(count) ⇒ Seq </h3>
 Returns the first N elements of the sequence.
 
 **Returns**: <code>Seq</code> - The result sequence.  
@@ -335,7 +350,8 @@ const taken = seq.take(2);
 console.log([...taken]);
 // => [1, 2]
 ```
-* ### takeWhile(predicate) ⇒ Seq </br>
+<hr style="border:2px solid gray"> </hr>
+<h3> takeWhile(predicate) ⇒ Seq </h3>
 Returns a sequence that, when iterated, yields elements of the underlying sequence while the given predicate returns True, and then returns no further elements.
 
 **Returns**: <code>Seq</code> - The result sequence.  
@@ -355,7 +371,8 @@ const result = seq.takeWhile(x => x < 3).toArray();
 console.log(result);
 => [1, 2]
 ```
-### toArray() ⇒ Seq </br>
+<hr style="border:2px solid gray"> </hr>
+<h3> toArray() ⇒ Seq </h3>
 Create an array out of the sequence.
 
 **Returns**: <code>Array</code> - The result array.  

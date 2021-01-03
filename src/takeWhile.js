@@ -4,7 +4,8 @@ import from from './from';
 /** @module */
 
 /**
- * * ### takeWhile(predicate) ⇒ Seq </br>
+ * <hr style="border:2px solid gray"> </hr>
+ * <h3> takeWhile(predicate) ⇒ Seq </h3>
  * Returns a sequence that, when iterated, yields elements of the underlying sequence while the given predicate returns True, and then returns no further elements.
  * @param {Function} predicate A function that evaluates to false when no more items should be returned.
  * @return {Seq} The result sequence.

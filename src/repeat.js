@@ -5,7 +5,8 @@ import empty from './empty';
 /** @module */
 
 /**
- * ### repeat(count, initial) ⇒ Seq </br>
+ * <hr style="border:2px solid gray"> </hr>
+ * <h3> repeat(count, initial) ⇒ Seq </h3>
  * Creates a sequence by replicating the given initial value.
  * @param {Number} count The number of elements to replicate.
  * @param initial The value to replicate.

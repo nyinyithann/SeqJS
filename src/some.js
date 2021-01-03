@@ -3,7 +3,8 @@ import * as util from './util';
 /** @module */
 
 /**
- * ### some(predicate) ⇒ Seq </br>
+ * <hr style="border:2px solid gray"> </hr>
+ * <h3> some(predicate) ⇒ Seq </h3>
  * Tests if at least one element in the sequence passes the test implemented by the provided function.
  * @param {Function} predicate A function to test on the elements of the seq.
  * @return {boolean} true if the callback function returns a truthy value for at least one element in the sequence. Otherwise, false.

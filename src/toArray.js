@@ -3,7 +3,8 @@ import * as util from './util';
 /** @module */
 
 /**
- * ### toArray() ⇒ Seq </br>
+ * <hr style="border:2px solid gray"> </hr>
+ * <h3> toArray() ⇒ Seq </h3>
  * Create an array out of the sequence.
  * @return {Array} The result array.
  * @exception {TypeError} If the source sequence is null or undefined.

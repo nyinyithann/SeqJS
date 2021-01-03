@@ -4,7 +4,8 @@ import from from './from';
 /** @module */
 
 /**
- * ### initInfinite(initializer) ⇒ Seq </br>
+ * <hr style="border:2px solid gray"> </hr>
+ * <h3> initInfinite(initializer) ⇒ Seq </h3>
  * Generate a new sequence by invoking initializer function passed as the argument.
  * The index of the item generated is passed to the initializer function.
  * The iteration can continue up to Number.MAX_SAFE_INTEGER.

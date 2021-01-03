@@ -5,7 +5,8 @@ import empty from './empty';
 /** @module */
 
 /**
- * ### init(count, initializer) ⇒ Seq </br>
+ * <hr style="border:2px solid gray"> </hr>
+ * <h3> init(count, initializer) ⇒ Seq </h3>
  * Generate a new sequence by invoking initializer function passed as the argument up to the given count.
  * @param {Number} count The maximum number of items to generate for the sequence.
  * @param {Function } initializer A function that generates an item in the sequence from a given index.

@@ -5,7 +5,8 @@ import empty from './empty';
 /** @module */
 
 /**
- * ### take(count) ⇒ Seq </br>
+ * <hr style="border:2px solid gray"> </hr>
+ * <h3> take(count) ⇒ Seq </h3>
  * Returns the first N elements of the sequence.
  * @param count The number of items to take.
  * @return {Seq} The result sequence.

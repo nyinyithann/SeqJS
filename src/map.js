@@ -4,7 +4,8 @@ import from from './from';
 /** @module */
 
 /**
- * ### map(callback) ⇒ Seq </br>
+ * <hr style="border:2px solid gray"> </hr>
+ * <h3> map(callback) ⇒ Seq </h3>
  * The map method creates a new Seq populated with the results of calling a provided function on every element.
  * The provided function is invoked with two arguments: (item, index).
  *

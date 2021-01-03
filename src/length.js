@@ -3,7 +3,8 @@ import * as util from './util';
 /** @module */
 
 /**
- * ### length ⇒ Number </br>
+ * <hr style="border:2px solid gray"> </hr>
+ * <h3> length ⇒ Number </h3>
  * Returns the length of the sequence.
  * @return {number} The length of the sequence.
  * @exception {TypeError} if the source sequence is null or undefined.

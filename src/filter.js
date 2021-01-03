@@ -4,7 +4,8 @@ import from from './from';
 /** @module */
 
 /**
- * ### filter(predicate) ⇒ Seq </br>
+ * <hr style="border:2px solid gray"> </hr>
+ * <h3>filter(predicate) ⇒ Seq</h3>
  * Returns a new sequence containing only the elements of the collection for which the given predicate returns "true".
  * @param {Function} predicate A function to test whether each item in the input sequence should be included in the output.
  * @return {Seq} The result sequence.
