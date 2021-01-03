@@ -1,5 +1,4 @@
-# <img src="assets/seq_logo.png" alt="seq logo" width="86" height="86">&nbsp;&nbsp;SeqJS: Pipeline Operations for working with values of type `Seq`.
-
+## <img src="assets/seq_logo.png" alt="seq logo" width="56" height="66">&nbsp;&nbsp;SeqJS: Pipeline Operations for working with values of type `Seq`
 ![Node.js CI](https://github.com/nyinyithann/SeqJS/workflows/Node.js%20CI/badge.svg?branch=master&event=push)
 
 `SeqJS` contains operations for working with values of type `Seq` which is a container of a series of elements. Types of
