@@ -1,23 +1,21 @@
-export function notNull(value) {
+export function isNotNull(value) {
   return value !== null;
 }
 
-export function notUndefined(value) {
+export function isNotUndefined(value) {
   return typeof value !== 'undefined';
 }
 
 export function isGeneratorFunction(source) {
-  return notNull(source) && source[Symbol.toStringTag]
-            === 'GeneratorFunction';
+  return isNotNull(source) && source[Symbol.toStringTag] === 'GeneratorFunction';
 }
 
 export function isIterable(source) {
-  return notNull(source) && notUndefined(source[Symbol.iterator]);
+  return isNotNull(source) && isNotUndefined(source[Symbol.iterator]);
 }
 
 export function isArrayLike(source) {
-  return source && typeof source.length === 'number' && typeof source
-            !== 'function';
+  return isNotNull(source) && typeof source.length === 'number' && typeof source !== 'function';
 }
 
 export function createGeneratorFunction(source) {
@@ -33,33 +31,32 @@ export function createGeneratorFunction(source) {
       }
     };
   }
-  return function* () {
-  };
+  return function* () {};
 }
 
 export function isFunction(value) {
   return typeof value === 'function';
 }
 
-export function checkNonNull(value, name = 'value') {
+export function throwIfNull(value, name = 'value') {
   if (value == null) {
     throw new TypeError(`${name} is null or not defined.`);
   }
 }
 
-export function checkNonFunction(value, name = 'value') {
+export function throwIfNotAFunction(value, name = 'value') {
   if (!isFunction(value)) {
     throw new TypeError(`${name} is not a function.`);
   }
 }
 
-export function checkNonNegative(value, name = 'value') {
+export function throwIfNegativeNumber(value, name = 'value') {
   if (!Number.isFinite(value) || value < 0) {
     throw new TypeError(`${name} must be a non-negative number.`);
   }
 }
 
-export function checkGeneratorFunction(value, name = 'value') {
+export function throwIfGeneratorFunction(value, name = 'value') {
   if (isGeneratorFunction(value)) {
     throw TypeError(`${name} is a generator function. It should be a normal function.`);
   }

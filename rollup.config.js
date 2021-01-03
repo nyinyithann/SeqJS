@@ -5,9 +5,9 @@ export default [
     input: 'src/main.js',
     plugins: [terser()],
     output: {
-      file: 'build/umd/seqjaz.js',
+      file: 'build/umd/seq.js',
       format: 'umd',
-      name: 'seqjaz',
+      name: 'seq',
       esModule: false,
     },
   },
@@ -15,7 +15,7 @@ export default [
     input: 'src/main.js',
     plugins: [terser()],
     output: {
-      file: 'build/esm/seqjaz.js',
+      file: 'build/esm/seq.js',
       format: 'esm',
     },
   },

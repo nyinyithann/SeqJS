@@ -5,7 +5,7 @@ describe('init()', () => {
     'should generate sequence by invoking initializer up to the given count',
     () => {
       const fiveRandoms = Seq.init(5,
-        () => getRandomNumber_ForTest(1000));
+        () => global.getRandomNumber_ForTest(1000));
       expect(fiveRandoms.length).toBe(5);
 
       const seq = Seq.init(3, (x) => x);

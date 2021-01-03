@@ -12,6 +12,10 @@ describe('reduce()', () => {
     },
   );
 
+  test('initial value is provided and sequence contains only one element', () => {
+    expect(Seq.of(1).reduce((x, y) => x + y, 1)).toBe(2);
+  });
+
   test('sum of 1 to 10.', () => {
     expect(Seq.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
       .reduce((acc, val) => acc + val)).toBe(55);
@@ -53,6 +57,15 @@ describe('reduce()', () => {
     expect(expected).toBe([1].reduce((x, y) => x + y, 10));
   });
 
+  test('invocation via call/apply/bind should work', () => {
+    const { reduce } = Seq.prototype;
+    const seq = Seq.of(1, 2, 3, 4, 5);
+    const reducer = (x, y) => x + y;
+    expect(reduce.call(seq, reducer, 0)).toBe(15);
+    expect(reduce.apply(seq, [reducer, 0])).toBe(15);
+    expect(reduce.bind(seq)(reducer, 0)).toBe(15);
+  });
+
   test('map using reduce.', () => {
     const map = function (iterable, func) {
       const seq = new Seq(iterable);
@@ -67,15 +80,10 @@ describe('reduce()', () => {
   test('filter using reduce.', () => {
     const filter = function (iterable, predicate) {
       const seq = new Seq(iterable);
-      return seq.reduce((acc, cv) => {
-        if (predicate(cv)) {
-          acc = acc.concat(cv);
-        }
-        return acc;
-      }, new Seq());
+      return seq.reduce((acc, cv) => (predicate(cv) ? acc.concat(cv) : acc), new Seq());
     };
     const nums = [1, 2, 3, 4];
-    const predicate = (x) => x % 2 == 0;
+    const predicate = (x) => x % 2 === 0;
     const filteredSeq = filter(new Seq(nums), predicate);
     expect([...filteredSeq]).toEqual(nums.filter(predicate));
   });

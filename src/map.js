@@ -1,5 +1,5 @@
 import * as util from './util';
-import from from './seq.from';
+import from from './from';
 
 /** @module */
 
@@ -10,7 +10,7 @@ import from from './seq.from';
  *
  * @param {Function} callback The function invoked on each item.
  * @return {Seq} Return the new mapped sequence.
- * @exception {TypeError} If callable is not a function.
+ * @exception {TypeError} If the source sequence is null or undefined; or callback is a not a function or a generator function.
  * @example
  *
  * const seq = Seq.of(1,2,3,4,5).map(x => x * x);
@@ -22,9 +22,9 @@ import from from './seq.from';
  * // => [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]]
  */
 const map = function (callback) {
-  util.checkNonNull(this, 'this');
-  util.checkNonFunction(callback, 'callback');
-  util.checkGeneratorFunction(callback, 'callback');
+  util.throwIfNull(this, 'this');
+  util.throwIfNotAFunction(callback, 'callback');
+  util.throwIfGeneratorFunction(callback, 'callback');
 
   let index = 0;
   let thisArg;

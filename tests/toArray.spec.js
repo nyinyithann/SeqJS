@@ -1,19 +1,21 @@
 import Seq from '../src/main';
 
 describe('toArray()', () => {
-  test('return array without touching original source', () => {
+  test('should return a new array without mutating original source', () => {
     const seq = Seq.of(1, 2, 3, 4);
     expect(seq.toArray()).toEqual([1, 2, 3, 4]);
     expect([...seq]).toEqual([1, 2, 3, 4]);
   });
 
-  test('call/apply invocation should work', () => {
+  test('invocation via call/apply/bind should work', () => {
     const { toArray } = Seq.prototype;
     expect(toArray.call(Seq.of(1, 2, 3))).toEqual([1, 2, 3]);
+    expect(toArray.apply(Seq.of(1, 2, 3))).toEqual([1, 2, 3]);
+    expect(toArray.bind(Seq.of(1, 2, 3))()).toEqual([1, 2, 3]);
   });
 
   test(
-    'call/apply invocation on null or undefined seq should throw TypeError',
+    'should throw TypeError if the source sequence is null or undefined',
     () => {
       const { toArray } = Seq.prototype;
       expect(() => toArray.call(null)).toThrow(TypeError);

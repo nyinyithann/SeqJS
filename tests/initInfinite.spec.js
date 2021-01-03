@@ -3,14 +3,14 @@ import Seq from '../src/main';
 describe('initInfinite()', () => {
   test('should generate sequence by invoking initializer', () => {
     const infiniteIntegers = Seq.initInfinite(
-      () => getRandomNumber_ForTest(1000),
+      () => global.getRandomNumber_ForTest(1000),
     );
     const first5ThreeDigitsNumber = infiniteIntegers.filter(
       (x) => x % 100 === 0,
     ).take(5);
     expect(first5ThreeDigitsNumber.length).toBe(5);
 
-    const seq = Seq.initInfinite(getNumberGeneratorStartingFrom(0));
+    const seq = Seq.initInfinite(global.getNumberGeneratorStartingFrom(0));
     const first5EvenNumbersAfter100 = seq.filter(
       (x) => x > 100 && x % 2 === 0,
     ).take(5);

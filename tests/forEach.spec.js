@@ -24,6 +24,12 @@ describe('forEach()', () => {
     const { forEach } = Seq.prototype;
     forEach.call(seq, (x) => result.push(x + 1));
     expect(result).toEqual(seq.map((x) => x + 1).toArray());
+    result.length = 0;
+    forEach.apply(seq, [(x) => result.push(x + 1)]);
+    expect(result).toEqual(seq.map((x) => x + 1).toArray());
+    result.length = 0;
+    forEach.bind(seq)((x) => result.push(x + 1));
+    expect(result).toEqual(seq.map((x) => x + 1).toArray());
   });
 
   test(

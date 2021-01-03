@@ -1,6 +1,6 @@
 import * as util from './util';
-import from from './seq.from';
-import empty from './seq.empty';
+import from from './from';
+import empty from './empty';
 
 /** @module */
 
@@ -9,6 +9,7 @@ import empty from './seq.empty';
  * Returns the first N elements of the sequence.
  * @param count The number of items to take.
  * @return {Seq} The result sequence.
+ * @exception {TypeError} if the source sequence is null or undefined; or count is a negative number.
  * @example
  * const seq = Seq.of(1,2,3,4,5);
  * const taken = seq.take(2);
@@ -16,8 +17,8 @@ import empty from './seq.empty';
  * // => [1, 2]
  */
 const take = function (count) {
-  util.checkNonNull(this, 'this');
-  util.checkNonNegative(count, 'count');
+  util.throwIfNull(this, 'this');
+  util.throwIfNegativeNumber(count, 'count');
 
   if (count === 0) {
     return empty();

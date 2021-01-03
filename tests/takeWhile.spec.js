@@ -7,8 +7,7 @@ describe('takeWhile()', () => {
     () => {
       expect(seq.takeWhile((x) => x <= 3).toArray()).toEqual([1, 2, 3]);
       expect(seq.takeWhile((x) => x > 1).toArray()).toEqual([]);
-      expect(seq.takeWhile((x) => x > 0).toArray())
-        .toEqual([1, 2, 3, 4, 5]);
+      expect(seq.takeWhile((x) => x > 0).toArray()).toEqual([1, 2, 3, 4, 5]);
     });
 
   test('predicate can be a method of an object', () => {
@@ -21,14 +20,17 @@ describe('takeWhile()', () => {
     expect(seq.takeWhile(obj.predicate, obj).toArray()).toEqual([1, 2, 3, 4]);
   });
 
+  test('should throw TypeError if the existing sequence is null or undefined.', () => {
+    const { takeWhile } = Seq.prototype;
+    expect(() => takeWhile(null, (x) => x)).toThrow(TypeError);
+    expect(() => takeWhile(undefined, (x) => x)).toThrow(TypeError);
+  });
+
   test(
     'should throw TypeError if predicate is not a function or a generator function',
     () => {
       expect(() => seq.takeWhile({})).toThrow(TypeError);
-      expect(() => seq.takeWhile(function* (x) {
-        return x > 0;
-      }))
-        .toThrow(TypeError);
+      expect(() => seq.takeWhile(function* () {})).toThrow(TypeError);
     },
   );
 

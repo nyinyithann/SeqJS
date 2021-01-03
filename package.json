@@ -1,8 +1,8 @@
 {
-  "name": "seqjaz",
+  "name": "seq-js",
   "version": "0.0.2",
-  "main": "build/umd/seqjaz.js",
-  "module": "build/esm/seqjaz.js",
+  "main": "build/umd/seq.js",
+  "module": "build/esm/seq.js",
   "license": "MIT",
   "repository": {
     "type": "git",

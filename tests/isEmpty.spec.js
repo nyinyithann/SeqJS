@@ -1,16 +1,16 @@
 import Seq from '../src/main';
 
 describe('isEmpty()', () => {
-  test('empty seq should be empty', () => {
+  test('empty sequence should be empty', () => {
     expect(Seq.empty().isEmpty()).toBe(true);
   });
 
-  test('empty seq\'s length is 0', () => {
+  test('length of empty sequence is 0', () => {
     expect(Seq.empty().length).toBe(0);
   });
 
-  test('apply/call invocation on null context should throw error', () => {
-    const { isEmpty } = Seq.prototype;
+  test('should throw TypeError is the sequence is null or undefined', () => {
+    const isEmpty = Seq.prototype.isEmpty;
     expect(() => isEmpty.apply(null)).toThrow(TypeError);
   });
 });

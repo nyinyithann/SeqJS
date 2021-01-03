@@ -10,29 +10,27 @@ describe('filter()', () => {
     },
   };
 
-  test('filtering with arrow function.', () => {
-    expect([...Seq.from(nums).filter((x) => x % 2 == 0)])
-      .toEqual(nums.filter((x) => x % 2 == 0));
+  test('filtering with arrow function', () => {
+    expect([...Seq.from(nums).filter((x) => x % 2 === 0)]).toEqual(nums.filter((x) => x % 2 === 0));
   });
 
-  test('filtering with an object method.', () => {
-    expect([...Seq.from(nums).filter(obj.greaterThan4, obj)])
-      .toEqual(nums.filter(obj.greaterThan4, obj));
+  test('filtering with an object method', () => {
+    expect([...Seq.from(nums).filter(obj.greaterThan4, obj)]).toEqual(nums.filter(obj.greaterThan4, obj));
   });
 
-  test('should throw error if seq is null or undefined.', () => {
+  test('should throw error if seq is null or undefined', () => {
     const seqFilter = Seq.prototype.filter;
-    expect(() => seqFilter.call(null, (x) => x > 2))
-      .toThrow(TypeError);
+    expect(() => seqFilter.call(null, (x) => x > 2)).toThrow(TypeError);
   });
 
-  test('calling up prototype method.', () => {
+  test('invocation via call/apply/bind should work', () => {
     const seqFilter = Seq.prototype.filter;
-    expect([...seqFilter.call(Seq.from(nums), obj.greaterThan4, obj)])
-      .toEqual(nums.filter(obj.greaterThan4, obj));
+    expect([...seqFilter.call(Seq.from(nums), obj.greaterThan4, obj)]).toEqual(nums.filter(obj.greaterThan4, obj));
+    expect([...seqFilter.apply(Seq.from(nums), [obj.greaterThan4, obj])]).toEqual(nums.filter(obj.greaterThan4, obj));
+    expect([...seqFilter.bind(Seq.from(nums))(obj.greaterThan4, obj)]).toEqual(nums.filter(obj.greaterThan4, obj));
   });
 
-  test('should throw error if predicate is not a function.', () => {
+  test('should throw error if predicate is not a function', () => {
     expect(() => Seq.of(1, 2).filter(undefined)).toThrow(Error);
     expect(() => Seq.of(1, 2).filter(null)).toThrow(Error);
     expect(() => Seq.of(1, 2).filter({})).toThrow(Error);

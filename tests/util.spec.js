@@ -36,14 +36,6 @@ describe('Test utility functions', () => {
     },
   );
 
-  test('notNull()', () => {
-    expect(utils.notNull({})).toBe(true);
-  });
-
-  test('notUndefined()', () => {
-    expect(utils.notUndefined(void 0)).toBe(false);
-  });
-
   test('isFunction()', () => {
     expect(utils.isFunction(() => {})).toBe(true);
   });

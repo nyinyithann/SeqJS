@@ -19,15 +19,23 @@ describe('every()', () => {
     expect(actual).toBe(true);
   });
 
-  test('throws error if predicate is not a function.', () => {
+  test('throws error if predicate is not a function or a generator function.', () => {
     const seq = Seq.of(1, 2, 3, 4, 5);
     expect(() => seq.every(null)).toThrow(TypeError);
+    expect(() => seq.every(function* () {})).toThrow(TypeError);
   });
 
   test('throws error if the seq is null or undefined.', () => {
     const { every } = Seq.prototype;
     expect(every.call(Seq.of(1, 2), (x) => x >= 1)).toBe(true);
     expect(() => every.call(null, (x) => x > 1)).toThrow(TypeError);
+  });
+
+  test('invocation via call/apply/bind should work', () => {
+    const { every } = Seq.prototype;
+    expect(every.call(Seq.of(1, 2), (x) => x > 0)).toBe(true);
+    expect(every.apply(Seq.of(1, 2), [(x) => x > 0])).toBe(true);
+    expect(every.bind(Seq.of(1, 2))((x) => x > 0)).toBe(true);
   });
 
   test('predicate can be a method of an object.', () => {
