@@ -1,5 +1,4 @@
-## <img src="assets/seq_logo.png" alt="seq logo" width="56" height="66">&nbsp;&nbsp;SeqJS: Pipeline Operations for working with values of type `Seq`
-![Node.js CI](https://github.com/nyinyithann/SeqJS/workflows/Node.js%20CI/badge.svg?branch=master&event=push)
+## <img src="assets/seq_logo.png" alt="seq logo" width="56" height="66">&nbsp;&nbsp;SeqJS: Pipeline Operations for working with values of type `Seq` 
 
 `SeqJS` contains operations for working with values of type `Seq` which is a container of a series of elements. Types of
 a seq's elements are not fixed. Individual seq elements are computed only as required.
@@ -7,6 +6,9 @@ a seq's elements are not fixed. Individual seq elements are computed only as req
 conforms [`iterable`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#The_iterable_protocol)
 and [`iterator`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#The_iterator_protocol)
 protocols of JavaScript.
+
+#### GitHub CI Status
+![Node.js CI](https://github.com/nyinyithann/SeqJS/workflows/Node.js%20CI/badge.svg?branch=master&event=push)
 
 ## Roadmap
 
@@ -96,6 +98,7 @@ Nyi Nyi Than - [@nyinyithann](https://www.linkedin.com/in/nyinyithan/)
   by [Martin Fowler](https://martinfowler.com/)
 - [javascript.info](https://javascript.info/)
 - [Iteration protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)
+- [F# Seq Module](https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-seqmodule.html)
 
 ### License
 

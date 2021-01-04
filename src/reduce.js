@@ -20,7 +20,7 @@ import * as util from './util';
  * console.log(result);
  * // => [0, 1, 2, 3, 4, 5]
  */
-const reduce = function (reducer) {
+function reduce(reducer) {
   util.throwIfNull(this, 'this');
   util.throwIfNotAFunction(reducer, 'reducer');
   util.throwIfGeneratorFunction(reducer, 'reducer');
@@ -51,6 +51,6 @@ const reduce = function (reducer) {
     current = iter.next();
   }
   return state;
-};
+}
 
 export default reduce;

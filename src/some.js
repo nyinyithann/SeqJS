@@ -15,7 +15,7 @@ import * as util from './util';
  * console.log(result);
  * // => true
  */
-const some = function (predicate) {
+function some(predicate) {
   util.throwIfNull(this, 'this');
   util.throwIfNotAFunction(predicate, 'predicate');
   util.throwIfGeneratorFunction(predicate, 'predicate');
@@ -35,6 +35,6 @@ const some = function (predicate) {
     current = iter.next();
   }
   return false;
-};
+}
 
 export default some;

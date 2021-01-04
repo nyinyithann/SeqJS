@@ -17,7 +17,7 @@ import from from './from';
  * // => [ 1, 2, 3, 4, 5, 6, { seven: 7 }, [ 8 ], [ 9 ], [ [ 10 ], [ 11 ] ] ]
  *
  */
-const concat = function (...others) {
+function concat(...others) {
   util.throwIfNull(this, 'this');
 
   if (others.length === 0) {
@@ -37,6 +37,6 @@ const concat = function (...others) {
       }
     }
   });
-};
+}
 
 export default concat;

@@ -19,7 +19,7 @@ import from from './from';
  * // => [0, 2, 4, 6, 8]
  */
 
-const initInfinite = function (initializer) {
+function initInfinite(initializer) {
   util.throwIfNotAFunction(initializer, 'initializer');
   util.throwIfGeneratorFunction(initializer, 'initializer');
 
@@ -31,6 +31,6 @@ const initInfinite = function (initializer) {
       index += 1;
     }
   });
-};
+}
 
 export default initInfinite;

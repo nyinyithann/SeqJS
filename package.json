@@ -1,6 +1,6 @@
 {
   "name": "seq-js",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "main": "build/umd/seq.js",
   "module": "build/esm/seq.js",
   "license": "MIT",
@@ -46,7 +46,10 @@
     "test": "jest --config jest.config.js",
     "doc": "jsdoc2md --partial docs.hbs body.hbs main-index.hbs --files src/*.js > api.md",
     "prepare": "rollup --config",
-    "build": "npm run lint & npm run test & npm run doc & npm run prepare"
+    "build": "npm run lint & npm run test & npm run doc & npm run prepare",
+    "iv": "npm --no-git-tag-version version patch",
+    "lp": "npm run iv & npm publish --registry http://localhost:4873",
+    "lup": "npm unpublish --force --registry http://localhost:4873/  seq-js"
   },
   "files": [
     "build/esm/*",

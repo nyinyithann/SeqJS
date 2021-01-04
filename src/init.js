@@ -17,7 +17,7 @@ import empty from './empty';
  * console.log(fiveNums.toArray());
  * // => [0, 2, 4, 6, 8]
  */
-const init = function (count, initializer) {
+function init(count, initializer) {
   util.throwIfNegativeNumber(count, 'count');
   util.throwIfNotAFunction(initializer, 'initializer');
   util.throwIfGeneratorFunction(initializer, 'initializer');
@@ -31,6 +31,6 @@ const init = function (count, initializer) {
       yield initializer(i);
     }
   });
-};
+}
 
 export default init;

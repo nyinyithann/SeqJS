@@ -22,7 +22,7 @@ import from from './from';
  * console.log([...seq]);
  * // => [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]]
  */
-const map = function (callback) {
+function map(callback) {
   util.throwIfNull(this, 'this');
   util.throwIfNotAFunction(callback, 'callback');
   util.throwIfGeneratorFunction(callback, 'callback');
@@ -43,6 +43,6 @@ const map = function (callback) {
       index += 1;
     }
   });
-};
+}
 
 export default map;

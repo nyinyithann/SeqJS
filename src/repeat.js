@@ -18,7 +18,7 @@ import empty from './empty';
  * // => [1, 1, 1, 1, 1]
  */
 
-const repeat = function (count, initial) {
+function repeat(count, initial) {
   util.throwIfNegativeNumber(count, 'count');
 
   if (count === 0) {
@@ -30,6 +30,6 @@ const repeat = function (count, initial) {
       yield initial;
     }
   });
-};
+}
 
 export default repeat;

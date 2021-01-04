@@ -15,9 +15,9 @@ import * as util from './util';
  * console.log(arr);
  * // => [1,2,3,4]
  */
-const toArray = function () {
+function toArray() {
   util.throwIfNull(this, 'this');
   return [...this._generator()];
-};
+}
 
 export default toArray;

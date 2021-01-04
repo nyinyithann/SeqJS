@@ -61,3 +61,9 @@ export function throwIfGeneratorFunction(value, name = 'value') {
     throw TypeError(`${name} is a generator function. It should be a normal function.`);
   }
 }
+
+export function throwIfNotAFiniteNumber(value, name = 'value') {
+  if (!Number.isFinite(value)) {
+    throw new TypeError(`${name} is not a finite number.`);
+  }
+}

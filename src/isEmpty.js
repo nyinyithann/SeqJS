@@ -12,9 +12,9 @@ import * as util from './util';
  * console.log(Seq.empty().isEmpty());
  * // => true
  */
-const isEmpty = function () {
+function isEmpty() {
   util.throwIfNull(this, 'this');
   return this._generator().next().done;
-};
+}
 
 export default isEmpty;

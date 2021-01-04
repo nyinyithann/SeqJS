@@ -13,7 +13,7 @@ import * as util from './util';
  * console.log(seq.length);
  * // => 3;
  */
-const length = function () {
+function length() {
   util.throwIfNull(this, 'this');
 
   if (Array.isArray(this._source)) {
@@ -25,6 +25,6 @@ const length = function () {
     count += 1;
   }
   return count;
-};
+}
 
 export default length;

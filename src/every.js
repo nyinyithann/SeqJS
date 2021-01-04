@@ -15,7 +15,7 @@ import * as util from './util';
  * console.log(result);
  * // => true
  */
-const every = function (predicate) {
+function every(predicate) {
   util.throwIfNull(this, 'this');
   util.throwIfNotAFunction(predicate, 'predicate');
   util.throwIfGeneratorFunction(predicate, 'predicate');
@@ -35,6 +35,6 @@ const every = function (predicate) {
     current = iter.next();
   }
   return true;
-};
+}
 
 export default every;

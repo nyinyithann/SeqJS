@@ -16,7 +16,7 @@ import from from './from';
  * console.log(result);
  * => [1, 2]
  */
-const takeWhile = function (predicate) {
+function takeWhile(predicate) {
   util.throwIfNull(this, 'this');
   util.throwIfNotAFunction(predicate, 'predicate');
   util.throwIfGeneratorFunction(predicate, 'predicate');
@@ -35,6 +35,6 @@ const takeWhile = function (predicate) {
       current = iter.next();
     }
   });
-};
+}
 
 export default takeWhile;

@@ -18,7 +18,7 @@ import * as util from './util';
  * // =>   4
  * // =>   5
  */
-const forEach = function (callback) {
+function forEach(callback) {
   util.throwIfNull(this, 'this');
   util.throwIfNotAFunction(callback, 'callback');
   util.throwIfGeneratorFunction(callback, 'callback');
@@ -37,6 +37,6 @@ const forEach = function (callback) {
     current = iter.next();
     index += 1;
   }
-};
+}
 
 export default forEach;

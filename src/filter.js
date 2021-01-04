@@ -16,7 +16,7 @@ import from from './from';
  * console.log([...seq]);
  * // => [2, 4]
  */
-const filter = function (predicate) {
+function filter(predicate) {
   util.throwIfNull(this, 'this');
   util.throwIfNotAFunction(predicate, 'predicate');
   util.throwIfGeneratorFunction(predicate, 'predicate');
@@ -37,6 +37,6 @@ const filter = function (predicate) {
       current = iter.next();
     }
   });
-};
+}
 
 export default filter;

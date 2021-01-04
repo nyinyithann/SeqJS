@@ -17,7 +17,7 @@ import empty from './empty';
  * console.log([...taken]);
  * // => [1, 2]
  */
-const take = function (count) {
+function take(count) {
   util.throwIfNull(this, 'this');
   util.throwIfNegativeNumber(count, 'count');
 
@@ -34,6 +34,6 @@ const take = function (count) {
       }
     }
   });
-};
+}
 
 export default take;
