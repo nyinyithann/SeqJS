@@ -222,6 +222,50 @@ console.log(nums);
 // => [ 1, 2, { three: 3 }, [ 4 ], '5', 6 ]
 ```
 <hr style="border:2px solid gray"> </hr>
+<h3>Seq.range(begin, end, step) ⇒ Seq</h3>
+Creates a sequence of numbers starting from 'begin' to 'end', but not including, 'end'.
+If 'end' is not defined, it is set to 'begin', and 'begin' is then set to 0.
+'step' will be assigned to -1 if 'begin' is negative and 'end' is not defined.
+
+**Returns**: <code>Seq</code> - The result sequence.  
+**Throws**:
+
+- <code>TypeError</code> if 'begin', 'end', and 'step' are not finite numbers when passed.
+
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [being] | <code>number</code> | <code>0</code> | The first number of the sequence |
+| end | <code>number</code> |  | The end of the range of numbers. It won't include in the result sequence. |
+| [step] | <code>number</code> | <code>1</code> | The value to increment or decrement by. |
+
+**Example**  
+```js
+console.log(Seq.range(5).toArray());
+// => [ 0, 1, 2, 3, 4 ]
+
+console.log(Seq.range(-5).toArray());
+// => [ 0, -1, -2, -3, -4 ]
+
+console.log(Seq.range(1,5).toArray());
+// => [ 1, 2, 3, 4 ]
+
+console.log(Seq.range(0, 20, 5).toArray());
+// => [ 0, 5, 10, 15 ]
+
+console.log(Seq.range(0, -5, -1).toArray());
+// => [ 0, -1, -2, -3, -4 ]
+
+console.log(Seq.range(0).toArray());
+// => []
+
+console.log(Seq.range(10, -5, -1).toArray());
+// => [ 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4 ]
+
+console.log(Seq.range(-1, -2, -5).toArray());
+// => [-1]
+```
+<hr style="border:2px solid gray"> </hr>
 <h3> reduce(reducer) ⇒ Any </h3>
 The method executes the provided reducer function on each element of the sequence, resulting in single output value.
 

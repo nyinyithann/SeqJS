@@ -33,10 +33,10 @@ import from from './from';
  * console.log(Seq.range(0).toArray());
  * // => []
  *
- * console.log(range(10, -5, -1));
+ * console.log(Seq.range(10, -5, -1).toArray());
  * // => [ 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4 ]
  *
- * console.log(range(-1, -2, -5));
+ * console.log(Seq.range(-1, -2, -5).toArray());
  * // => [-1]
  */
 function range(begin, end, step) {
