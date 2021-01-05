@@ -1,6 +1,21 @@
 import Seq from '../src/main';
 
 describe('concat()', () => {
+  const genFunc = function* () {
+    yield* [3, 4, 5, 6];
+  };
+
+  const iterator = {
+    * [Symbol.iterator]() {
+      yield 1;
+      yield 2;
+    },
+  };
+
+  const arrayLike = {
+    0: 0, 1: 1, 2: 2, length: 3,
+  };
+
   test('concat array.', () => {
     const seq = Seq.of(1, 2, 3);
     const carr = seq.concat([4, 5, 6]);
@@ -12,9 +27,7 @@ describe('concat()', () => {
   });
 
   test('concat a generator function.', () => {
-    const seq = Seq.of(1, 2).concat(function* () {
-      yield* [3, 4, 5, 6];
-    });
+    const seq = Seq.of(1, 2).concat(genFunc());
     expect([...seq]).toEqual([1, 2, 3, 4, 5, 6]);
   });
 
@@ -23,13 +36,19 @@ describe('concat()', () => {
   });
 
   test('concat an iterator.', () => {
-    const seq = Seq.of(1, 2).concat({
-      * [Symbol.iterator]() {
-        yield 1;
-        yield 2;
-      },
-    });
+    const seq = Seq.of(1, 2).concat(iterator);
     expect([...seq]).toEqual([1, 2, 1, 2]);
+  });
+
+  test('concat an array-like object.', () => {
+    const seq = Seq.of(1, 2).concat(arrayLike);
+    expect([...seq]).toEqual([1, 2, 0, 1, 2]);
+  });
+
+  test('concat a gen func, iterator, array, array-like obj, and single values', () => {
+    const seq1 = Seq.of(1).concat(genFunc(), arrayLike, [1, 2, 3], 'A', 'B', { name: 'Foo' });
+    const seq2 = Seq.of(1).concat(genFunc(), arrayLike, [1, 2, 3], 'A', 'B', { name: 'Foo' });
+    expect(seq1.toArray()).toEqual([...seq2]);
   });
 
   test('invocation via call/apply/bind should work', () => {

@@ -1,5 +1,5 @@
-  <h3>concat([val1[,val2[,...[,valN]]]]) ⇒ Seq </h3>
-Creates a new seq that appends the passed value to the existing seq. This method does not change the existing sequence.
+  <h3>concat([val1[,val2[,...[,valN]]]]) ⇒ Seq</h3>
+Creates a new sequence that appends the passed value to the existing seq. This method does not change the existing sequence.
 
 **Returns**: <code>Seq</code> - A new sequence.  
 **Throws**:
@@ -9,7 +9,7 @@ Creates a new seq that appends the passed value to the existing seq. This method
 
 | Param | Description |
 | --- | --- |
-| ...others | Iterable, iterator, generator function or single value to concatenate into new sequence. If omitted, the method returns the existing sequence. |
+| ...others | Iterable, iterator, generator function, array-like object, or single value to concatenate into new sequence. If omitted, the method returns the existing sequence. |
 
 **Example**  
 ```js
@@ -209,6 +209,26 @@ Creates a new sequence from a variable number of arguments, regardless of number
 const nums = Seq.of(1,2, { 'three' : 3}, [4], '5', 0b110);
 console.log(nums);
 // => [ 1, 2, { three: 3 }, [ 4 ], '5', 6 ]
+```
+<h3>prepend([val1[,val2[,...[,valN]]]]) ⇒ Seq</h3>
+Creates a new sequence with new values prepended.
+
+**Returns**: <code>Seq</code> - A new sequence.  
+**Throws**:
+
+- <code>TypeError</code> if the existing sequence is null or undefined when invoke via call/apply/bind.
+
+
+| Param | Description |
+| --- | --- |
+| ...others | Iterable, iterator, generator function, array-like object, or single value to prepend into new sequence. If omitted, the method returns the existing sequence. |
+
+**Example**  
+```js
+const seq = Seq.of(4,5);
+const prepended = seq.prepend([1,2], { three : 3 });
+console.log(prepended.toArray());
+// => [ 1, 2, { three: 3 }, 4, 5]
 ```
 <h3>Seq.range(begin, end, step) ⇒ Seq</h3>
 Creates a sequence of numbers starting from 'begin' to 'end', but not including, 'end'.

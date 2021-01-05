@@ -56,6 +56,15 @@ describe('range', () => {
     expect(Seq.range(10, -5, 1).toArray()).toEqual([]);
   });
 
+  test('a new seq returned from range method should be multi-iterable', () => {
+    const seq = Seq.range(0, 1000);
+    /* eslint-disable */
+    for (const _ of seq) {}
+    for (const _ of seq) {}
+    for (const _ of seq) {}
+    expect(seq.toArray()).toEqual(seq.toArray());
+  });
+
   test('from 10 down to -5 by step -1', () => {
     expect(Seq.range(10, -5, -1).toArray()).toEqual([10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4]);
   });
