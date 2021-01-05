@@ -3,11 +3,10 @@ import * as util from './util';
 /** @module */
 
 /**
- * <hr style="border:2px solid gray"> </hr>
  * <h3> toArray() ⇒ Seq </h3>
  * Create an array out of the sequence.
  * @return {Array} The result array.
- * @exception {TypeError} If the source sequence is null or undefined.
+ * @exception {TypeError} if the existing sequence is null or undefined when invoke via call/apply/bind.
  * @example
  *
  * const seq = Seq.of(1,2,3,4);

@@ -4,14 +4,13 @@ import from from './from';
 /** @module */
 
 /**
- * <hr style="border:2px solid gray"> </hr>
  * <h3> initInfinite(initializer) ⇒ Seq </h3>
  * Generate a new sequence by invoking initializer function passed as the argument.
  * The index of the item generated is passed to the initializer function.
  * The iteration can continue up to Number.MAX_SAFE_INTEGER.
  * @param {Function } initializer A function that generates an item in the sequence from a given index.
  * @return {Seq} The result sequence.
- * @exception {TypeError} if initializer is not a function or a generator function.
+ * @exception {TypeError} if initializer a generator function or not a function.
  * @example
  * const seq = Seq.initInfinite(x => x * 2);
  * const first5Nums = seq.take(5);

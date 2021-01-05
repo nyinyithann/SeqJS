@@ -9,7 +9,7 @@ import from from './from';
  * @param others Iterable, iterator, generator function or single value to concatenate into new sequence. If omitted, the method
  * returns the existing sequence.
  * @return {Seq} A new sequence.
- * @exception {TypeError} if the existing sequence is null or undefined.
+ * @exception {TypeError} if the existing sequence is null or undefined when invoke via call/apply/bind.
  * @example
  * const seq = Seq.of(1, 2, 3);
  * const result = seq.concat([4, 5, 6], { seven: 7 }, [[8], [9]], [[[10], [11]]]);

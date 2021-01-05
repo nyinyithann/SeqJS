@@ -3,11 +3,10 @@ import * as util from './util';
 /** @module */
 
 /**
- * <hr style="border:2px solid gray"> </hr>
  * <h3> forEach(callback) ⇒ undefined </h3>
  * Applies the given function to each element of the collection.
  * @param  {Function} callback A function to apply to each element of the sequence.
- * @exception {TypeError} If the source sequence is null or undefined; or predicate is not a function or a generator function.
+ * @exception {TypeError} If the source sequence is null or undefined when invoke via call/apply/bind; or predicate is a generator function or not a function.
  * @example
  *
  * const seq = Seq.of(1, 2, 3, 4, 5);

@@ -3,12 +3,11 @@ import * as util from './util';
 /** @module */
 
 /**
- * <hr style="border:2px solid gray"> </hr>
  * <h3> some(predicate) ⇒ Seq </h3>
  * Tests if at least one element in the sequence passes the test implemented by the provided function.
  * @param {Function} predicate A function to test on the elements of the seq.
  * @return {boolean} true if the callback function returns a truthy value for at least one element in the sequence. Otherwise, false.
- * @exception If the source sequence is null or undefined; or predicate is not a function or a generator function.
+ * @exception If the source sequence is null or undefined when invoke via call/apply/bind; or predicate is a generator function or not a function.
  * @example
  * const seq = Seq.of(1,2,3,4,5);
  * const result = seq.some(x => x % 2 === 0);

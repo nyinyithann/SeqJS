@@ -4,12 +4,11 @@ import from from './from';
 /** @module */
 
 /**
- * <hr style="border:2px solid gray"> </hr>
  * <h3>Seq.range(begin, end, step) ⇒ Seq</h3>
  * Creates a sequence of numbers starting from 'begin' to 'end', but not including, 'end'.
  * If 'end' is not defined, it is set to 'begin', and 'begin' is then set to 0.
  * 'step' will be assigned to -1 if 'begin' is negative and 'end' is not defined.
- * @param {number} [being = 0] The first number of the sequence
+ * @param {number} [begin = 0] The first number of the sequence
  * @param {number} end The end of the range of numbers. It won't include in the result sequence.
  * @param {number} [step = 1] The value to increment or decrement by.
  * @returns {Seq} The result sequence.
@@ -54,19 +53,26 @@ function range(begin, end, step) {
     util.throwIfNotAFiniteNumber(step, 'step');
   }
 
-  const getRangeIterator = (b, e, s) => {
-    let length = Math.max(Math.ceil((e - b) / (s || 1)), 0);
+  const createRangeIterator = (b, e, s) => {
+    let ob = b;
+    const getLength = () => Math.max(Math.ceil((e - b) / (s || 1)), 0);
 
     return {
       [Symbol.iterator]() {
         return {
+          minusFactor: 0,
           next() {
-            if (length) {
-              const res = { value: b, done: false };
-              b += s;
-              length -= 1;
+            if ((getLength() - this.minusFactor) > 0) {
+              const res = { value: ob, done: false };
+              ob += s;
+              this.minusFactor += 1;
               return res;
             }
+            ob = b;
+            this.minusFactor = 0;
+            return { done: true };
+          },
+          return() {
             return { done: true };
           },
         };
@@ -74,7 +80,7 @@ function range(begin, end, step) {
     };
   };
 
-  return from(getRangeIterator(begin, end, step));
+  return from(createRangeIterator(begin, end, step));
 }
 
 export default range;

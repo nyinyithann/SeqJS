@@ -4,14 +4,13 @@ import from from './from';
 /** @module */
 
 /**
- * <hr style="border:2px solid gray"> </hr>
  * <h3> map(callback) ⇒ Seq </h3>
  * The map method creates a new Seq populated with the results of calling a provided function on every element.
  * The provided function is invoked with two arguments: (item, index).
  *
  * @param {Function} callback The function invoked on each item.
  * @return {Seq} Return the new mapped sequence.
- * @exception {TypeError} If the source sequence is null or undefined; or callback is a not a function or a generator function.
+ * @exception {TypeError} If the source sequence is null or undefined when invoke via call/apply/bind; or callback is a generator function or not a function.
  * @example
  *
  * const seq = Seq.of(1,2,3,4,5).map(x => x * x);

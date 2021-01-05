@@ -3,13 +3,12 @@ import * as util from './util';
 /** @module */
 
 /**
- * <hr style="border:2px solid gray"> </hr>
  * <h3> reduce(reducer) ⇒ Any </h3>
  * The method executes the provided reducer function on each element of the sequence, resulting in single output value.
  * @param reducer {Function} It takes two arguments - (accumulator, currentValue). if initialValue is provided, the value will be used as the first argument in the reducer.
  * Otherwise; the first element of the sequence will be used as the first argument.
  * @return A single value that results from reduction.
- * @exception {TypeError} If the source sequence is null or undefined; or reducer is not a function or a generator function; or when the source sequence is empty and initial value is not provided.
+ * @exception {TypeError} If the source sequence is null or undefined when invoke via call/apply/bind; or reducer is a generator function or not a function; or when the source sequence is empty and initial value is not provided.
  *
  * @example
  * const result = Seq.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10).reduce((accumulator, currentValue) => accumulator + currentValue);

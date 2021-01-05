@@ -3,7 +3,6 @@ import Seq from './seq';
 /** @module */
 
 /**
- * <hr style="border:2px solid gray"> </hr>
  * <h3> Seq.of(elem0[elem1[,...[,elemN]]]) ⇒ Seq </h3>
  * Creates a new sequence from a variable number of arguments, regardless of number or type of the arguments.
  * @param args Elements used to create the sequence.

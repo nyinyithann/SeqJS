@@ -75,4 +75,11 @@ describe('Spec of Seq.', () => {
   test('a seq is of type Seq.', () => {
     expect(Seq.isSeq(new Seq())).toBe(true);
   });
+
+  test('Seq can wrap array-like object', () => {
+    const arrayLike = {
+      0: 0, 1: 1, 2: 2, length: 3,
+    };
+    expect(new Seq(arrayLike).toArray()).toEqual([0, 1, 2]);
+  });
 });

@@ -14,10 +14,11 @@ import map from './map';
 import reduce from './reduce';
 import filter from './filter';
 import take from './take';
+import takeWhile from './takeWhile';
 import concat from './concat';
 import some from './some';
 import every from './every';
-import takeWhile from './takeWhile';
+import reverse from './reverse';
 
 Seq.of = of;
 Seq.from = from;
@@ -38,11 +39,12 @@ Seq.prototype.takeWhile = takeWhile;
 Seq.prototype.concat = concat;
 Seq.prototype.some = some;
 Seq.prototype.every = every;
+Seq.prototype.reverse = reverse;
 
-Object.defineProperties(Seq.prototype, {
-  length: {
-    get: length,
-  },
+Object.defineProperty(Seq.prototype, 'length', {
+  get: length,
+  configurable: false,
+  enumerable: true,
 });
 
 export default Seq;

@@ -1,11 +1,12 @@
 import * as util from './util';
 
 class Seq {
+  /* eslint class-methods-use-this : 0 */
   constructor(source = function* () {}) {
     this._source = source;
     if (util.isGeneratorFunction(this._source)) {
       this._generator = this._source;
-    } else if (util.isIterable(this._source) || util.isArrayLike(source)) {
+    } else if (util.isIterable(this._source) || util.isArrayLike(this._source)) {
       this._generator = util.createGeneratorFunction(this._source);
     } else {
       throw new TypeError('source must be iterable.');
@@ -25,12 +26,10 @@ class Seq {
     return { done: true };
   }
 
-  // eslint-disable-next-line class-methods-use-this
   return() {
     return { done: true };
   }
 
-  // eslint-disable-next-line class-methods-use-this
   get [Symbol.toStringTag]() {
     return 'Seq';
   }

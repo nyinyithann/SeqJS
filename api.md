@@ -4,7 +4,7 @@ Creates a new seq that appends the passed value to the existing seq. This method
 **Returns**: <code>Seq</code> - A new sequence.  
 **Throws**:
 
-- <code>TypeError</code> if the existing sequence is null or undefined.
+- <code>TypeError</code> if the existing sequence is null or undefined when invoke via call/apply/bind.
 
 
 | Param | Description |
@@ -18,7 +18,6 @@ const result = seq.concat([4, 5, 6], { seven: 7 }, [[8], [9]], [[[10], [11]]]);
 console.log(result.toArray());
 // => [ 1, 2, 3, 4, 5, 6, { seven: 7 }, [ 8 ], [ 9 ], [ [ 10 ], [ 11 ] ] ]
 ```
-<hr style="border:2px solid gray"> </hr>
 <h3> Seq.empty() ⇒ Seq </h3>
 Creates an empty sequence.
 
@@ -29,14 +28,13 @@ const emptySeq = Seq.empty();
 console.log(emptySeq.toArray());
 // => []
 ```
-<hr style="border:2px solid gray"> </hr>
 <h3>every(predicate) ⇒ Seq</h3>
 Tests if all elements of the sequence satisfy the given predicate.
 
 **Returns**: <code>boolean</code> - true if the callback function returns a truthy value for at least one element in the sequence. Otherwise, false.  
 **Throws**:
 
-- If the source sequence is null or undefined; or predicate is not a function or a generator function.
+- If the source sequence is null or undefined; or predicate is a generator function or not a function.
 
 
 | Param | Type | Description |
@@ -50,14 +48,13 @@ const result = seq.some(x => x % 2 === 0);
 console.log(result);
 // => true
 ```
-<hr style="border:2px solid gray"> </hr>
 <h3>filter(predicate) ⇒ Seq</h3>
 Returns a new sequence containing only the elements of the collection for which the given predicate returns "true".
 
 **Returns**: <code>Seq</code> - The result sequence.  
 **Throws**:
 
-- <code>TypeError</code> If the source sequence is null or undefined; or predicate is not a function or a generator function.
+- <code>TypeError</code> If the source sequence is null or undefined when invoke via call/apply/bind; or predicate is a generator function or not a function.
 
 
 | Param | Type | Description |
@@ -70,13 +67,12 @@ const seq = Seq.of(1,2,3,4,5).filter(x => x % 2 === 0);
 console.log([...seq]);
 // => [2, 4]
 ```
-<hr style="border:2px solid gray"> </hr>
 <h3> forEach(callback) ⇒ undefined </h3>
 Applies the given function to each element of the collection.
 
 **Throws**:
 
-- <code>TypeError</code> If the source sequence is null or undefined; or predicate is not a function or a generator function.
+- <code>TypeError</code> If the source sequence is null or undefined when invoke via call/apply/bind; or predicate is a generator function or not a function.
 
 
 | Param | Type | Description |
@@ -93,7 +89,6 @@ seq.forEach(x => console.log(x));
 // =>   4
 // =>   5
 ```
-<hr style="border:2px solid gray"> </hr>
 <h3> Seq.from(source) ⇒ Seq </h3>
 Create a new sequence wrapped a given source. The given source can be anything that implemented iterable protocol.
 
@@ -107,14 +102,13 @@ Create a new sequence wrapped a given source. The given source can be anything t
 | --- | --- |
 | source | Anything that implemented iterable protocol. |
 
-<hr style="border:2px solid gray"> </hr>
 <h3> init(count, initializer) ⇒ Seq </h3>
 Generate a new sequence by invoking initializer function passed as the argument up to the given count.
 
 **Returns**: <code>Seq</code> - The result sequence.  
 **Throws**:
 
-- <code>TypeError</code> if count is a negative number; or initializer is not a function or a generator function.
+- <code>TypeError</code> if count is a negative number; or initializer is a generator function or not a function.
 
 
 | Param | Type | Description |
@@ -128,7 +122,6 @@ const fiveNums = Seq.init(5, x => x * 2);
 console.log(fiveNums.toArray());
 // => [0, 2, 4, 6, 8]
 ```
-<hr style="border:2px solid gray"> </hr>
 <h3> initInfinite(initializer) ⇒ Seq </h3>
 Generate a new sequence by invoking initializer function passed as the argument.
 The index of the item generated is passed to the initializer function.
@@ -137,7 +130,7 @@ The iteration can continue up to Number.MAX_SAFE_INTEGER.
 **Returns**: <code>Seq</code> - The result sequence.  
 **Throws**:
 
-- <code>TypeError</code> if initializer is not a function or a generator function.
+- <code>TypeError</code> if initializer a generator function or not a function.
 
 
 | Param | Type | Description |
@@ -151,28 +144,26 @@ const first5Nums = seq.take(5);
 console.log(first5Nums.toArray());
 // => [0, 2, 4, 6, 8]
 ```
-<hr style="border:2px solid gray"> </hr>
 <h3> isEmpty() ⇒ Boolean </h3>
 Returns true if the sequence contains no elements, false otherwise.
 
 **Returns**: <code>boolean</code> - True if the sequence is empty; false otherwise.  
 **Throws**:
 
-- <code>TypeError</code> if the source sequence is null or undefined.
+- <code>TypeError</code> if the existing sequence is null or undefined when invoke via call/apply/bind.
 
 **Example**  
 ```js
 console.log(Seq.empty().isEmpty());
 // => true
 ```
-<hr style="border:2px solid gray"> </hr>
 <h3> length ⇒ Number </h3>
 Returns the length of the sequence.
 
 **Returns**: <code>number</code> - The length of the sequence.  
 **Throws**:
 
-- <code>TypeError</code> if the source sequence is null or undefined.
+- <code>TypeError</code> if the existing sequence is null or undefined when invoke via call/apply/bind.
 
 **Example**  
 ```js
@@ -180,7 +171,6 @@ const seq = Seq.of(1,2,3);
 console.log(seq.length);
 // => 3;
 ```
-<hr style="border:2px solid gray"> </hr>
 <h3> map(callback) ⇒ Seq </h3>
 The map method creates a new Seq populated with the results of calling a provided function on every element.
 The provided function is invoked with two arguments: (item, index).
@@ -188,7 +178,7 @@ The provided function is invoked with two arguments: (item, index).
 **Returns**: <code>Seq</code> - Return the new mapped sequence.  
 **Throws**:
 
-- <code>TypeError</code> If the source sequence is null or undefined; or callback is a not a function or a generator function.
+- <code>TypeError</code> If the source sequence is null or undefined when invoke via call/apply/bind; or callback is a generator function or not a function.
 
 
 | Param | Type | Description |
@@ -205,7 +195,6 @@ const seq = Seq.of(1,2,3,4,5).map((item, index) => [index, item]);
 console.log([...seq]);
 // => [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]]
 ```
-<hr style="border:2px solid gray"> </hr>
 <h3> Seq.of(elem0[elem1[,...[,elemN]]]) ⇒ Seq </h3>
 Creates a new sequence from a variable number of arguments, regardless of number or type of the arguments.
 
@@ -221,7 +210,6 @@ const nums = Seq.of(1,2, { 'three' : 3}, [4], '5', 0b110);
 console.log(nums);
 // => [ 1, 2, { three: 3 }, [ 4 ], '5', 6 ]
 ```
-<hr style="border:2px solid gray"> </hr>
 <h3>Seq.range(begin, end, step) ⇒ Seq</h3>
 Creates a sequence of numbers starting from 'begin' to 'end', but not including, 'end'.
 If 'end' is not defined, it is set to 'begin', and 'begin' is then set to 0.
@@ -235,7 +223,7 @@ If 'end' is not defined, it is set to 'begin', and 'begin' is then set to 0.
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
-| [being] | <code>number</code> | <code>0</code> | The first number of the sequence |
+| [begin] | <code>number</code> | <code>0</code> | The first number of the sequence |
 | end | <code>number</code> |  | The end of the range of numbers. It won't include in the result sequence. |
 | [step] | <code>number</code> | <code>1</code> | The value to increment or decrement by. |
 
@@ -265,14 +253,13 @@ console.log(Seq.range(10, -5, -1).toArray());
 console.log(Seq.range(-1, -2, -5).toArray());
 // => [-1]
 ```
-<hr style="border:2px solid gray"> </hr>
 <h3> reduce(reducer) ⇒ Any </h3>
 The method executes the provided reducer function on each element of the sequence, resulting in single output value.
 
 **Returns**: A single value that results from reduction.  
 **Throws**:
 
-- <code>TypeError</code> If the source sequence is null or undefined; or reducer is not a function or a generator function; or when the source sequence is empty and initial value is not provided.
+- <code>TypeError</code> If the source sequence is null or undefined when invoke via call/apply/bind; or reducer is a generator function or not a function; or when the source sequence is empty and initial value is not provided.
 
 
 | Param | Type | Description |
@@ -289,7 +276,6 @@ const result = Seq.of([0, 1], [2, 3], [4, 5]).reduce((accumulator, currentValue)
 console.log(result);
 // => [0, 1, 2, 3, 4, 5]
 ```
-<hr style="border:2px solid gray"> </hr>
 <h3> repeat(count, initial) ⇒ Seq </h3>
 Creates a sequence by replicating the given initial value.
 
@@ -310,14 +296,27 @@ const seq = Seq.repeat(5, 1);
 console.log(seq.toArray());
 // => [1, 1, 1, 1, 1]
 ```
-<hr style="border:2px solid gray"> </hr>
+<h3>reverse() ⇒ Seq</h3>
+Return a new sequence with the elements in reverse order.
+
+**Returns**: <code>Seq</code> - The reversed sequence.  
+**Throws**:
+
+- <code>TypeError</code> if the source sequence is null or undefined when invoke via call/apply/bind.
+
+**Example**  
+```js
+const seq = Seq.of(0, 1, 2, 3, 4);
+console.log(seq.reverse().toArray());
+// => [4, 3, 2, 1, 0]
+```
 <h3> some(predicate) ⇒ Seq </h3>
 Tests if at least one element in the sequence passes the test implemented by the provided function.
 
 **Returns**: <code>boolean</code> - true if the callback function returns a truthy value for at least one element in the sequence. Otherwise, false.  
 **Throws**:
 
-- If the source sequence is null or undefined; or predicate is not a function or a generator function.
+- If the source sequence is null or undefined when invoke via call/apply/bind; or predicate is a generator function or not a function.
 
 
 | Param | Type | Description |
@@ -331,14 +330,13 @@ const result = seq.some(x => x % 2 === 0);
 console.log(result);
 // => true
 ```
-<hr style="border:2px solid gray"> </hr>
 <h3> take(count) ⇒ Seq </h3>
 Returns the first N elements of the sequence.
 
 **Returns**: <code>Seq</code> - The result sequence.  
 **Throws**:
 
-- <code>TypeError</code> if the source sequence is null or undefined; or count is a negative number.
+- <code>TypeError</code> if the source sequence is null or undefined when invoke via call/apply/bind; or count is a negative number.
 
 
 | Param | Description |
@@ -352,14 +350,13 @@ const taken = seq.take(2);
 console.log([...taken]);
 // => [1, 2]
 ```
-<hr style="border:2px solid gray"> </hr>
 <h3> takeWhile(predicate) ⇒ Seq </h3>
 Returns a sequence that, when iterated, yields elements of the underlying sequence while the given predicate returns True, and then returns no further elements.
 
 **Returns**: <code>Seq</code> - The result sequence.  
 **Throws**:
 
-- <code>TypeError</code> If the source sequence is null or undefined; or predicate is not a function or a generator function.
+- <code>TypeError</code> If the source sequence is null or undefined when invoke via call/apply/bind; or predicate is a generator function or not a function.
 
 
 | Param | Type | Description |
@@ -373,14 +370,13 @@ const result = seq.takeWhile(x => x < 3).toArray();
 console.log(result);
 => [1, 2]
 ```
-<hr style="border:2px solid gray"> </hr>
 <h3> toArray() ⇒ Seq </h3>
 Create an array out of the sequence.
 
 **Returns**: <code>Array</code> - The result array.  
 **Throws**:
 
-- <code>TypeError</code> If the source sequence is null or undefined.
+- <code>TypeError</code> if the existing sequence is null or undefined when invoke via call/apply/bind.
 
 **Example**  
 ```js

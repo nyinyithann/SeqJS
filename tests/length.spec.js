@@ -6,9 +6,13 @@ describe('length property', () => {
     expect(seq.length).toBe(3);
   });
 
-  test('length of array source', () => {
+  test('length of array or array-like source', () => {
     const seq = new Seq([1, 2, 3, 4, 5]);
     expect(seq.length).toBe(5);
+    const arrayLike = {
+      0: 0, 1: 1, 2: 2, length: 3,
+    };
+    expect(Seq.from(arrayLike).length).toBe(3);
   });
 
   test('should throw TypeError if the sequence is null or undefined', () => {

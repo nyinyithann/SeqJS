@@ -5,12 +5,11 @@ import empty from './empty';
 /** @module */
 
 /**
- * <hr style="border:2px solid gray"> </hr>
  * <h3> take(count) ⇒ Seq </h3>
  * Returns the first N elements of the sequence.
  * @param count The number of items to take.
  * @return {Seq} The result sequence.
- * @exception {TypeError} if the source sequence is null or undefined; or count is a negative number.
+ * @exception {TypeError} if the source sequence is null or undefined when invoke via call/apply/bind; or count is a negative number.
  * @example
  * const seq = Seq.of(1,2,3,4,5);
  * const taken = seq.take(2);

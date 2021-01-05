@@ -65,5 +65,6 @@ describe('range', () => {
     expect(Seq.range(-5, -5, -5).toArray()).toEqual([]);
     expect(Seq.range(-1, -2, -5).toArray()).toEqual([-1]);
     expect(Seq.range(-5, -2, -5).toArray()).toEqual([]);
+    expect(Seq.range(0).toArray()).toEqual([]);
   });
 });
