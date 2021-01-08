@@ -7,7 +7,7 @@ export default [
     output: {
       file: 'build/umd/seq.js',
       format: 'umd',
-      name: 'seq',
+      name: 'Seq',
       esModule: false,
     },
   },

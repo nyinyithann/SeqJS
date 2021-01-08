@@ -1,6 +1,6 @@
 {
   "name": "seq-js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "build/umd/seq.js",
   "module": "build/esm/seq.js",
   "license": "MIT",

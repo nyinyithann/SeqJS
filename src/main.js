@@ -20,6 +20,8 @@ import prepend from './prepend';
 import some from './some';
 import every from './every';
 import reverse from './reverse';
+import head from './head';
+import tail from './tail';
 
 Seq.of = of;
 Seq.from = from;
@@ -42,6 +44,8 @@ Seq.prototype.prepend = prepend;
 Seq.prototype.some = some;
 Seq.prototype.every = every;
 Seq.prototype.reverse = reverse;
+Seq.prototype.head = head;
+Seq.prototype.tail = tail;
 
 Object.defineProperty(Seq.prototype, 'length', {
   get: length,
