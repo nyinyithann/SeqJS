@@ -67,3 +67,7 @@ export function throwIfNotAFiniteNumber(value, name = 'value') {
     throw new TypeError(`${name} is not a finite number.`);
   }
 }
+
+export function checkSameValueZeroEqual(lhs, rhs) {
+  return lhs === rhs || (Number.isNaN(lhs) && Number.isNaN(rhs));
+}

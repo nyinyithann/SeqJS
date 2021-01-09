@@ -18,6 +18,34 @@ const result = seq.concat([4, 5, 6], { seven: 7 }, [[8], [9]], [[[10], [11]]]);
 console.log(result.toArray());
 // => [ 1, 2, 3, 4, 5, 6, { seven: 7 }, [ 8 ], [ 9 ], [ [ 10 ], [ 11 ] ] ]
 ```
+* <h3> countBy(projection) ⇒ Seq </h3>
+Applies a key-generating function to each element of a sequence and returns a sequence yielding unique keys and their number of occurrences in the original sequence.
+This method should not be used with large or infinite sequences.
+
+**Returns**: <code>Seq</code> - The result sequence.  
+**Throws**:
+
+- <code>TypeError</code> If the source sequence is null or undefined when invoke via call/apply/bind; or projection is a generator function or not a function.
+
+
+| Param | Description |
+| --- | --- |
+| projection | A function transforming each item of the input sequence into a key to be compared against the others. |
+
+**Example**  
+```js
+class Person {
+  constructor(name) {
+    this.Name = name;
+  }
+}
+const mrA = new Person('A', 20);
+const mrB = new Person('B', 15);
+const seq = Seq.of(mrA, mrA, mrB);
+const nameCounts = seq.countBy(x => x.Name).toArray();
+console.log(nameCounts)
+// => [['A', 2], ['B', 1]]
+```
 <h3> Seq.empty() ⇒ Seq </h3>
 Creates an empty sequence.
 
@@ -102,6 +130,16 @@ Create a new sequence wrapped a given source. The given source can be anything t
 | --- | --- |
 | source | Anything that implemented iterable protocol. |
 
+Returns the first element of the sequence.
+
+**Returns**: The first element of the sequence.  
+**Example**  
+```js
+@exception {TypeError} If the source sequence is null or undefined when invoke via call/apply/bind.
+const seq = Seq.of(1, 2, 3, 4, 5);
+console.log(seq.head());
+// => 1
+```
 <h3> init(count, initializer) ⇒ Seq </h3>
 Generate a new sequence by invoking initializer function passed as the argument up to the given count.
 
@@ -350,6 +388,16 @@ const result = seq.some(x => x % 2 === 0);
 console.log(result);
 // => true
 ```
+Returns a new sequence containing all the elements of the existing sequence except the first.
+
+**Returns**: <code>Seq</code> - The result sequence.  
+**Example**  
+```js
+@exception {TypeError} If the source sequence is null or undefined when invoke via call/apply/bind.
+const seq = Seq.of(1, 2, 3, 4, 5);
+console.log(seq.tail().toArray());
+// => [2, 3, 4, 5]
+```
 <h3> take(count) ⇒ Seq </h3>
 Returns the first N elements of the sequence.
 
@@ -404,4 +452,18 @@ const seq = Seq.of(1,2,3,4);
 const arr = seq.toArray();
 console.log(arr);
 // => [1,2,3,4]
+```
+<h3> toString() ⇒ string </h3>
+Returns a string representing upto 128 elements of the sequence. If the sequence contains
+more than 128 elements, the string will end with '...'.
+
+**Returns**: A string representing the elements of the sequence.  
+**Throws**:
+
+- <code>TypeError</code> If the source sequence is null or undefined when invoke via call/apply/bind.
+
+**Example**  
+```js
+console.log(Seq.of(1,2,3).toString());
+// => "1, 2, 3"
 ```

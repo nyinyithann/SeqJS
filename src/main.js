@@ -22,6 +22,8 @@ import every from './every';
 import reverse from './reverse';
 import head from './head';
 import tail from './tail';
+import countBy from './countBy';
+import toString from './toString';
 
 Seq.of = of;
 Seq.from = from;
@@ -46,6 +48,8 @@ Seq.prototype.every = every;
 Seq.prototype.reverse = reverse;
 Seq.prototype.head = head;
 Seq.prototype.tail = tail;
+Seq.prototype.countBy = countBy;
+Seq.prototype.toString = toString;
 
 Object.defineProperty(Seq.prototype, 'length', {
   get: length,
