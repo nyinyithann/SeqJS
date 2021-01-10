@@ -195,6 +195,40 @@ Returns true if the sequence contains no elements, false otherwise.
 console.log(Seq.empty().isEmpty());
 // => true
 ```
+<h3> last() ⇒ value </h3>
+Returns the last element of a sequence.
+
+**Returns**: The value at the last position in the source sequence.  
+**Throws**:
+
+- <code>TypeError</code> If the source sequence is null or undefined when invoke via call/apply/bind.
+
+**Example**  
+```js
+const seq = Seq.range(0,10);
+const last = seq.last();
+console.log(last);
+// => 9
+```
+<h3> lastBy(predicate) ⇒ Seq </h3>
+Returns the last element of a sequence that satisfies a specified condition.
+
+**Returns**: The last element in the sequence that passes the test in the specified predicate function.  
+**Throws**:
+
+- <code>TypeError</code> If the source sequence is null or undefined when invoke via call/apply/bind; or predicate is a generator function or not a function.
+
+
+| Param | Description |
+| --- | --- |
+| predicate | A function to test each element for a condition. |
+
+**Example**  
+```js
+const seq = Seq.of(1, 2, 42, 323, 423, 32, 23, 10, 11);
+console.log(seq.lastBy(x => x % 2 === 0));
+// => 10
+```
 <h3> length ⇒ Number </h3>
 Returns the length of the sequence.
 

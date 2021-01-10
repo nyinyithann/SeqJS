@@ -41,7 +41,7 @@ function countBy(projection) {
   while (!current.done) {
     const currentValue = current.value;
     const key = projection.call(thisArg, currentValue);
-    map.set(key, (map.get(key) ?? 0) + 1);
+    map.set(key, (map.get(key) || 0) + 1);
     current = iter.next();
   }
 

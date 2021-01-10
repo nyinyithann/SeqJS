@@ -6,6 +6,7 @@ import range from './range';
 import repeat from './repeat';
 import init from './init';
 import initInfinite from './initInfinite';
+import toString from './toString';
 import length from './length';
 import isEmpty from './isEmpty';
 import forEach from './forEach';
@@ -23,7 +24,8 @@ import reverse from './reverse';
 import head from './head';
 import tail from './tail';
 import countBy from './countBy';
-import toString from './toString';
+import last from './last';
+import lastBy from './lastBy';
 
 Seq.of = of;
 Seq.from = from;
@@ -33,6 +35,7 @@ Seq.repeat = repeat;
 Seq.init = init;
 Seq.initInfinite = initInfinite;
 
+Seq.prototype.toString = toString;
 Seq.prototype.isEmpty = isEmpty;
 Seq.prototype.forEach = forEach;
 Seq.prototype.toArray = toArray;
@@ -49,7 +52,8 @@ Seq.prototype.reverse = reverse;
 Seq.prototype.head = head;
 Seq.prototype.tail = tail;
 Seq.prototype.countBy = countBy;
-Seq.prototype.toString = toString;
+Seq.prototype.last = last;
+Seq.prototype.lastBy = lastBy;
 
 Object.defineProperty(Seq.prototype, 'length', {
   get: length,

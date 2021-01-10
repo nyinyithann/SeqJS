@@ -12,9 +12,9 @@ module.exports = {
     'node_modules',
     'src',
   ],
-  setupFiles: ['./tests/helper.js'],
+  setupFiles: ['./tests/helpers/helper.js'],
   testEnvironment: 'node',
-  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|js?|tsx?|ts?)$',
+  testRegex: '(/(tests/more|tests/specs)/.*|(\\.|/)(test|spec))\\.(jsx?|js?|tsx?|ts?)$',
   transform: {
     '^.+\\.jsx?$': 'babel-jest',
     '^.+\\.mjs$': 'babel-jest',
