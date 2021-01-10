@@ -1,4 +1,4 @@
-  <h3>concat([val1[,val2[,...[,valN]]]]) ⇒ Seq</h3>
+  <h3>append([val1[,val2[,...[,valN]]]]) ⇒ Seq</h3>
 Creates a new sequence that appends the passed value to the existing seq. This method does not change the existing sequence.
 
 **Returns**: <code>Seq</code> - A new sequence.  
@@ -14,7 +14,7 @@ Creates a new sequence that appends the passed value to the existing seq. This m
 **Example**  
 ```js
 const seq = Seq.of(1, 2, 3);
-const result = seq.concat([4, 5, 6], { seven: 7 }, [[8], [9]], [[[10], [11]]]);
+const result = seq.append([4, 5, 6], { seven: 7 }, [[8], [9]], [[[10], [11]]]);
 console.log(result.toArray());
 // => [ 1, 2, 3, 4, 5, 6, { seven: 7 }, [ 8 ], [ 9 ], [ [ 10 ], [ 11 ] ] ]
 ```
@@ -114,28 +114,6 @@ const seq = Seq.of(1, 2, 42, 323, 423, 32, 23, 10, 11);
 console.log(seq.findBack(x => x % 2 === 0));
 // => 10
 ```
-<h3> forEach(callback) ⇒ undefined </h3>
-Applies the given function to each element of the collection.
-
-**Throws**:
-
-- <code>TypeError</code> If the source sequence is null or undefined when invoke via call/apply/bind; or predicate is a generator function or not a function.
-
-
-| Param | Type | Description |
-| --- | --- | --- |
-| callback | <code>function</code> | A function to apply to each element of the sequence. |
-
-**Example**  
-```js
-const seq = Seq.of(1, 2, 3, 4, 5);
-seq.forEach(x => console.log(x));
-// =>   1
-// =>   2
-// =>   3
-// =>   4
-// =>   5
-```
 <h3>forall(predicate) ⇒ Seq</h3>
 Tests if all elements of the sequence satisfy the given predicate.
 
@@ -233,6 +211,28 @@ Returns true if the sequence contains no elements, false otherwise.
 ```js
 console.log(Seq.empty().isEmpty());
 // => true
+```
+<h3> iter(callback) ⇒ undefined </h3>
+Applies the given function to each element of the collection.
+
+**Throws**:
+
+- <code>TypeError</code> If the source sequence is null or undefined when invoke via call/apply/bind; or predicate is a generator function or not a function.
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| callback | <code>function</code> | A function to apply to each element of the sequence. |
+
+**Example**  
+```js
+const seq = Seq.of(1, 2, 3, 4, 5);
+seq.iter(x => console.log(x));
+// =>   1
+// =>   2
+// =>   3
+// =>   4
+// =>   5
 ```
 <h3> last() ⇒ value </h3>
 Returns the last element of a sequence.
@@ -384,7 +384,7 @@ const result = Seq.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10).reduce((accumulator, curren
 console.log(result);
 // => 55
 
-const result = Seq.of([0, 1], [2, 3], [4, 5]).reduce((accumulator, currentValue) => accumulator.concat(currentValue) , []);
+const result = Seq.of([0, 1], [2, 3], [4, 5]).reduce((accumulator, currentValue) => accumulator.append(currentValue) , []);
 console.log(result);
 // => [0, 1, 2, 3, 4, 5]
 ```

@@ -15,7 +15,7 @@ import * as util from './util';
  * console.log(result);
  * // => 55
  *
- * const result = Seq.of([0, 1], [2, 3], [4, 5]).reduce((accumulator, currentValue) => accumulator.concat(currentValue) , []);
+ * const result = Seq.of([0, 1], [2, 3], [4, 5]).reduce((accumulator, currentValue) => accumulator.append(currentValue) , []);
  * console.log(result);
  * // => [0, 1, 2, 3, 4, 5]
  */

@@ -1,6 +1,6 @@
 import Seq from '../../src/main';
 
-describe('concat()', () => {
+describe('append()', () => {
   const genFunc = function* () {
     yield* [3, 4, 5, 6];
   };
@@ -16,17 +16,17 @@ describe('concat()', () => {
     0: 0, 1: 1, 2: 2, length: 3,
   };
 
-  test('concat array.', () => {
+  test('append array.', () => {
     const seq = Seq.of(1, 2, 3);
     const carr = seq.concat([4, 5, 6]);
     expect([...carr]).toEqual([1, 2, 3, 4, 5, 6]);
   });
 
-  test('concat a single value.', () => {
+  test('append a single value.', () => {
     expect([...Seq.of(1).concat(2)]).toEqual([1, 2]);
   });
 
-  test('concat a generator function.', () => {
+  test('append a generator function.', () => {
     const seq = Seq.of(1, 2).concat(genFunc());
     expect([...seq]).toEqual([1, 2, 3, 4, 5, 6]);
   });
@@ -35,17 +35,17 @@ describe('concat()', () => {
     expect(Seq.of(1, 2, 3, 4, 5).concat().toArray()).toEqual([1, 2, 3, 4, 5]);
   });
 
-  test('concat an iterator.', () => {
+  test('append an iterator.', () => {
     const seq = Seq.of(1, 2).concat(iterator);
     expect([...seq]).toEqual([1, 2, 1, 2]);
   });
 
-  test('concat an array-like object.', () => {
+  test('append an array-like object.', () => {
     const seq = Seq.of(1, 2).concat(arrayLike);
     expect([...seq]).toEqual([1, 2, 0, 1, 2]);
   });
 
-  test('concat a gen func, iterator, array, array-like obj, and single values', () => {
+  test('append a gen func, iterator, array, array-like obj, and single values', () => {
     const seq1 = Seq.of(1).concat(genFunc(), arrayLike, [1, 2, 3], 'A', 'B', { name: 'Foo' });
     const seq2 = Seq.of(1).concat(genFunc(), arrayLike, [1, 2, 3], 'A', 'B', { name: 'Foo' });
     expect(seq1.toArray()).toEqual([...seq2]);

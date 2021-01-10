@@ -1,6 +1,6 @@
 import Seq from '../../src/main';
 
-describe('forEach()', () => {
+describe('iter()', () => {
   const seq = Seq.of(1, 2, 3, 4, 5);
 
   test('should throw type error if callback is not  a function', () => {
