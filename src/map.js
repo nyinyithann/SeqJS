@@ -5,7 +5,7 @@ import from from './from';
 
 /**
  * <h3> map(callback) ⇒ Seq </h3>
- * The map method creates a new Seq populated with the results of calling a provided function on every element.
+ * The map method creates a new Seq populated with the results of calling a provided function on forall element.
  * The provided function is invoked with two arguments: (item, index).
  *
  * @param {Function} callback The function invoked on each item.

@@ -1,6 +1,6 @@
 import Seq from '../../src/main';
 
-describe('repeat()', () => {
+describe('replicate()', () => {
   test('should generate a new sequence based on the params pass', () => {
     expect(Seq.repeat(5, 1).toArray()).toEqual([1, 1, 1, 1, 1]);
     const funcSeq = Seq.repeat(2, (x) => x);

@@ -1,6 +1,6 @@
 import Seq from '../../src/main';
 
-describe('some()', () => {
+describe('exists()', () => {
   test('true case', () => {
     const seq = Seq.of(1, 2, 3, 4, 5);
     const actual = seq.some((x) => x % 2 === 0);

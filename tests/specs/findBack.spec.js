@@ -1,6 +1,6 @@
 import Seq from '../../src/main';
 
-describe('lastBy()', () => {
+describe('findBack()', () => {
   test('should throw type error if the sequence is null or undefined, or '
           + 'predicate is a generator function or not a function', () => {
     const lastBy = Seq.prototype.lastBy;

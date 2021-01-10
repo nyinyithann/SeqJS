@@ -1,7 +1,7 @@
 import Seq from '../../src/main';
 
 describe('take()', () => {
-  test('take some', () => {
+  test('take exists', () => {
     const seq = Seq.of(1, 2, 3, 4, 5);
     const taken = seq.take(2);
     expect([...taken]).toEqual([1, 2]);

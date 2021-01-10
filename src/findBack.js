@@ -3,17 +3,17 @@ import * as util from './util';
 /** @module */
 
 /**
- * <h3> lastBy(predicate) ⇒ Seq </h3>
+ * <h3> findBack(predicate) ⇒ Seq </h3>
  * Returns the last element of a sequence that satisfies a specified condition.
  * @param predicate A function to test each element for a condition.
  * @returns The last element in the sequence that passes the test in the specified predicate function.
  * @exception {TypeError} If the source sequence is null or undefined when invoke via call/apply/bind; or predicate is a generator function or not a function.
  * @example
  * const seq = Seq.of(1, 2, 42, 323, 423, 32, 23, 10, 11);
- * console.log(seq.lastBy(x => x % 2 === 0));
+ * console.log(seq.findBack(x => x % 2 === 0));
  * // => 10
  */
-function lastBy(predicate) {
+function findBack(predicate) {
   util.throwIfNull(this, 'this');
   util.throwIfNotAFunction(predicate, 'predicate');
   util.throwIfGeneratorFunction(predicate, 'predicate');
@@ -55,4 +55,4 @@ function lastBy(predicate) {
   return undefined;
 }
 
-export default lastBy;
+export default findBack;

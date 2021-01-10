@@ -1,6 +1,6 @@
 import Seq from '../../src/main';
 
-describe('every()', () => {
+describe('forall()', () => {
   test('true case', () => {
     const seq = Seq.of(2, 4, 6, 8, 10);
     const actual = seq.every((x) => x % 2 == 0);

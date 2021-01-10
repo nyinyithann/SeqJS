@@ -56,13 +56,13 @@ const emptySeq = Seq.empty();
 console.log(emptySeq.toArray());
 // => []
 ```
-<h3>every(predicate) ⇒ Seq</h3>
-Tests if all elements of the sequence satisfy the given predicate.
+<h3> exists(predicate) ⇒ Seq </h3>
+Tests if at least one element in the sequence passes the test implemented by the provided function.
 
 **Returns**: <code>boolean</code> - true if the callback function returns a truthy value for at least one element in the sequence. Otherwise, false.  
 **Throws**:
 
-- If the source sequence is null or undefined; or predicate is a generator function or not a function.
+- If the source sequence is null or undefined when invoke via call/apply/bind; or predicate is a generator function or not a function.
 
 
 | Param | Type | Description |
@@ -71,8 +71,8 @@ Tests if all elements of the sequence satisfy the given predicate.
 
 **Example**  
 ```js
-const seq = Seq.of(2, 4, 5, 8);
-const result = seq.some(x => x % 2 === 0);
+const seq = Seq.of(1,2,3,4,5);
+const result = seq.exists(x => x % 2 === 0);
 console.log(result);
 // => true
 ```
@@ -95,6 +95,25 @@ const seq = Seq.of(1,2,3,4,5).filter(x => x % 2 === 0);
 console.log([...seq]);
 // => [2, 4]
 ```
+<h3> findBack(predicate) ⇒ Seq </h3>
+Returns the last element of a sequence that satisfies a specified condition.
+
+**Returns**: The last element in the sequence that passes the test in the specified predicate function.  
+**Throws**:
+
+- <code>TypeError</code> If the source sequence is null or undefined when invoke via call/apply/bind; or predicate is a generator function or not a function.
+
+
+| Param | Description |
+| --- | --- |
+| predicate | A function to test each element for a condition. |
+
+**Example**  
+```js
+const seq = Seq.of(1, 2, 42, 323, 423, 32, 23, 10, 11);
+console.log(seq.findBack(x => x % 2 === 0));
+// => 10
+```
 <h3> forEach(callback) ⇒ undefined </h3>
 Applies the given function to each element of the collection.
 
@@ -116,6 +135,26 @@ seq.forEach(x => console.log(x));
 // =>   3
 // =>   4
 // =>   5
+```
+<h3>forall(predicate) ⇒ Seq</h3>
+Tests if all elements of the sequence satisfy the given predicate.
+
+**Returns**: <code>boolean</code> - true if the callback function returns a truthy value for at least one element in the sequence. Otherwise, false.  
+**Throws**:
+
+- If the source sequence is null or undefined; or predicate is a generator function or not a function.
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| predicate | <code>function</code> | A function to test on the elements of the seq. |
+
+**Example**  
+```js
+const seq = Seq.of(2, 4, 5, 8);
+const result = seq.exists(x => x % 2 === 0);
+console.log(result);
+// => true
 ```
 <h3> Seq.from(source) ⇒ Seq </h3>
 Create a new sequence wrapped a given source. The given source can be anything that implemented iterable protocol.
@@ -210,25 +249,6 @@ const last = seq.last();
 console.log(last);
 // => 9
 ```
-<h3> lastBy(predicate) ⇒ Seq </h3>
-Returns the last element of a sequence that satisfies a specified condition.
-
-**Returns**: The last element in the sequence that passes the test in the specified predicate function.  
-**Throws**:
-
-- <code>TypeError</code> If the source sequence is null or undefined when invoke via call/apply/bind; or predicate is a generator function or not a function.
-
-
-| Param | Description |
-| --- | --- |
-| predicate | A function to test each element for a condition. |
-
-**Example**  
-```js
-const seq = Seq.of(1, 2, 42, 323, 423, 32, 23, 10, 11);
-console.log(seq.lastBy(x => x % 2 === 0));
-// => 10
-```
 <h3> length ⇒ Number </h3>
 Returns the length of the sequence.
 
@@ -244,7 +264,7 @@ console.log(seq.length);
 // => 3;
 ```
 <h3> map(callback) ⇒ Seq </h3>
-The map method creates a new Seq populated with the results of calling a provided function on every element.
+The map method creates a new Seq populated with the results of calling a provided function on forall element.
 The provided function is invoked with two arguments: (item, index).
 
 **Returns**: <code>Seq</code> - Return the new mapped sequence.  
@@ -368,7 +388,7 @@ const result = Seq.of([0, 1], [2, 3], [4, 5]).reduce((accumulator, currentValue)
 console.log(result);
 // => [0, 1, 2, 3, 4, 5]
 ```
-<h3> repeat(count, initial) ⇒ Seq </h3>
+<h3> replicate(count, initial) ⇒ Seq </h3>
 Creates a sequence by replicating the given initial value.
 
 **Returns**: <code>Seq</code> - The generated sequence.  
@@ -384,7 +404,7 @@ Creates a sequence by replicating the given initial value.
 
 **Example**  
 ```js
-const seq = Seq.repeat(5, 1);
+const seq = Seq.replicate(5, 1);
 console.log(seq.toArray());
 // => [1, 1, 1, 1, 1]
 ```
@@ -401,26 +421,6 @@ Return a new sequence with the elements in reverse order.
 const seq = Seq.of(0, 1, 2, 3, 4);
 console.log(seq.reverse().toArray());
 // => [4, 3, 2, 1, 0]
-```
-<h3> some(predicate) ⇒ Seq </h3>
-Tests if at least one element in the sequence passes the test implemented by the provided function.
-
-**Returns**: <code>boolean</code> - true if the callback function returns a truthy value for at least one element in the sequence. Otherwise, false.  
-**Throws**:
-
-- If the source sequence is null or undefined when invoke via call/apply/bind; or predicate is a generator function or not a function.
-
-
-| Param | Type | Description |
-| --- | --- | --- |
-| predicate | <code>function</code> | A function to test on the elements of the seq. |
-
-**Example**  
-```js
-const seq = Seq.of(1,2,3,4,5);
-const result = seq.some(x => x % 2 === 0);
-console.log(result);
-// => true
 ```
 Returns a new sequence containing all the elements of the existing sequence except the first.
 
