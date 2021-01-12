@@ -30,6 +30,22 @@ describe('initInfinite()', () => {
     expect(() => Seq.initInfinite(function* () {})).toThrow(TypeError);
   });
 
+  test('result seq should be closable', () => {
+    const seq = Seq.initInfinite((x) => x);
+    let stop = 1;
+    // eslint-disable-next-line no-restricted-syntax,no-unused-vars
+    for (const _ of seq) {
+      if (stop === 6) {
+        break;
+      }
+      stop += 1;
+    }
+    expect(seq.take(2).toArray()).toEqual([0, 1]);
+    const actual = seq.take(5).toArray();
+    const expected = seq.take(5).toArray();
+    expect(actual).toEqual(expected);
+  });
+
   // the test takes time.
   // test('should stop when index reaches Number.MAX_SAFE_INTEGER', () => {
   //    const seq = Seq.initInfinite(x => x);

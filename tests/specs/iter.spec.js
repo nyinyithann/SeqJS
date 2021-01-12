@@ -4,39 +4,39 @@ describe('iter()', () => {
   const seq = Seq.of(1, 2, 3, 4, 5);
 
   test('should throw type error if callback is not  a function', () => {
-    expect(() => seq.forEach(null)).toThrow(TypeError);
+    expect(() => seq.iter(null)).toThrow(TypeError);
   });
 
   test('callback should work as intended', () => {
     const result = [];
-    seq.forEach((x) => result.push(x * x));
+    seq.iter((x) => result.push(x * x));
     expect(result).toEqual(seq.map((x) => x * x).toArray());
   });
 
   test('correct index should be passed to callback', () => {
     const result = [];
-    seq.forEach((x, i) => result.push([x, i]));
+    seq.iter((x, i) => result.push([x, i]));
     expect(result).toEqual(seq.map((x, i) => [x, i]).toArray());
   });
 
   test('call/apply invocation should work', () => {
     const result = [];
-    const { forEach } = Seq.prototype;
-    forEach.call(seq, (x) => result.push(x + 1));
+    const { iter } = Seq.prototype;
+    iter.call(seq, (x) => result.push(x + 1));
     expect(result).toEqual(seq.map((x) => x + 1).toArray());
     result.length = 0;
-    forEach.apply(seq, [(x) => result.push(x + 1)]);
+    iter.apply(seq, [(x) => result.push(x + 1)]);
     expect(result).toEqual(seq.map((x) => x + 1).toArray());
     result.length = 0;
-    forEach.bind(seq)((x) => result.push(x + 1));
+    iter.bind(seq)((x) => result.push(x + 1));
     expect(result).toEqual(seq.map((x) => x + 1).toArray());
   });
 
   test(
     'call/apply invocation on null or undefined seq should throw TypeError',
     () => {
-      const { forEach } = Seq.prototype;
-      expect(() => forEach.call(null)).toThrow(TypeError);
+      const { iter } = Seq.prototype;
+      expect(() => iter.call(null)).toThrow(TypeError);
     },
   );
 
@@ -49,7 +49,7 @@ describe('iter()', () => {
       },
     };
 
-    seq.forEach(obj.callback, obj);
+    seq.iter(obj.callback, obj);
     expect(obj.result.length).toBe(seq.length);
     expect(obj.result).toEqual(seq.map((x) => x + x).toArray());
   });

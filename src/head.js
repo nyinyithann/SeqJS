@@ -15,6 +15,7 @@ function head() {
 
   const iter = this._generator();
   const current = iter.next();
+  iter.return();
   return current.value;
 }
 

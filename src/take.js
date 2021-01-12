@@ -23,16 +23,34 @@ function take(count) {
   if (count === 0) {
     return empty();
   }
-  let current;
+
   const iter = this._generator();
-  return from(function* () {
-    for (let i = 0; i < count; i += 1) {
-      current = iter.next();
-      if (!current.done) {
-        yield current.value;
-      }
-    }
-  });
+
+  const createTakeIterator = (c) => {
+    let innerCount = c;
+    return {
+      [Symbol.iterator]() {
+        return {
+          next() {
+            if (innerCount > 0) {
+              innerCount -= 1;
+              return iter.next();
+            }
+            innerCount = c;
+            iter.return();
+            return { done: true };
+          },
+          return() {
+            innerCount = c;
+            iter.return();
+            return { done: true };
+          },
+        };
+      },
+    };
+  };
+
+  return from(createTakeIterator(count));
 }
 
 export default take;

@@ -8,7 +8,8 @@ describe('head()', () => {
 
   test('should be able to invoke vai call/apply/bind', () => {
     const seq = Seq.initInfinite((x) => x + 100);
-    expect(seq.take(10).head()).toBe(100);
+    const actual = seq.take(10).head();
+    expect(actual).toBe(100);
 
     const head = Seq.prototype.head;
     expect(head.call(seq.take(1))).toBe(100);

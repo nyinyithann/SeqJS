@@ -22,14 +22,25 @@ function initInfinite(initializer) {
   util.throwIfNotAFunction(initializer, 'initializer');
   util.throwIfGeneratorFunction(initializer, 'initializer');
 
-  let index = 0;
+  const createInfiniteIterator = (index) => {
+    let innerIndex = index;
+    return {
+      [Symbol.iterator]() {
+        return {
+          next() {
+            innerIndex += 1;
+            return { value: initializer(innerIndex), done: false };
+          },
+          return() {
+            innerIndex = index;
+            return { done: true };
+          },
+        };
+      },
+    };
+  };
 
-  return from(function* () {
-    while (index < Number.MAX_SAFE_INTEGER) {
-      yield initializer(index);
-      index += 1;
-    }
-  });
+  return from(createInfiniteIterator(-1));
 }
 
 export default initInfinite;

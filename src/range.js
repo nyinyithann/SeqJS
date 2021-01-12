@@ -73,6 +73,7 @@ function range(begin, end, step) {
             return { done: true };
           },
           return() {
+            ob = b;
             this.minusFactor = 0;
             return { done: true };
           },

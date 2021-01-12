@@ -26,34 +26,36 @@ import tail from './tail';
 import countBy from './countBy';
 import last from './last';
 import findBack from './findBack';
+import item from './item';
 
 Seq.of = of;
 Seq.from = from;
 Seq.empty = empty;
 Seq.range = range;
-Seq.repeat = replicate;
+Seq.replicate = replicate;
 Seq.init = init;
 Seq.initInfinite = initInfinite;
 
 Seq.prototype.toString = toString;
 Seq.prototype.isEmpty = isEmpty;
-Seq.prototype.forEach = iter;
+Seq.prototype.iter = iter;
 Seq.prototype.toArray = toArray;
 Seq.prototype.map = map;
 Seq.prototype.reduce = reduce;
 Seq.prototype.filter = filter;
 Seq.prototype.take = take;
 Seq.prototype.takeWhile = takeWhile;
-Seq.prototype.concat = append;
+Seq.prototype.append = append;
 Seq.prototype.prepend = prepend;
-Seq.prototype.some = exists;
-Seq.prototype.every = forall;
+Seq.prototype.exists = exists;
+Seq.prototype.forall = forall;
 Seq.prototype.reverse = reverse;
 Seq.prototype.head = head;
 Seq.prototype.tail = tail;
 Seq.prototype.countBy = countBy;
 Seq.prototype.last = last;
-Seq.prototype.lastBy = findBack;
+Seq.prototype.findBack = findBack;
+Seq.prototype.item = item;
 
 Object.defineProperty(Seq.prototype, 'length', {
   get: length,

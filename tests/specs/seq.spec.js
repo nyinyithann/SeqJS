@@ -29,6 +29,11 @@ describe('Spec of Seq.', () => {
 
   test('seq can be constructed with an array-like object', () => {
     const seq = Seq.from(global.arrayLikeObject_ForTest);
+    // eslint-disable-next-line no-restricted-syntax,no-unused-vars,no-empty
+    for (const item of seq) {}
+    const s1 = [...seq];
+    const s2 = [...seq];
+    expect(s1).toEqual(s2);
     expect(seq.toArray()).toEqual(Array.prototype.slice.call(global.arrayLikeObject_ForTest));
   });
 

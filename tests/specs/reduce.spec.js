@@ -69,7 +69,7 @@ describe('reduce()', () => {
   test('map using reduce.', () => {
     const map = function (iterable, func) {
       const seq = new Seq(iterable);
-      return seq.reduce((acc, cv) => acc.concat(func(cv)), new Seq());
+      return seq.reduce((acc, cv) => acc.append(func(cv)), new Seq());
     };
     const nums = [1, 2, 3, 4];
     const callback = (x) => x + x;
@@ -80,7 +80,7 @@ describe('reduce()', () => {
   test('filter using reduce.', () => {
     const filter = function (iterable, predicate) {
       const seq = new Seq(iterable);
-      return seq.reduce((acc, cv) => (predicate(cv) ? acc.concat(cv) : acc), new Seq());
+      return seq.reduce((acc, cv) => (predicate(cv) ? acc.append(cv) : acc), new Seq());
     };
     const nums = [1, 2, 3, 4];
     const predicate = (x) => x % 2 === 0;

@@ -26,7 +26,15 @@ class Seq {
     return { done: true };
   }
 
-  return() {
+  return(value) {
+    let sourceIter;
+    if (util.isGeneratorFunction(this._source)) {
+      sourceIter = this._source()[Symbol.iterator]();
+    } else {
+      sourceIter = this._source[Symbol.iterator]();
+    }
+    sourceIter.return(value);
+
     return { done: true };
   }
 

@@ -24,7 +24,6 @@ function iter(callback) {
 
   let index = 0;
   let thisArg;
-
   if (arguments.length > 1) {
     thisArg = arguments[1];
   }
