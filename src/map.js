@@ -4,8 +4,8 @@ import from from './from';
 /** @module */
 
 /**
- * <h3> map(mapper) ⇒ SeqCore </h3>
- * The map method creates a new SeqCore populated with the results of calling a provided function on forall element.
+ * <h3> map(mapper) ⇒ Seq </h3>
+ * The map method creates a new Seq populated with the results of calling a provided function on forall element.
  * The provided function is invoked with two arguments: (item, index).
  *
  * @param {Function} mapper The function invoked on each item.
@@ -13,11 +13,11 @@ import from from './from';
  * @exception {TypeError} If the source sequence is null or undefined when invoke via call/apply/bind; or mapper is a generator function or not a function.
  * @example
  *
- * const seq = SeqCore.of(1,2,3,4,5).map(x => x * x);
+ * const seq = Seq.of(1,2,3,4,5).map(x => x * x);
  * console.log([...seq]);
  * // => [1, 4, 9, 16, 25]
  *
- * const seq = SeqCore.of(1,2,3,4,5).map((item, index) => [index, item]);
+ * const seq = Seq.of(1,2,3,4,5).map((item, index) => [index, item]);
  * console.log([...seq]);
  * // => [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]]
  */

@@ -5,13 +5,13 @@ import empty from './empty';
 /** @module */
 
 /**
- * <h3> take(count) ⇒ SeqCore </h3>
+ * <h3> take(count) ⇒ Seq </h3>
  * Returns the first N elements of the sequence.
  * @param count The number of items to take.
  * @return {Seq} The result sequence.
  * @exception {TypeError} if the source sequence is null or undefined when invoke via call/apply/bind; or count is a negative number.
  * @example
- * const seq = SeqCore.of(1,2,3,4,5);
+ * const seq = Seq.of(1,2,3,4,5);
  * const taken = seq.take(2);
  * console.log([...taken]);
  * // => [1, 2]
@@ -24,8 +24,9 @@ function take(count) {
     return empty();
   }
 
-  const createTakeIterator = (c, iter) => {
-    let innerCount = c;
+  const iter = this._generator();
+  const createTakeIterator = () => {
+    let innerCount = count;
     return {
       [Symbol.iterator]() {
         return {
@@ -40,7 +41,7 @@ function take(count) {
             return this.reset(value);
           },
           reset(value) {
-            innerCount = c;
+            innerCount = count;
             iter.return();
             return { value, done: true };
           },
@@ -49,7 +50,7 @@ function take(count) {
     };
   };
 
-  return from(createTakeIterator(count, this._generator()));
+  return from(createTakeIterator());
 }
 
 export default take;

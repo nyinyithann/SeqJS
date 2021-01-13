@@ -1,11 +1,11 @@
 import Seq from '../../src/seq';
 
-describe('Spec of SeqCore.', () => {
-  test('SeqCore is instantiated with default empty generator function.', () => {
+describe('Spec of Seq.', () => {
+  test('Seq is instantiated with default empty generator function.', () => {
     expect([...new Seq()]).toEqual([]);
   });
 
-  test('SeqCore can be constructed with a generator function or an iterator.',
+  test('Seq can be constructed with a generator function or an iterator.',
     () => {
       expect([...new Seq(global.generatorFunction_ForTest)]).toEqual(global.array_ForTest);
       expect([...new Seq(global.iterator_ForTest)]).toEqual([1, 2, 3, 4, 5]);
@@ -19,13 +19,13 @@ describe('Spec of SeqCore.', () => {
       }
     });
 
-  test('SeqCore can be constructed with an iterable (array).', () => {
+  test('Seq can be constructed with an iterable (array).', () => {
     const seq = new Seq(global.array_ForTest);
     expect([...seq]).toEqual(global.array_ForTest);
     expect([...seq]).toEqual([...seq]);
   });
 
-  test('SeqCore can be constructed with an iterable (string).', () => {
+  test('Seq can be constructed with an iterable (string).', () => {
     const seq = new Seq('jobatahrefs');
     expect([...seq].join('')).toBe('jobatahrefs');
     expect([...seq].join('')).toBe(seq.toArray().join(''));
@@ -42,12 +42,12 @@ describe('Spec of SeqCore.', () => {
     expect(actual).toEqual([].slice.call(global.arrayLikeObject_ForTest));
   });
 
-  test('SeqCore constructor throws error if source is not iterable.',
+  test('Seq constructor throws error if source is not iterable.',
     () => {
       expect(() => new Seq(1)).toThrow(Error);
     });
 
-  test('SeqCore is multi-iterable.', () => {
+  test('Seq is multi-iterable.', () => {
     const seq = new Seq(global.array_ForTest);
     // eslint-disable-next-line no-restricted-syntax,no-unused-vars,no-empty
     for (const item of seq) {}
@@ -56,7 +56,7 @@ describe('Spec of SeqCore.', () => {
     expect(s1).toEqual(s2);
   });
 
-  test('SeqCore is closable.', () => {
+  test('Seq is closable.', () => {
     const seq = new Seq(global.array_ForTest);
     // eslint-disable-next-line no-restricted-syntax
     for (const item of seq) {
@@ -85,11 +85,11 @@ describe('Spec of SeqCore.', () => {
     expect([...seq]).toEqual([1, 2, 3, 4, 5]);
   });
 
-  test('a seq is of type SeqCore.', () => {
+  test('a seq is of type Seq.', () => {
     expect(Seq.isSeq(new Seq())).toBe(true);
   });
 
-  test('SeqCore can wrap array-like object', () => {
+  test('Seq can wrap array-like object', () => {
     const arrayLike = {
       0: 0, 1: 1, 2: 2, length: 3,
     };

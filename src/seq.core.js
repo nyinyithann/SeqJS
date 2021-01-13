@@ -38,7 +38,7 @@ class Seq {
 
   // eslint-disable-next-line class-methods-use-this
   get [Symbol.toStringTag]() {
-    return 'SeqCore';
+    return 'Seq';
   }
 
   static get [Symbol.species]() {
@@ -46,7 +46,7 @@ class Seq {
   }
 
   static isSeq(source) {
-    return Object.prototype.toString.call(source) === '[object SeqCore]';
+    return Object.prototype.toString.call(source) === '[object Seq]';
   }
 }
 

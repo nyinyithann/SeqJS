@@ -8,7 +8,7 @@ import * as util from './util';
  * @returns A string representing the elements of the sequence.
  * @exception {TypeError} If the source sequence is null or undefined when invoke via call/apply/bind.
  * @example
- * console.log(SeqCore.of(1,2,3).toString());
+ * console.log(Seq.of(1,2,3).toString());
  * // => "1, 2, 3"
  */
 function toString() {

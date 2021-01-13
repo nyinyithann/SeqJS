@@ -69,7 +69,7 @@ export function throwIfNotAFiniteNumber(value, name = 'value') {
 }
 
 export function throwIfNotSeqType(value, name = 'value') {
-  if (Object.prototype.toString.call(value) !== '[object SeqCore]') {
+  if (Object.prototype.toString.call(value) !== '[object Seq]') {
     throw new TypeError(`${name} is not of type Seq.`);
   }
 }

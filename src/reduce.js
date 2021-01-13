@@ -11,11 +11,11 @@ import * as util from './util';
  * @exception {TypeError} If the source sequence is null or undefined when invoke via call/apply/bind; or reducer is a generator function or not a function; or when the source sequence is empty and initial value is not provided.
  *
  * @example
- * const result = SeqCore.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10).reduce((accumulator, currentValue) => accumulator + currentValue);
+ * const result = Seq.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10).reduce((accumulator, currentValue) => accumulator + currentValue);
  * console.log(result);
  * // => 55
  *
- * const result = SeqCore.of([0, 1], [2, 3], [4, 5]).reduce((accumulator, currentValue) => accumulator.append(currentValue) , []);
+ * const result = Seq.of([0, 1], [2, 3], [4, 5]).reduce((accumulator, currentValue) => accumulator.append(currentValue) , []);
  * console.log(result);
  * // => [0, 1, 2, 3, 4, 5]
  */

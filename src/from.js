@@ -3,7 +3,7 @@ import Seq from './seq.core';
 /** @module */
 
 /**
- * <h3> SeqCore.from(source) ⇒ SeqCore </h3>
+ * <h3> Seq.from(source) ⇒ Seq </h3>
  * Create a new sequence wrapped a given source. The given source can be anything that implemented iterable protocol.
  * @param source Anything that implemented iterable protocol.
  * @exception {TypeError} if source doesn't conform iterable protocol.

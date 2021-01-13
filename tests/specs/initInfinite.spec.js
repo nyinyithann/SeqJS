@@ -51,7 +51,7 @@ describe('initInfinite()', () => {
 
   // the test takes time.
   // test('should stop when index reaches Number.MAX_SAFE_INTEGER', () => {
-  //    const seq = SeqCore.initInfinite(x => x);
+  //    const seq = Seq.initInfinite(x => x);
   //    let last;
   //    for(const item of seq){
   //        last = item;

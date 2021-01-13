@@ -9,7 +9,7 @@ import * as util from './util';
  * @exception {TypeError} If the source sequence is null or undefined when invoke via call/apply/bind; or predicate is a generator function or not a function.
  * @example
  *
- * const seq = SeqCore.of(1, 2, 3, 4, 5);
+ * const seq = Seq.of(1, 2, 3, 4, 5);
  * seq.iter(x => console.log(x));
  * // =>   1
  * // =>   2

@@ -4,7 +4,7 @@ import from from './from';
 /** @module */
 
 /**
- * <h3>SeqCore.range(begin, end, step) ⇒ SeqCore</h3>
+ * <h3>Seq.range(begin, end, step) ⇒ Seq</h3>
  * Creates a sequence of numbers starting from 'begin' to 'end', but not including, 'end'.
  * If 'end' is not defined, it is set to 'begin', and 'begin' is then set to 0.
  * 'step' will be assigned to -1 if 'begin' is negative and 'end' is not defined.
@@ -14,28 +14,28 @@ import from from './from';
  * @returns {Seq} The result sequence.
  * @exception {TypeError} if 'begin', 'end', and 'step' are not finite numbers when passed.
  * @example
- * console.log(SeqCore.range(5).toArray());
+ * console.log(Seq.range(5).toArray());
  * // => [ 0, 1, 2, 3, 4 ]
  *
- * console.log(SeqCore.range(-5).toArray());
+ * console.log(Seq.range(-5).toArray());
  * // => [ 0, -1, -2, -3, -4 ]
  *
- * console.log(SeqCore.range(1,5).toArray());
+ * console.log(Seq.range(1,5).toArray());
  * // => [ 1, 2, 3, 4 ]
  *
- * console.log(SeqCore.range(0, 20, 5).toArray());
+ * console.log(Seq.range(0, 20, 5).toArray());
  * // => [ 0, 5, 10, 15 ]
  *
- * console.log(SeqCore.range(0, -5, -1).toArray());
+ * console.log(Seq.range(0, -5, -1).toArray());
  * // => [ 0, -1, -2, -3, -4 ]
  *
- * console.log(SeqCore.range(0).toArray());
+ * console.log(Seq.range(0).toArray());
  * // => []
  *
- * console.log(SeqCore.range(10, -5, -1).toArray());
+ * console.log(Seq.range(10, -5, -1).toArray());
  * // => [ 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4 ]
  *
- * console.log(SeqCore.range(-1, -2, -5).toArray());
+ * console.log(Seq.range(-1, -2, -5).toArray());
  * // => [-1]
  */
 function range(begin, end, step) {

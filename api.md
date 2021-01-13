@@ -1,7 +1,7 @@
-  <h3>append([val1[,val2[,...[,valN]]]]) ⇒ SeqCore</h3>
+  <h3>append([val1[,val2[,...[,valN]]]]) ⇒ Seq</h3>
 Creates a new sequence that appends the passed value to the existing seq. This method does not change the existing sequence.
 
-**Returns**: <code>SeqCore</code> - A new sequence.  
+**Returns**: <code>Seq</code> - A new sequence.  
 **Throws**:
 
 - <code>TypeError</code> if the existing sequence is null or undefined when invoke via call/apply/bind.
@@ -19,11 +19,11 @@ const result = seq.append([4, 5, 6], { seven: 7 }, [[8], [9]], [[[10], [11]]]);
 console.log(result.toArray());
 // => [ 1, 2, 3, 4, 5, 6, { seven: 7 }, [ 8 ], [ 9 ], [ [ 10 ], [ 11 ] ] ]
 ```
-* <h3> countBy(projection) ⇒ SeqCore </h3>
+* <h3> countBy(projection) ⇒ Seq </h3>
 Applies a key-generating function to each element of a sequence and returns a sequence yielding unique keys and their number of occurrences in the original sequence.
 This method should not be used with large or infinite sequences.
 
-**Returns**: <code>SeqCore</code> - The result sequence.  
+**Returns**: <code>Seq</code> - The result sequence.  
 **Throws**:
 
 - <code>TypeError</code> If the source sequence is null or undefined when invoke via call/apply/bind; or projection is a generator function or not a function.
@@ -49,10 +49,10 @@ const nameCounts = seq.countBy(x => x.Name).toArray();
 console.log(nameCounts)
 // => [['A', 2], ['B', 1]]
 ```
-<h3> SeqCore.empty() ⇒ SeqCore </h3>
+<h3> Seq.empty() ⇒ Seq </h3>
 Creates an empty sequence.
 
-**Returns**: <code>SeqCore</code> - An empty sequence.  
+**Returns**: <code>Seq</code> - An empty sequence.  
 **Example**
 
 ```js
@@ -60,7 +60,7 @@ const emptySeq = Seq.empty();
 console.log(emptySeq.toArray());
 // => []
 ```
-<h3> exists(predicate) ⇒ SeqCore </h3>
+<h3> exists(predicate) ⇒ Seq </h3>
 Tests if at least one element in the sequence passes the test implemented by the provided function.
 
 **Returns**: <code>boolean</code> - true if the callback function returns a truthy value for at least one element in the sequence. Otherwise, false.  
@@ -81,10 +81,10 @@ const result = seq.exists(x => x % 2 === 0);
 console.log(result);
 // => true
 ```
-<h3>filter(predicate) ⇒ SeqCore</h3>
+<h3>filter(predicate) ⇒ Seq</h3>
 Returns a new sequence containing only the elements of the collection for which the given predicate returns "true".
 
-**Returns**: <code>SeqCore</code> - The result sequence.  
+**Returns**: <code>Seq</code> - The result sequence.  
 **Throws**:
 
 - <code>TypeError</code> If the source sequence is null or undefined when invoke via call/apply/bind; or predicate is a generator function or not a function.
@@ -101,7 +101,7 @@ const seq = Seq.of(1, 2, 3, 4, 5).filter(x => x % 2 === 0);
 console.log([...seq]);
 // => [2, 4]
 ```
-<h3> findBack(predicate) ⇒ SeqCore </h3>
+<h3> findBack(predicate) ⇒ Seq </h3>
 Returns the last element of a sequence that satisfies a specified condition.
 
 **Returns**: The last element in the sequence that passes the test in the specified predicate function.  
@@ -121,7 +121,7 @@ const seq = Seq.of(1, 2, 42, 323, 423, 32, 23, 10, 11);
 console.log(seq.findBack(x => x % 2 === 0));
 // => 10
 ```
-<h3>forall(predicate) ⇒ SeqCore</h3>
+<h3>forall(predicate) ⇒ Seq</h3>
 Tests if all elements of the sequence satisfy the given predicate.
 
 **Returns**: <code>boolean</code> - true if the callback function returns a truthy value for at least one element in the sequence. Otherwise, false.  
@@ -142,10 +142,10 @@ const result = seq.exists(x => x % 2 === 0);
 console.log(result);
 // => true
 ```
-<h3> SeqCore.from(source) ⇒ SeqCore </h3>
+<h3> Seq.from(source) ⇒ Seq </h3>
 Create a new sequence wrapped a given source. The given source can be anything that implemented iterable protocol.
 
-**Returns**: <code>SeqCore</code> - The return sequence.  
+**Returns**: <code>Seq</code> - The return sequence.  
 **Throws**:
 
 - <code>TypeError</code> if source doesn't conform iterable protocol.
@@ -180,10 +180,10 @@ seq = Seq.of(1, 2, 3, 4, 5);
 console.log(seq.head());
 // => 1
 ```
-<h3> init(count, initializer) ⇒ SeqCore </h3>
+<h3> init(count, initializer) ⇒ Seq </h3>
 Generate a new sequence by invoking initializer function passed as the argument up to the given count.
 
-**Returns**: <code>SeqCore</code> - The result sequence.  
+**Returns**: <code>Seq</code> - The result sequence.  
 **Throws**:
 
 - <code>TypeError</code> if count is a negative number; or initializer is a generator function or not a function.
@@ -201,12 +201,12 @@ const fiveNums = Seq.init(5, x => x * 2);
 console.log(fiveNums.toArray());
 // => [0, 2, 4, 6, 8]
 ```
-<h3> initInfinite(initializer) ⇒ SeqCore </h3>
+<h3> initInfinite(initializer) ⇒ Seq </h3>
 Generate a new sequence by invoking initializer function passed as the argument.
 The index of the item generated is passed to the initializer function.
 The iteration can continue up to Number.MAX_SAFE_INTEGER.
 
-**Returns**: <code>SeqCore</code> - The result sequence.  
+**Returns**: <code>Seq</code> - The result sequence.  
 **Throws**:
 
 - <code>TypeError</code> if initializer a generator function or not a function.
@@ -292,11 +292,11 @@ const seq = Seq.of(1, 2, 3);
 console.log(seq.length);
 // => 3;
 ```
-<h3> map(callback) ⇒ SeqCore </h3>
-The map method creates a new SeqCore populated with the results of calling a provided function on forall element.
+<h3> map(callback) ⇒ Seq </h3>
+The map method creates a new Seq populated with the results of calling a provided function on forall element.
 The provided function is invoked with two arguments: (item, index).
 
-**Returns**: <code>SeqCore</code> - Return the new mapped sequence.  
+**Returns**: <code>Seq</code> - Return the new mapped sequence.  
 **Throws**:
 
 - <code>TypeError</code> If the source sequence is null or undefined when invoke via call/apply/bind; or callback is a generator function or not a function.
@@ -317,10 +317,10 @@ const seq = Seq.of(1, 2, 3, 4, 5).map((item, index) => [index, item]);
 console.log([...seq]);
 // => [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]]
 ```
-<h3> SeqCore.of(elem0[elem1[,...[,elemN]]]) ⇒ SeqCore </h3>
+<h3> Seq.of(elem0[elem1[,...[,elemN]]]) ⇒ Seq </h3>
 Creates a new sequence from a variable number of arguments, regardless of number or type of the arguments.
 
-**Returns**: <code>SeqCore</code> - A new sequence.  
+**Returns**: <code>Seq</code> - A new sequence.  
 
 | Param | Description |
 | --- | --- |
@@ -333,10 +333,10 @@ const nums = Seq.of(1, 2, { 'three': 3 }, [4], '5', 0b110);
 console.log(nums);
 // => [ 1, 2, { three: 3 }, [ 4 ], '5', 6 ]
 ```
-<h3>prepend([val1[,val2[,...[,valN]]]]) ⇒ SeqCore</h3>
+<h3>prepend([val1[,val2[,...[,valN]]]]) ⇒ Seq</h3>
 Creates a new sequence with new values prepended.
 
-**Returns**: <code>SeqCore</code> - A new sequence.  
+**Returns**: <code>Seq</code> - A new sequence.  
 **Throws**:
 
 - <code>TypeError</code> if the existing sequence is null or undefined when invoke via call/apply/bind.
@@ -354,12 +354,12 @@ const prepended = seq.prepend([1, 2], { three: 3 });
 console.log(prepended.toArray());
 // => [ 1, 2, { three: 3 }, 4, 5]
 ```
-<h3>SeqCore.range(begin, end, step) ⇒ SeqCore</h3>
+<h3>Seq.range(begin, end, step) ⇒ Seq</h3>
 Creates a sequence of numbers starting from 'begin' to 'end', but not including, 'end'.
 If 'end' is not defined, it is set to 'begin', and 'begin' is then set to 0.
 'step' will be assigned to -1 if 'begin' is negative and 'end' is not defined.
 
-**Returns**: <code>SeqCore</code> - The result sequence.  
+**Returns**: <code>Seq</code> - The result sequence.  
 **Throws**:
 
 - <code>TypeError</code> if 'begin', 'end', and 'step' are not finite numbers when passed.
@@ -422,10 +422,10 @@ const result = Seq.of([0, 1], [2, 3], [4, 5]).reduce((accumulator, currentValue)
 console.log(result);
 // => [0, 1, 2, 3, 4, 5]
 ```
-<h3> replicate(count, initial) ⇒ SeqCore </h3>
+<h3> replicate(count, initial) ⇒ Seq </h3>
 Creates a sequence by replicating the given initial value.
 
-**Returns**: <code>SeqCore</code> - The generated sequence.  
+**Returns**: <code>Seq</code> - The generated sequence.  
 **Throws**:
 
 - <code>TypeError</code> if count is a negative number.
@@ -443,10 +443,10 @@ const seq = Seq.replicate(5, 1);
 console.log(seq.toArray());
 // => [1, 1, 1, 1, 1]
 ```
-<h3>reverse() ⇒ SeqCore</h3>
+<h3>reverse() ⇒ Seq</h3>
 Return a new sequence with the elements in reverse order.
 
-**Returns**: <code>SeqCore</code> - The reversed sequence.  
+**Returns**: <code>Seq</code> - The reversed sequence.  
 **Throws**:
 
 - <code>TypeError</code> if the source sequence is null or undefined when invoke via call/apply/bind.
@@ -460,7 +460,7 @@ console.log(seq.reverse().toArray());
 ```
 Returns a new sequence containing all the elements of the existing sequence except the first.
 
-**Returns**: <code>SeqCore</code> - The result sequence.  
+**Returns**: <code>Seq</code> - The result sequence.  
 **Example**
 
 ```js
@@ -483,10 +483,10 @@ seq = Seq.of(1, 2, 3, 4, 5);
 console.log(seq.tail().toArray());
 // => [2, 3, 4, 5]
 ```
-<h3> take(count) ⇒ SeqCore </h3>
+<h3> take(count) ⇒ Seq </h3>
 Returns the first N elements of the sequence.
 
-**Returns**: <code>SeqCore</code> - The result sequence.  
+**Returns**: <code>Seq</code> - The result sequence.  
 **Throws**:
 
 - <code>TypeError</code> if the source sequence is null or undefined when invoke via call/apply/bind; or count is a negative number.
@@ -504,10 +504,10 @@ const taken = seq.take(2);
 console.log([...taken]);
 // => [1, 2]
 ```
-<h3> takeWhile(predicate) ⇒ SeqCore </h3>
+<h3> takeWhile(predicate) ⇒ Seq </h3>
 Returns a sequence that, when iterated, yields elements of the underlying sequence while the given predicate returns True, and then returns no further elements.
 
-**Returns**: <code>SeqCore</code> - The result sequence.  
+**Returns**: <code>Seq</code> - The result sequence.  
 **Throws**:
 
 - <code>TypeError</code> If the source sequence is null or undefined when invoke via call/apply/bind; or predicate is a generator function or not a function.
@@ -526,7 +526,7 @@ console.log(result);
 =>
 [1, 2]
 ```
-<h3> toArray() ⇒ SeqCore </h3>
+<h3> toArray() ⇒ Seq </h3>
 Create an array out of the sequence.
 
 **Returns**: <code>Array</code> - The result array.  

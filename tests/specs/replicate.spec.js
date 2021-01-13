@@ -20,4 +20,15 @@ describe('replicate()', () => {
   test('should throw TypeError if count is a negative number', () => {
     expect(() => Seq.replicate(-1, 1)).toThrow(TypeError);
   });
+
+  test('replicate dogfooding', () => {
+    const seq = Seq.replicate(50, 2);
+    const fun = () => (
+      seq.map((x) => x + x)
+        .take(10)
+        .item(2)
+    );
+    expect(fun() + fun()).toEqual(fun() + fun());
+    expect(fun() + fun()).toEqual(fun() + 4);
+  });
 });

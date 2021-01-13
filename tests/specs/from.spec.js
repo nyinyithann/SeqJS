@@ -1,6 +1,6 @@
 import Seq from '../../src/seq';
 
-describe('SeqCore.from', () => {
+describe('Seq.from', () => {
   test('create a seq from an array', () => {
     expect([...Seq.from([1, 2, 3])]).toEqual([1, 2, 3]);
   });

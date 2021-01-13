@@ -27,4 +27,10 @@ describe('tail()', () => {
     expect(tail.apply(seq).toArray()).toEqual([2, 3, 4]);
     expect(tail.bind(seq)().toArray()).toEqual([2, 3, 4]);
   });
+
+  test('tail dogfooding', () => {
+    const seq = Seq.initInfinite((x) => x);
+    expect(seq.tail().map((x) => x + x).take(10).toArray())
+      .toEqual(seq.tail().map((x) => x + x).take(10).toArray());
+  });
 });

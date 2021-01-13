@@ -60,7 +60,7 @@ describe('map()', () => {
 
     expect((Seq.map((x) => x + 1)(seq)).take(2).toArray()).toEqual([1, 2]);
 
-    // seq |> SeqCore.map (x => x + 1) in future
+    // seq |> Seq.map (x => x + 1) in future
     expect(global.pipe(seq, Seq.map((x) => x + 1)).take(2).toArray()).toEqual([1, 2]);
   });
 });
