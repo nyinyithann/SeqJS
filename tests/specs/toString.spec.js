@@ -1,4 +1,4 @@
-import Seq from '../../src/main';
+import Seq from '../../src/seq';
 
 describe('toString()', () => {
   test('should throw error if the existing sequence is null or undefined', () => {

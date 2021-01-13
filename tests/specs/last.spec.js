@@ -1,4 +1,4 @@
-import Seq from '../../src/main';
+import Seq from '../../src/seq';
 
 describe('last()', () => {
   test('should throw TypeError if the existing sequence is null or undefined', () => {

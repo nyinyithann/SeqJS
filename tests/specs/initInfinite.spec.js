@@ -1,4 +1,4 @@
-import Seq from '../../src/main';
+import Seq from '../../src/seq';
 
 describe('initInfinite()', () => {
   test('should generate sequence by invoking initializer', () => {
@@ -30,7 +30,7 @@ describe('initInfinite()', () => {
     expect(() => Seq.initInfinite(function* () {})).toThrow(TypeError);
   });
 
-  test('result seq should be closable', () => {
+  test('result seq should be closable and multi-iterable', () => {
     const seq = Seq.initInfinite((x) => x);
     let stop = 1;
     // eslint-disable-next-line no-restricted-syntax,no-unused-vars
@@ -44,11 +44,14 @@ describe('initInfinite()', () => {
     const actual = seq.take(5).toArray();
     const expected = seq.take(5).toArray();
     expect(actual).toEqual(expected);
+
+    expect(seq.take(5).item(2) + seq.take(5).item(2))
+      .toBe(4);
   });
 
   // the test takes time.
   // test('should stop when index reaches Number.MAX_SAFE_INTEGER', () => {
-  //    const seq = Seq.initInfinite(x => x);
+  //    const seq = SeqCore.initInfinite(x => x);
   //    let last;
   //    for(const item of seq){
   //        last = item;

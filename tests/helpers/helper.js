@@ -37,3 +37,5 @@ global.arrayLikeObject_ForTest = {
   4: 'e',
   length: 5,
 };
+
+global.pipe = (s, f) => f (s);

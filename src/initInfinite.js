@@ -4,7 +4,7 @@ import from from './from';
 /** @module */
 
 /**
- * <h3> initInfinite(initializer) ⇒ Seq </h3>
+ * <h3> initInfinite(initializer) ⇒ SeqCore </h3>
  * Generate a new sequence by invoking initializer function passed as the argument.
  * The index of the item generated is passed to the initializer function.
  * The iteration can continue up to Number.MAX_SAFE_INTEGER.
@@ -12,7 +12,7 @@ import from from './from';
  * @return {Seq} The result sequence.
  * @exception {TypeError} if initializer a generator function or not a function.
  * @example
- * const seq = Seq.initInfinite(x => x * 2);
+ * const seq = SeqCore.initInfinite(x => x * 2);
  * const first5Nums = seq.take(5);
  * console.log(first5Nums.toArray());
  * // => [0, 2, 4, 6, 8]

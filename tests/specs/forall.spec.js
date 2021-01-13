@@ -1,21 +1,21 @@
-import Seq from '../../src/main';
+import Seq from '../../src/seq';
 
 describe('forall()', () => {
   test('true case', () => {
     const seq = Seq.of(2, 4, 6, 8, 10);
-    const actual = seq.forall((x) => x % 2 == 0);
+    const actual = seq.forall((x) => x % 2 === 0);
     expect(actual).toBe(true);
   });
 
   test('false case', () => {
     const seq = Seq.of(1, 2, 3, 4, 5);
-    const actual = seq.forall((x) => x % 2 == 0);
+    const actual = seq.forall((x) => x % 2 === 0);
     expect(actual).toBe(false);
   });
 
   test('empty seq, true case', () => {
     const seq = Seq.empty();
-    const actual = seq.forall((x) => x % 2 == 0);
+    const actual = seq.forall((x) => x % 2 === 0);
     expect(actual).toBe(true);
   });
 

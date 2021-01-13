@@ -1,4 +1,4 @@
-import Seq from '../../src/main';
+import Seq from '../../src/seq';
 
 describe('isEmpty()', () => {
   test('empty sequence should be empty', () => {

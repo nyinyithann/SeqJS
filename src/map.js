@@ -4,29 +4,28 @@ import from from './from';
 /** @module */
 
 /**
- * <h3> map(callback) ⇒ Seq </h3>
- * The map method creates a new Seq populated with the results of calling a provided function on forall element.
+ * <h3> map(mapper) ⇒ SeqCore </h3>
+ * The map method creates a new SeqCore populated with the results of calling a provided function on forall element.
  * The provided function is invoked with two arguments: (item, index).
  *
- * @param {Function} callback The function invoked on each item.
+ * @param {Function} mapper The function invoked on each item.
  * @return {Seq} Return the new mapped sequence.
- * @exception {TypeError} If the source sequence is null or undefined when invoke via call/apply/bind; or callback is a generator function or not a function.
+ * @exception {TypeError} If the source sequence is null or undefined when invoke via call/apply/bind; or mapper is a generator function or not a function.
  * @example
  *
- * const seq = Seq.of(1,2,3,4,5).map(x => x * x);
+ * const seq = SeqCore.of(1,2,3,4,5).map(x => x * x);
  * console.log([...seq]);
  * // => [1, 4, 9, 16, 25]
  *
- * const seq = Seq.of(1,2,3,4,5).map((item, index) => [index, item]);
+ * const seq = SeqCore.of(1,2,3,4,5).map((item, index) => [index, item]);
  * console.log([...seq]);
  * // => [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]]
  */
-function map(callback) {
+function map(mapper) {
   util.throwIfNull(this, 'this');
-  util.throwIfNotAFunction(callback, 'callback');
-  util.throwIfGeneratorFunction(callback, 'callback');
+  util.throwIfNotAFunction(mapper, 'mapper');
+  util.throwIfGeneratorFunction(mapper, 'mapper');
 
-  let index = 0;
   let thisArg;
 
   if (arguments.length > 1) {
@@ -34,14 +33,36 @@ function map(callback) {
   }
 
   const iter = this._generator();
-  return from(function* () {
-    let item = iter.next();
-    while (!item.done) {
-      yield callback.call(thisArg, item.value, index);
-      item = iter.next();
-      index += 1;
-    }
-  });
+
+  const getMapIterator = () => {
+    let index = -1;
+    return {
+      [Symbol.iterator]() {
+        return {
+          next() {
+            const item = iter.next();
+            if (!item.done) {
+              index += 1;
+              return { value: mapper.call(thisArg, item.value, index), done: false };
+            }
+            return this.reset(undefined);
+          },
+          return(value) {
+            return this.reset(value);
+          },
+          reset(value) {
+            if (util.isFunction(iter.return)) {
+              iter.return(value);
+            }
+            index = -1;
+            return { value, done: true };
+          },
+        };
+      },
+    };
+  };
+
+  return from(getMapIterator());
 }
 
 export default map;

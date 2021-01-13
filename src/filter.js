@@ -4,14 +4,14 @@ import from from './from';
 /** @module */
 
 /**
- * <h3>filter(predicate) ⇒ Seq</h3>
+ * <h3>filter(predicate) ⇒ SeqCore</h3>
  * Returns a new sequence containing only the elements of the collection for which the given predicate returns "true".
  * @param {Function} predicate A function to test whether each item in the input sequence should be included in the output.
  * @return {Seq} The result sequence.
  * @exception {TypeError} If the source sequence is null or undefined when invoke via call/apply/bind; or predicate is a generator function or not a function.
  * @example
  *
- * const seq = Seq.of(1,2,3,4,5).filter(x => x % 2 === 0);
+ * const seq = SeqCore.of(1,2,3,4,5).filter(x => x % 2 === 0);
  * console.log([...seq]);
  * // => [2, 4]
  */
@@ -27,15 +27,34 @@ function filter(predicate) {
   }
 
   const iter = this._generator();
-  return from(function* () {
-    let current = iter.next();
-    while (!current.done) {
-      if (predicate.call(thisArg, current.value)) {
-        yield current.value;
-      }
-      current = iter.next();
-    }
+
+  const getFilterIterator = () => ({
+    [Symbol.iterator]() {
+      return {
+        next() {
+          const item = iter.next();
+          if (!item.done) {
+            if (predicate.call(thisArg, item.value)) {
+              return { value: item.value, done: false };
+            }
+            return this.next();
+          }
+          return this.reset(undefined);
+        },
+        return(value) {
+          return this.reset(value);
+        },
+        reset(value) {
+          if (util.isFunction(iter.return)) {
+            iter.return(value);
+          }
+          return { value, done: true };
+        },
+      };
+    },
   });
+
+  return from(getFilterIterator());
 }
 
 export default filter;

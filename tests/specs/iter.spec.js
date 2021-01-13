@@ -1,4 +1,4 @@
-import Seq from '../../src/main';
+import Seq from '../../src/seq';
 
 describe('iter()', () => {
   const seq = Seq.of(1, 2, 3, 4, 5);

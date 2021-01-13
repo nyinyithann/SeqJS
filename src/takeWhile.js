@@ -4,13 +4,13 @@ import from from './from';
 /** @module */
 
 /**
- * <h3> takeWhile(predicate) ⇒ Seq </h3>
+ * <h3> takeWhile(predicate) ⇒ SeqCore </h3>
  * Returns a sequence that, when iterated, yields elements of the underlying sequence while the given predicate returns True, and then returns no further elements.
  * @param {Function} predicate A function that evaluates to false when no more items should be returned.
  * @return {Seq} The result sequence.
  * @exception {TypeError} If the source sequence is null or undefined when invoke via call/apply/bind; or predicate is a generator function or not a function.
  * @example
- * const seq = Seq.from([1, 2, 3, 1, 2, 3]);
+ * const seq = SeqCore.from([1, 2, 3, 1, 2, 3]);
  * const result = seq.takeWhile(x => x < 3).toArray();
  * console.log(result);
  * => [1, 2]

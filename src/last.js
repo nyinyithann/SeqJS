@@ -8,7 +8,7 @@ import * as util from './util';
  * @returns The value at the last position in the source sequence.
  * @exception {TypeError} If the source sequence is null or undefined when invoke via call/apply/bind.
  * @example
- * const seq = Seq.range(0,10);
+ * const seq = SeqCore.range(0,10);
  * const last = seq.last();
  * console.log(last);
  * // => 9

@@ -4,12 +4,12 @@ import from from './from';
 /** @module */
 
 /**
- * <h3>reverse() ⇒ Seq</h3>
+ * <h3>reverse() ⇒ SeqCore</h3>
  * Return a new sequence with the elements in reverse order.
  * @returns {Seq} The reversed sequence.
  * @exception {TypeError} if the source sequence is null or undefined when invoke via call/apply/bind.
  * @example
- * const seq = Seq.of(0, 1, 2, 3, 4);
+ * const seq = SeqCore.of(0, 1, 2, 3, 4);
  * console.log(seq.reverse().toArray());
  * // => [4, 3, 2, 1, 0]
  */

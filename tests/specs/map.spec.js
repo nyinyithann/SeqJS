@@ -1,4 +1,4 @@
-import Seq from '../../src/main';
+import Seq from '../../src/seq';
 
 describe('map()', () => {
   const nums = [1, 2, 3, 4, 5];
@@ -45,5 +45,22 @@ describe('map()', () => {
     expect(() => Seq.of(1, 2).map(undefined)).toThrow(Error);
     expect(() => Seq.of(1, 2).map(null)).toThrow(Error);
     expect(() => Seq.of(1, 2).map({})).toThrow(Error);
+  });
+
+  test('map dogfooding', () => {
+    const seq = Seq.initInfinite((x) => x);
+    const actualOne = seq.map((x) => x + 1).take(5);
+    const actualTwo = seq.map((x) => x + 1).take(5);
+    expect(actualOne.toArray()).toEqual([1, 2, 3, 4, 5]);
+    expect(actualTwo.toArray()).toEqual([1, 2, 3, 4, 5]);
+    expect(actualTwo.toArray()).toEqual(actualTwo.toArray());
+    expect(seq.item(2) + seq.item(2)).toBe(4);
+    expect(seq.map((x) => x + 100).take(10).head() + seq.map((x) => x + 100).take(10).head())
+      .toBe(200);
+
+    expect((Seq.map((x) => x + 1)(seq)).take(2).toArray()).toEqual([1, 2]);
+
+    // seq |> SeqCore.map (x => x + 1) in future
+    expect(global.pipe(seq, Seq.map((x) => x + 1)).take(2).toArray()).toEqual([1, 2]);
   });
 });

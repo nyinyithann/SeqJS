@@ -1,4 +1,4 @@
-import Seq from '../../src/main';
+import Seq from '../../src/seq';
 
 describe('replicate()', () => {
   test('should generate a new sequence based on the params pass', () => {

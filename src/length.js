@@ -8,7 +8,7 @@ import * as util from './util';
  * @return {number} The length of the sequence.
  * @exception {TypeError} if the existing sequence is null or undefined when invoke via call/apply/bind.
  * @example
- * const seq = Seq.of(1,2,3);
+ * const seq = SeqCore.of(1,2,3);
  * console.log(seq.length);
  * // => 3;
  */

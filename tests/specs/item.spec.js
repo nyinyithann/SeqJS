@@ -1,4 +1,4 @@
-import Seq from '../../src/main';
+import Seq from '../../src/seq';
 
 describe('item()', () => {
   test('should throw TypeError if the sequence is null or undefined; or index param is a negative number', () => {
@@ -8,12 +8,12 @@ describe('item()', () => {
   });
 
   test('should return nth element of the sequence', () => {
-    // let seq = Seq.range(0, 5);
-    // expect(seq.item(3)).toBe(3);
-    // expect(seq.item(0)).toBe(0);
-    // expect(seq.item(4)).toBe(4);
+    let seq = Seq.range(0, 5);
+    expect(seq.item(3)).toBe(3);
+    expect(seq.item(0)).toBe(0);
+    expect(seq.item(4)).toBe(4);
 
-    const seq = Seq.initInfinite((x) => x * x);
+    seq = Seq.initInfinite((x) => x * x);
     expect(seq.item(2)).toBe(4);
     expect(seq.item(0)).toBe(0);
   });

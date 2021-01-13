@@ -17,7 +17,7 @@ function item(index) {
     return nth(n - 1, seq);
   }
 
-  return nth(index, this);
+  return nth(index, this._generator());
 }
 
 export default item;

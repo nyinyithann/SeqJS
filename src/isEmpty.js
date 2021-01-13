@@ -8,7 +8,7 @@ import * as util from './util';
  * @return {boolean} True if the sequence is empty; false otherwise.
  * @exception {TypeError} if the existing sequence is null or undefined when invoke via call/apply/bind.
  * @example
- * console.log(Seq.empty().isEmpty());
+ * console.log(SeqCore.empty().isEmpty());
  * // => true
  */
 function isEmpty() {

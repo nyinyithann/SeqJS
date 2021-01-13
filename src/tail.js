@@ -8,7 +8,7 @@ import from from './from';
  * Returns a new sequence containing all the elements of the existing sequence except the first.
  * @returns {Seq} The result sequence.
  * @example @exception {TypeError} If the source sequence is null or undefined when invoke via call/apply/bind.
- * const seq = Seq.of(1, 2, 3, 4, 5);
+ * const seq = SeqCore.of(1, 2, 3, 4, 5);
  * console.log(seq.tail().toArray());
  * // => [2, 3, 4, 5]
  */

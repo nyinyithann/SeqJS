@@ -1,4 +1,4 @@
-import Seq from '../../src/main';
+import Seq from '../../src/seq';
 
 describe('toArray()', () => {
   test('should return a new array without mutating original source', () => {

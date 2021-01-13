@@ -1,4 +1,4 @@
-import Seq from '../../src/main';
+import Seq from '../../src/seq';
 
 describe('findBack()', () => {
   test('should throw type error if the sequence is null or undefined, or '

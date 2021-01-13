@@ -1,4 +1,4 @@
-import Seq from '../../src/main';
+import Seq from '../../src/seq';
 
 describe('tail()', () => {
   test('should throw error if the existing sequence is null or undefined when invocation via call/apply/bind', () => {

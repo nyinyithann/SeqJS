@@ -3,13 +3,13 @@ import * as util from './util';
 /** @module */
 
 /**
- * <h3>forall(predicate) ⇒ Seq</h3>
+ * <h3>forall(predicate) ⇒ SeqCore</h3>
  * Tests if all elements of the sequence satisfy the given predicate.
  * @param {Function} predicate A function to test on the elements of the seq.
  * @return {boolean} true if the callback function returns a truthy value for at least one element in the sequence. Otherwise, false.
  * @exception If the source sequence is null or undefined; or predicate is a generator function or not a function.
  * @example
- * const seq = Seq.of(2, 4, 5, 8);
+ * const seq = SeqCore.of(2, 4, 5, 8);
  * const result = seq.exists(x => x % 2 === 0);
  * console.log(result);
  * // => true

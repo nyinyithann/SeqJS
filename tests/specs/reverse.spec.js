@@ -1,4 +1,4 @@
-import Seq from '../../src/main';
+import Seq from '../../src/seq';
 
 describe('reverse()', () => {
   test('reverse from array or array-like object', () => {

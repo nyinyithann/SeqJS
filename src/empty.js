@@ -1,12 +1,12 @@
-import Seq from './seq';
+import Seq from './seq.core';
 
 /** @module */
 /**
- * <h3> Seq.empty() ⇒ Seq </h3>
+ * <h3> SeqCore.empty() ⇒ SeqCore </h3>
  * Creates an empty sequence.
  * @returns {Seq} An empty sequence.
  * @example
- * const emptySeq = Seq.empty();
+ * const emptySeq = SeqCore.empty();
  * console.log(emptySeq.toArray());
  * // => []
  */

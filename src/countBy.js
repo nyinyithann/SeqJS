@@ -4,7 +4,7 @@ import from from './from';
 /** @module */
 
 /**
- * * <h3> countBy(projection) ⇒ Seq </h3>
+ * * <h3> countBy(projection) ⇒ SeqCore </h3>
  * Applies a key-generating function to each element of a sequence and returns a sequence yielding unique keys and their number of occurrences in the original sequence.
  * This method should not be used with large or infinite sequences.
  * @param projection A function transforming each item of the input sequence into a key to be compared against the others.
@@ -18,7 +18,7 @@ import from from './from';
  * }
  * const mrA = new Person('A', 20);
  * const mrB = new Person('B', 15);
- * const seq = Seq.of(mrA, mrA, mrB);
+ * const seq = SeqCore.of(mrA, mrA, mrB);
  * const nameCounts = seq.countBy(x => x.Name).toArray();
  * console.log(nameCounts)
  * // => [['A', 2], ['B', 1]]

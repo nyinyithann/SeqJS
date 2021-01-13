@@ -68,6 +68,12 @@ export function throwIfNotAFiniteNumber(value, name = 'value') {
   }
 }
 
+export function throwIfNotSeqType(value, name = 'value') {
+  if (Object.prototype.toString.call(value) !== '[object SeqCore]') {
+    throw new TypeError(`${name} is not of type Seq.`);
+  }
+}
+
 export function checkSameValueZeroEqual(lhs, rhs) {
   return lhs === rhs || (Number.isNaN(lhs) && Number.isNaN(rhs));
 }
