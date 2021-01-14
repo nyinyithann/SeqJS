@@ -42,4 +42,20 @@ describe('take()', () => {
     const { take } = Seq.prototype;
     expect(() => take.call(null, 1)).toThrow(TypeError);
   });
+
+  test('result seq should be closable and multi-iterable', () => {
+    const seq = Seq.initInfinite((x) => x).take(4);
+    const stop = 1;
+    // eslint-disable-next-line no-restricted-syntax,no-unused-vars
+    for (const _ of seq) {
+      if (stop === 2) {
+        break;
+      }
+      stop += 1;
+    }
+    expect(seq.take(2).toArray()).toEqual([0, 1]);
+    const actual = seq.take(5).take(2).toArray();
+    const expected = seq.take(5).take(2).toArray();
+    expect(actual).toEqual(expected);
+  });
 });

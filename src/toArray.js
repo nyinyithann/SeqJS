@@ -16,7 +16,7 @@ import * as util from './util';
  */
 function toArray() {
   util.throwIfNull(this, 'this');
-  return [...this._generator()];
+  return [...this];
 }
 
 export default toArray;

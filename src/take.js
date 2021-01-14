@@ -24,7 +24,7 @@ function take(count) {
     return empty();
   }
 
-  const iter = this._generator();
+  const iter = this[Symbol.iterator]();
   const createTakeIterator = () => {
     let innerCount = count;
     return {
@@ -42,7 +42,9 @@ function take(count) {
           },
           reset(value) {
             innerCount = count;
-            iter.return();
+            if (util.isFunction(iter.return)) {
+              iter.return(value);
+            }
             return { value, done: true };
           },
         };

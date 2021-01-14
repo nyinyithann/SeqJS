@@ -1,2 +1,4 @@
 build/*
 tests/more/*
+src/seq/*
+tests/seq-specs/*
